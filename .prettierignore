@@ -1,0 +1,5 @@
+src/api/generated/
+openapi/
+dist/
+coverage/
+package-lock.json
