@@ -28,6 +28,8 @@ import type {
 } from '../qASAAPIDocumentation.schemas';
 
 
+export const getGetInvoicesInvoicePaymentsResponseMock = (): InvoicePayment[] => (Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), invoice_id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), paid_at: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), method: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.helpers.arrayElement(['bank_transfer','cash','card','other'] as const), null]), undefined]), note: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), created_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined])})))
+
 export const getPostInvoicesInvoicePaymentsResponseMock = (overrideResponse: Partial<Extract<InvoicePayment, object>> = {}): InvoicePayment => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), invoice_id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), paid_at: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), method: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.helpers.arrayElement(['bank_transfer','cash','card','other'] as const), null]), undefined]), note: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), created_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), ...overrideResponse})
 
 export const getGetInvoicesInvoiceWorkReportResponseMock = (): WorkReportLine[] => (Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), work_date: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), hours: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), sort_order: faker.helpers.arrayElement([faker.number.int(), undefined])})))
@@ -78,6 +80,18 @@ export const getPostInvoicesInvoiceSettleResponseMock = (overrideResponse: Parti
 
 export const getPostInvoicesInvoicePublicLinkResponseMock = (overrideResponse: Partial<Extract<PostInvoicesInvoicePublicLink200, object>> = {}): PostInvoicesInvoicePublicLink200 => ({token: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), url: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
+
+export const getGetInvoicesInvoicePaymentsMockHandler = (overrideResponse?: InvoicePayment[] | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<InvoicePayment[]> | InvoicePayment[]), options?: RequestHandlerOptions) => {
+  return http.get('*/api/v1/invoices/:invoice/payments', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
+
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetInvoicesInvoicePaymentsResponseMock(),
+      { status: 200
+      })
+  }, options)
+}
 
 export const getPostInvoicesInvoicePaymentsMockHandler = (overrideResponse?: InvoicePayment | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<InvoicePayment> | InvoicePayment), options?: RequestHandlerOptions) => {
   return http.post('*/api/v1/invoices/:invoice/payments', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
@@ -299,6 +313,7 @@ export const getDeleteInvoicesInvoicePublicLinkMockHandler = (overrideResponse?:
   }, options)
 }
 export const getInvoicesMock = () => [
+  getGetInvoicesInvoicePaymentsMockHandler(),
   getPostInvoicesInvoicePaymentsMockHandler(),
   getDeleteInvoicesInvoicePaymentsPaymentMockHandler(),
   getGetInvoicesInvoiceWorkReportMockHandler(),

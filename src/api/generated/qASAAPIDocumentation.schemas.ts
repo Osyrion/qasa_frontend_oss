@@ -1957,6 +1957,137 @@ export type PostInvoicesInvoicePaymentsBody = {
   note?: string | null;
 };
 
+export type GetPublicInvoicesToken200Supplier = {
+  /** @nullable */
+  name?: string | null;
+  /** @nullable */
+  ico?: string | null;
+  /** @nullable */
+  dic?: string | null;
+  /** @nullable */
+  vat_id?: string | null;
+  is_vat_payer?: boolean;
+  vat_status?: string;
+  /** @nullable */
+  address?: string | null;
+  /** @nullable */
+  city?: string | null;
+  /** @nullable */
+  postal_code?: string | null;
+  /** @nullable */
+  country?: string | null;
+  /** @nullable */
+  email?: string | null;
+  /** @nullable */
+  phone?: string | null;
+  /** @nullable */
+  website?: string | null;
+  /** @nullable */
+  logo_path?: string | null;
+  /** @nullable */
+  invoice_footer_text?: string | null;
+};
+
+/**
+ * @nullable
+ */
+export type GetPublicInvoicesToken200Client = {
+  /** @nullable */
+  name?: string | null;
+  /** @nullable */
+  ico?: string | null;
+  /** @nullable */
+  dic?: string | null;
+  /** @nullable */
+  vat_id?: string | null;
+  is_vat_payer?: boolean;
+  /** @nullable */
+  address?: string | null;
+  /** @nullable */
+  city?: string | null;
+  /** @nullable */
+  postal_code?: string | null;
+  /** @nullable */
+  country?: string | null;
+  /** @nullable */
+  email?: string | null;
+  /** @nullable */
+  phone?: string | null;
+} | null;
+
+export type GetPublicInvoicesToken200ItemsItem = {
+  description?: string;
+  quantity?: number;
+  unit?: string;
+  unit_price?: number;
+  vat_rate?: number;
+  vat_amount?: number;
+  total_excl_vat?: number;
+  total_incl_vat?: number;
+};
+
+export type GetPublicInvoicesToken200VatRecapItem = {
+  rate?: number;
+  base?: number;
+  vat?: number;
+  total?: number;
+};
+
+export type GetPublicInvoicesToken200Payment = {
+  balance?: number;
+  is_paid?: boolean;
+  /** @nullable */
+  iban?: string | null;
+  /** @nullable */
+  bic?: string | null;
+  /** @nullable */
+  account_number?: string | null;
+  /** @nullable */
+  variable_symbol?: string | null;
+  /**
+     * SVG data URI
+     * @nullable
+     */
+  qr_svg?: string | null;
+};
+
+export type GetPublicInvoicesToken200PublicStatus = typeof GetPublicInvoicesToken200PublicStatus[keyof typeof GetPublicInvoicesToken200PublicStatus];
+
+
+export const GetPublicInvoicesToken200PublicStatus = {
+  cancelled: 'cancelled',
+  credited: 'credited',
+  paid: 'paid',
+  partially_paid: 'partially_paid',
+  unpaid: 'unpaid',
+} as const;
+
+export type GetPublicInvoicesToken200 = {
+  /** @nullable */
+  invoice_number?: string | null;
+  type?: string;
+  issued_at?: string;
+  /** @nullable */
+  taxable_supply_at?: string | null;
+  due_at?: string;
+  /** @nullable */
+  variable_symbol?: string | null;
+  currency?: string;
+  supplier?: GetPublicInvoicesToken200Supplier;
+  /** @nullable */
+  client?: GetPublicInvoicesToken200Client;
+  items?: GetPublicInvoicesToken200ItemsItem[];
+  vat_recap?: GetPublicInvoicesToken200VatRecapItem[];
+  /** @nullable */
+  discount_percent?: number | null;
+  discount_amount?: number;
+  subtotal?: number;
+  vat_amount?: number;
+  total?: number;
+  payment?: GetPublicInvoicesToken200Payment;
+  public_status?: GetPublicInvoicesToken200PublicStatus;
+};
+
 export type GetRecurringInvoiceTemplatesParams = {
 /**
  * Items per page

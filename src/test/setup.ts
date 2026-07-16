@@ -12,6 +12,12 @@ class ResizeObserverStub {
 }
 globalThis.ResizeObserver ??= ResizeObserverStub
 
+// jsdom has no pointer-capture APIs or scrollIntoView; radix-ui's Select needs them to open/select via pointer events.
+Element.prototype.hasPointerCapture ??= () => false
+Element.prototype.setPointerCapture ??= () => {}
+Element.prototype.releasePointerCapture ??= () => {}
+Element.prototype.scrollIntoView ??= () => {}
+
 beforeAll(() => {
   server.listen({ onUnhandledRequest: 'error' })
 })

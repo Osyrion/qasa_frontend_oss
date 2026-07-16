@@ -17,6 +17,7 @@ import {
 const navItems = [
   { to: '/dashboard', labelKey: 'nav.dashboard' },
   { to: '/clients', labelKey: 'nav.clients' },
+  { to: '/invoices', labelKey: 'nav.invoices' },
 ] as const
 
 export function AppShell() {

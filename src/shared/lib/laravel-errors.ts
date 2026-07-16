@@ -36,3 +36,12 @@ export function applyLaravelErrors<T extends FieldValues>(
 
   return payload?.message ?? null
 }
+
+/** For action buttons with no form to attach field errors to — just the toast-worthy message. */
+export function extractErrorMessage(error: unknown): string | null {
+  if (!isAxiosError(error) || !error.response) {
+    return null
+  }
+  const payload = error.response.data as LaravelErrorPayload | null
+  return payload?.message ?? null
+}

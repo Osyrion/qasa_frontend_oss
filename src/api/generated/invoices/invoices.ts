@@ -68,6 +68,98 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
 };
 
 /**
+ * @summary List payments recorded against an invoice
+ */
+export const getInvoicesInvoicePayments = (
+    invoice: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<InvoicePayment[]>(
+      {url: `/api/v1/invoices/${invoice}/payments`, method: 'GET', signal
+    },
+      options);
+    }
+
+
+
+
+export const getGetInvoicesInvoicePaymentsQueryKey = (invoice: string,) => {
+    return [
+    `/api/v1/invoices/${invoice}/payments`
+    ] as const;
+    }
+
+
+export const getGetInvoicesInvoicePaymentsQueryOptions = <TData = Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError = ErrorType<void>>(invoice: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetInvoicesInvoicePaymentsQueryKey(invoice);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInvoicesInvoicePayments>>> = ({ signal }) => getInvoicesInvoicePayments(invoice, requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: invoice !== null && invoice !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetInvoicesInvoicePaymentsQueryResult = NonNullable<Awaited<ReturnType<typeof getInvoicesInvoicePayments>>>
+export type GetInvoicesInvoicePaymentsQueryError = ErrorType<void>
+
+
+export function useGetInvoicesInvoicePayments<TData = Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError = ErrorType<void>>(
+ invoice: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getInvoicesInvoicePayments>>,
+          TError,
+          Awaited<ReturnType<typeof getInvoicesInvoicePayments>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetInvoicesInvoicePayments<TData = Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError = ErrorType<void>>(
+ invoice: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getInvoicesInvoicePayments>>,
+          TError,
+          Awaited<ReturnType<typeof getInvoicesInvoicePayments>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetInvoicesInvoicePayments<TData = Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError = ErrorType<void>>(
+ invoice: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary List payments recorded against an invoice
+ */
+
+export function useGetInvoicesInvoicePayments<TData = Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError = ErrorType<void>>(
+ invoice: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesInvoicePayments>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetInvoicesInvoicePaymentsQueryOptions(invoice,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+/**
  * @summary Record an incoming payment for an invoice
  */
 export const postInvoicesInvoicePayments = (

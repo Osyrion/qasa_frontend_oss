@@ -20,6 +20,10 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query';
 
+import type {
+  GetPublicInvoicesToken200
+} from '../qASAAPIDocumentation.schemas';
+
 import { apiMutator } from '../../mutator';
 import type { ErrorType } from '../../mutator';
 
@@ -52,7 +56,7 @@ export const getPublicInvoicesToken = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<GetPublicInvoicesToken200>(
       {url: `/api/v1/public/invoices/${token}`, method: 'GET', signal
     },
       options);

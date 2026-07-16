@@ -8,6 +8,7 @@
   "nav": {
     "dashboard": "Prehľad",
     "clients": "Klienti",
+    "invoices": "Faktúry",
     "logout": "Odhlásiť sa"
   },
   "not_found": "Táto stránka neexistuje.",

@@ -11,6 +11,10 @@ import { ClientDetailPage } from '@/features/clients/pages/ClientDetailPage'
 import { ClientFormPage } from '@/features/clients/pages/ClientFormPage'
 import { ClientsListPage } from '@/features/clients/pages/ClientsListPage'
 import { DashboardPage } from '@/features/dashboard/pages/DashboardPage'
+import { InvoiceDetailPage } from '@/features/invoicing/pages/InvoiceDetailPage'
+import { InvoiceFormPage } from '@/features/invoicing/pages/InvoiceFormPage'
+import { InvoicePdfPage } from '@/features/invoicing/pages/InvoicePdfPage'
+import { InvoicesListPage } from '@/features/invoicing/pages/InvoicesListPage'
 import { PublicInvoicePage } from '@/features/public/pages/PublicInvoicePage'
 import { AppShell } from '@/shared/components/AppShell'
 import { NotFoundPage } from '@/shared/components/NotFoundPage'
@@ -43,6 +47,11 @@ export const routes = [
           { path: '/clients/new', element: <ClientFormPage /> },
           { path: '/clients/:id/edit', element: <ClientFormPage /> },
           { path: '/clients/:id', element: <ClientDetailPage /> },
+          { path: '/invoices', element: <InvoicesListPage /> },
+          { path: '/invoices/new', element: <InvoiceFormPage /> },
+          { path: '/invoices/:id/edit', element: <InvoiceFormPage /> },
+          { path: '/invoices/:id/pdf', element: <InvoicePdfPage /> },
+          { path: '/invoices/:id', element: <InvoiceDetailPage /> },
         ],
       },
     ],

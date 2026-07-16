@@ -8,6 +8,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "clients": "Clients",
+    "invoices": "Invoices",
     "logout": "Sign out"
   },
   "not_found": "This page does not exist.",
