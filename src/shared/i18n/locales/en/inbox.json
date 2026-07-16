@@ -1,0 +1,41 @@
+{
+  "status": {
+    "pending": "Pending",
+    "imported": "Imported",
+    "ignored": "Ignored",
+    "failed": "Failed"
+  },
+  "list": {
+    "title": "Invoice inbox",
+    "column_filename": "File",
+    "column_status": "Status",
+    "column_ocr_engine": "OCR engine",
+    "column_matched_client": "Matched vendor",
+    "column_error": "Error",
+    "empty": "The inbox is empty."
+  },
+  "upload": {
+    "hint": "Drop a scanned invoice here, or click to browse",
+    "analyzing": "Analyzing document…",
+    "duplicate": "This file was already uploaded before.",
+    "throttled": "Too many uploads — try again in a moment.",
+    "failed": "Could not upload the document."
+  },
+  "actions": {
+    "convert": "Convert",
+    "ignore": "Ignore",
+    "ignored": "Item ignored.",
+    "ignore_failed": "Could not ignore the item.",
+    "delete": "Delete",
+    "deleted": "Item deleted.",
+    "view_invoice": "View invoice"
+  },
+  "convert_sheet": {
+    "title": "Convert to supplier invoice",
+    "preview": "Original document",
+    "preview_unavailable": "Preview unavailable for this file type.",
+    "submit": "Convert",
+    "converted": "Supplier invoice created.",
+    "matched_vendor": "Matched vendor from the extracted IČO"
+  }
+}

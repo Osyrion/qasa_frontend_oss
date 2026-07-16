@@ -1,0 +1,119 @@
+{
+  "status": {
+    "draft": "Koncept",
+    "received": "Prijatá",
+    "booked": "Zaúčtovaná",
+    "paid": "Uhradená",
+    "cancelled": "Stornovaná"
+  },
+  "vat_regime": {
+    "domestic": "Tuzemské plnenie",
+    "eu_reverse_charge": "EU reverse charge",
+    "import": "Dovoz"
+  },
+  "list": {
+    "title": "Došlé faktúry",
+    "new_invoice": "Nová došlá faktúra",
+    "filter_status": "Stav",
+    "filter_status_all": "Všetky stavy",
+    "filter_client": "Dodávateľ",
+    "filter_search": "Hľadať",
+    "column_number": "Číslo",
+    "column_vendor": "Dodávateľ",
+    "column_status": "Stav",
+    "column_total": "Suma",
+    "column_due_at": "Splatnosť",
+    "empty": "Zatiaľ žiadne došlé faktúry."
+  },
+  "form": {
+    "create_title": "Nová došlá faktúra",
+    "edit_title": "Upraviť došlú faktúru",
+    "vendor": "Dodávateľ",
+    "vendor_placeholder": "Vyberte dodávateľa…",
+    "supplier_invoice_number": "Číslo faktúry dodávateľa",
+    "issued_at": "Dátum vystavenia",
+    "taxable_supply_at": "Dátum zdaniteľného plnenia",
+    "due_at": "Dátum splatnosti",
+    "received_at": "Prijaté dňa",
+    "currency": "Mena",
+    "exchange_rate": "Výmenný kurz",
+    "variable_symbol": "Variabilný symbol",
+    "note": "Poznámka",
+    "vat_regime": "Režim DPH",
+    "section_account": "Platobný účet dodávateľa",
+    "vendor_account_number": "Číslo účtu",
+    "vendor_bank_code": "Kód banky",
+    "vendor_iban": "IBAN",
+    "vendor_bic": "BIC",
+    "section_vat": "Riadky DPH",
+    "created": "Došlá faktúra vytvorená.",
+    "updated": "Došlá faktúra upravená.",
+    "not_editable": "Túto došlú faktúru už nie je možné upravovať."
+  },
+  "validation": {
+    "vendor_required": "Vyberte dodávateľa.",
+    "supplier_invoice_number_required": "Číslo faktúry dodávateľa je povinné.",
+    "variable_symbol": "Maximálne 10 číslic.",
+    "vendor_account_number": "Neplatný formát čísla účtu.",
+    "vendor_bank_code": "Musí mať 4 číslice.",
+    "vendor_iban": "Neplatný formát IBAN.",
+    "vendor_bic": "Neplatný formát BIC.",
+    "account_pair_domestic": "Číslo účtu a kód banky sa musia vyplniť spolu.",
+    "account_pair_iban": "IBAN a BIC sa musia vyplniť spolu.",
+    "base_non_negative": "Základ nemôže byť záporný.",
+    "vat_amount_non_negative": "Suma DPH nemôže byť záporná."
+  },
+  "vat_lines": {
+    "vat_rate": "Sadzba DPH",
+    "base": "Základ",
+    "vat_amount": "DPH",
+    "subtotal": "Súčty",
+    "add": "Pridať riadok DPH",
+    "delete": "Zmazať riadok"
+  },
+  "actions": {
+    "change_status": "Zmeniť stav",
+    "status_updated": "Stav zmenený.",
+    "status_update_failed": "Stav sa nepodarilo zmeniť.",
+    "transition_to": {
+      "received": "Označiť ako prijatú",
+      "booked": "Označiť ako zaúčtovanú",
+      "paid": "Označiť ako uhradenú",
+      "cancelled": "Stornovať"
+    },
+    "confirm_terminal": "Nastaviť stav faktúry na „{{status}}“? Túto akciu nie je možné vrátiť späť.",
+    "mark_paid_title": "Označiť ako uhradenú",
+    "paid_at": "Dátum úhrady",
+    "cancel": "Zrušiť",
+    "confirm": "Potvrdiť"
+  },
+  "verify_account": {
+    "title": "Overenie účtu",
+    "verify": "Overiť účet",
+    "result": {
+      "published": "Zverejnený",
+      "unpublished": "Nezverejnený",
+      "unreliable": "Nespoľahlivý platca"
+    },
+    "verified_at": "Overené",
+    "published_accounts": "Účty zverejnené pre tohto dodávateľa:",
+    "account_number": "Číslo účtu",
+    "bank_code": "Kód banky",
+    "iban": "IBAN",
+    "reset_hint": "Overenie sa resetuje pri každej zmene účtu dodávateľa.",
+    "failed": "Účet sa nepodarilo overiť."
+  },
+  "payment_qr": {
+    "title": "QR kód na platbu",
+    "unavailable": "QR kód nie je k dispozícii (chýba účet alebo nepodporovaná mena).",
+    "failed": "QR kód sa nepodarilo načítať."
+  },
+  "detail": {
+    "overview": "Prehľad",
+    "total": "Spolu",
+    "self_assessed_vat": "Samovyrubená DPH",
+    "attachment": "Príloha",
+    "download_attachment": "Stiahnuť originálny dokument",
+    "deleted": "Došlá faktúra zmazaná."
+  }
+}

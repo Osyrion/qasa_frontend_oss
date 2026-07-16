@@ -30,6 +30,31 @@ npm run api:sync
 
 CI fails if the spec and the generated client drift apart.
 
+## Deployment
+
+`npm run build` outputs a static bundle in `dist/`. It's a client-side-routed SPA, so the
+webserver must fall back to `index.html` for unknown paths (React Router handles the rest).
+
+Auth tokens live in `localStorage` (see `src/features/auth/store.ts` for the trade-off), so a
+strict CSP is the main mitigation against token theft via XSS. Example nginx config:
+
+```nginx
+server {
+    listen 80;
+    root /var/www/qasa-web/dist;
+    index index.html;
+
+    add_header Content-Security-Policy "default-src 'self'; connect-src 'self' https://api.example.com; img-src 'self' data: https://api.example.com; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'" always;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
+Adjust `connect-src`/`img-src` to the backend's actual origin (`VITE_API_URL` at build time),
+and add the CDN origin serving `logo_path`/`avatar_path` images if it differs from the API host.
+
 ## Scripts
 
 | Script                    | Purpose                               |

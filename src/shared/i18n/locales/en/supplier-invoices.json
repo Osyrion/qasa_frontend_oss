@@ -1,0 +1,119 @@
+{
+  "status": {
+    "draft": "Draft",
+    "received": "Received",
+    "booked": "Booked",
+    "paid": "Paid",
+    "cancelled": "Cancelled"
+  },
+  "vat_regime": {
+    "domestic": "Domestic",
+    "eu_reverse_charge": "EU reverse charge",
+    "import": "Import"
+  },
+  "list": {
+    "title": "Supplier invoices",
+    "new_invoice": "New supplier invoice",
+    "filter_status": "Status",
+    "filter_status_all": "All statuses",
+    "filter_client": "Vendor",
+    "filter_search": "Search",
+    "column_number": "Number",
+    "column_vendor": "Vendor",
+    "column_status": "Status",
+    "column_total": "Total",
+    "column_due_at": "Due",
+    "empty": "No supplier invoices yet."
+  },
+  "form": {
+    "create_title": "New supplier invoice",
+    "edit_title": "Edit supplier invoice",
+    "vendor": "Vendor",
+    "vendor_placeholder": "Select a vendor…",
+    "supplier_invoice_number": "Vendor's invoice number",
+    "issued_at": "Issue date",
+    "taxable_supply_at": "Taxable supply date",
+    "due_at": "Due date",
+    "received_at": "Received on",
+    "currency": "Currency",
+    "exchange_rate": "Exchange rate",
+    "variable_symbol": "Variable symbol",
+    "note": "Note",
+    "vat_regime": "VAT regime",
+    "section_account": "Vendor payment account",
+    "vendor_account_number": "Account number",
+    "vendor_bank_code": "Bank code",
+    "vendor_iban": "IBAN",
+    "vendor_bic": "BIC",
+    "section_vat": "VAT lines",
+    "created": "Supplier invoice created.",
+    "updated": "Supplier invoice updated.",
+    "not_editable": "This supplier invoice can no longer be edited."
+  },
+  "validation": {
+    "vendor_required": "Select a vendor.",
+    "supplier_invoice_number_required": "Vendor's invoice number is required.",
+    "variable_symbol": "Up to 10 digits.",
+    "vendor_account_number": "Invalid account number format.",
+    "vendor_bank_code": "Must be 4 digits.",
+    "vendor_iban": "Invalid IBAN format.",
+    "vendor_bic": "Invalid BIC format.",
+    "account_pair_domestic": "Account number and bank code must be filled in together.",
+    "account_pair_iban": "IBAN and BIC must be filled in together.",
+    "base_non_negative": "Base cannot be negative.",
+    "vat_amount_non_negative": "VAT amount cannot be negative."
+  },
+  "vat_lines": {
+    "vat_rate": "VAT rate",
+    "base": "Base",
+    "vat_amount": "VAT amount",
+    "subtotal": "Totals",
+    "add": "Add VAT line",
+    "delete": "Delete line"
+  },
+  "actions": {
+    "change_status": "Change status",
+    "status_updated": "Status updated.",
+    "status_update_failed": "Could not update the status.",
+    "transition_to": {
+      "received": "Mark as received",
+      "booked": "Mark as booked",
+      "paid": "Mark as paid",
+      "cancelled": "Cancel"
+    },
+    "confirm_terminal": "Set this supplier invoice to \"{{status}}\"? This cannot be undone.",
+    "mark_paid_title": "Mark as paid",
+    "paid_at": "Paid on",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "verify_account": {
+    "title": "Account verification",
+    "verify": "Verify account",
+    "result": {
+      "published": "Published",
+      "unpublished": "Not published",
+      "unreliable": "Unreliable payer"
+    },
+    "verified_at": "Verified",
+    "published_accounts": "Accounts published for this vendor:",
+    "account_number": "Account number",
+    "bank_code": "Bank code",
+    "iban": "IBAN",
+    "reset_hint": "Verification resets whenever the vendor account changes.",
+    "failed": "Could not verify the account."
+  },
+  "payment_qr": {
+    "title": "Payment QR code",
+    "unavailable": "No payment QR is available (missing account or unsupported currency).",
+    "failed": "Could not load the payment QR code."
+  },
+  "detail": {
+    "overview": "Overview",
+    "total": "Total",
+    "self_assessed_vat": "Self-assessed VAT",
+    "attachment": "Attachment",
+    "download_attachment": "Download original document",
+    "deleted": "Supplier invoice deleted."
+  }
+}

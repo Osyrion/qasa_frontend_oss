@@ -1,0 +1,57 @@
+{
+  "category": {
+    "office": "Office",
+    "travel": "Travel",
+    "software": "Software",
+    "hardware": "Hardware",
+    "marketing": "Marketing",
+    "education": "Education",
+    "services": "Services",
+    "other": "Other"
+  },
+  "list": {
+    "title": "Expenses",
+    "new_expense": "New expense",
+    "filter_category": "Category",
+    "filter_category_all": "All categories",
+    "filter_currency": "Currency",
+    "filter_currency_all": "All currencies",
+    "filter_date_from": "From",
+    "filter_date_to": "To",
+    "filter_year": "Year",
+    "filter_year_all": "All years",
+    "column_date": "Date",
+    "column_description": "Description",
+    "column_category": "Category",
+    "column_amount": "Amount",
+    "column_attachment": "Attachment",
+    "empty": "No expenses yet."
+  },
+  "form": {
+    "create_title": "New expense",
+    "edit_title": "Edit expense",
+    "description": "Description",
+    "category": "Category",
+    "amount": "Amount",
+    "currency": "Currency",
+    "date": "Date",
+    "note": "Note",
+    "created": "Expense created.",
+    "updated": "Expense updated.",
+    "deleted": "Expense deleted."
+  },
+  "validation": {
+    "description_required": "Description is required.",
+    "amount_positive": "Amount must be greater than zero.",
+    "date_required": "Date is required."
+  },
+  "attachment": {
+    "title": "Attachment",
+    "empty": "No attachment yet.",
+    "download": "Download",
+    "delete": "Delete attachment",
+    "replace_confirm": "This will replace the current attachment. Continue?",
+    "upload_failed": "Could not upload the attachment.",
+    "delete_failed": "Could not delete the attachment."
+  }
+}

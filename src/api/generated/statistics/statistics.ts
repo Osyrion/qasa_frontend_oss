@@ -21,7 +21,12 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  GetStatisticsHealth200,
+  GetStatisticsOverview200,
+  GetStatisticsPartners200,
   GetStatisticsPartnersParams,
+  GetStatisticsReceivables200,
+  GetStatisticsTables200,
   GetStatisticsTablesParams
 } from '../qASAAPIDocumentation.schemas';
 
@@ -58,7 +63,7 @@ export const getStatisticsOverview = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<GetStatisticsOverview200>(
       {url: `/api/v1/statistics/overview`, method: 'GET', signal
     },
       options);
@@ -150,7 +155,7 @@ export const getStatisticsTables = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<GetStatisticsTables200>(
       {url: `/api/v1/statistics/tables`, method: 'GET',
         params, signal
     },
@@ -243,7 +248,7 @@ export const getStatisticsReceivables = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<GetStatisticsReceivables200>(
       {url: `/api/v1/statistics/receivables`, method: 'GET', signal
     },
       options);
@@ -335,7 +340,7 @@ export const getStatisticsPartners = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<GetStatisticsPartners200>(
       {url: `/api/v1/statistics/partners`, method: 'GET',
         params, signal
     },
@@ -428,7 +433,7 @@ export const getStatisticsHealth = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<GetStatisticsHealth200>(
       {url: `/api/v1/statistics/health`, method: 'GET', signal
     },
       options);

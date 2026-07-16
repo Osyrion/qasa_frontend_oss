@@ -1,0 +1,57 @@
+{
+  "category": {
+    "office": "Kancelária",
+    "travel": "Cestovné",
+    "software": "Software",
+    "hardware": "Hardware",
+    "marketing": "Marketing",
+    "education": "Vzdelávanie",
+    "services": "Služby",
+    "other": "Ostatné"
+  },
+  "list": {
+    "title": "Výdavky",
+    "new_expense": "Nový výdavok",
+    "filter_category": "Kategória",
+    "filter_category_all": "Všetky kategórie",
+    "filter_currency": "Mena",
+    "filter_currency_all": "Všetky meny",
+    "filter_date_from": "Od",
+    "filter_date_to": "Do",
+    "filter_year": "Rok",
+    "filter_year_all": "Všetky roky",
+    "column_date": "Dátum",
+    "column_description": "Popis",
+    "column_category": "Kategória",
+    "column_amount": "Suma",
+    "column_attachment": "Príloha",
+    "empty": "Zatiaľ žiadne výdavky."
+  },
+  "form": {
+    "create_title": "Nový výdavok",
+    "edit_title": "Upraviť výdavok",
+    "description": "Popis",
+    "category": "Kategória",
+    "amount": "Suma",
+    "currency": "Mena",
+    "date": "Dátum",
+    "note": "Poznámka",
+    "created": "Výdavok vytvorený.",
+    "updated": "Výdavok upravený.",
+    "deleted": "Výdavok zmazaný."
+  },
+  "validation": {
+    "description_required": "Popis je povinný.",
+    "amount_positive": "Suma musí byť väčšia ako nula.",
+    "date_required": "Dátum je povinný."
+  },
+  "attachment": {
+    "title": "Príloha",
+    "empty": "Zatiaľ žiadna príloha.",
+    "download": "Stiahnuť",
+    "delete": "Zmazať prílohu",
+    "replace_confirm": "Týmto nahradíte aktuálnu prílohu. Pokračovať?",
+    "upload_failed": "Prílohu sa nepodarilo nahrať.",
+    "delete_failed": "Prílohu sa nepodarilo zmazať."
+  }
+}

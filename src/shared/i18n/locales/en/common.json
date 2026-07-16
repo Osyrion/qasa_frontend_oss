@@ -6,9 +6,23 @@
   "delete": "Delete",
   "error_generic": "Something went wrong. Please try again.",
   "nav": {
+    "group_overview": "Overview",
+    "group_sales": "Sales",
     "dashboard": "Dashboard",
     "clients": "Clients",
     "invoices": "Invoices",
+    "quotes": "Quotes",
+    "orders": "Orders",
+    "recurring": "Recurring templates",
+    "group_purchases": "Purchases",
+    "supplier_invoices": "Supplier invoices",
+    "inbox": "Inbox",
+    "expenses": "Expenses",
+    "group_analysis": "Analysis",
+    "statistics": "Statistics",
+    "reports": "Reports",
+    "activity": "Activity log",
+    "settings": "Settings",
     "logout": "Sign out"
   },
   "not_found": "This page does not exist.",
@@ -22,5 +36,37 @@
   "confirm_delete": "Are you sure? This cannot be undone.",
   "add": "Add",
   "edit": "Edit",
-  "back": "Back"
+  "back": "Back",
+  "file_upload": {
+    "hint": "Drop a file here, or click to browse",
+    "max_size": "Max {{max}}",
+    "type_not_allowed": "This file type is not allowed.",
+    "too_large": "File is too large — max {{max}}."
+  },
+  "attachments": {
+    "empty": "No attachments yet.",
+    "download": "Download",
+    "delete": "Delete attachment"
+  },
+  "dashboard": {
+    "setup_title": "Getting started",
+    "setup_done": "All set up!",
+    "setup": {
+      "billing_identity": "Fill in your billing identity",
+      "vat_status": "Set your VAT status",
+      "bank_account": "Add a bank account",
+      "invoice_numbering": "Set up invoice numbering",
+      "logo": "Upload your logo",
+      "first_client": "Add your first client",
+      "first_invoice": "Send your first invoice"
+    },
+    "kpi_revenue": "Revenue",
+    "kpi_costs": "Costs",
+    "kpi_profit": "Profit",
+    "this_month": "This month",
+    "ytd": "Year to date",
+    "rolling_12m": "Last 12 months",
+    "vs_last_month": "vs. last month",
+    "vs_last_year": "vs. last year"
+  }
 }

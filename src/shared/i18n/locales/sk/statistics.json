@@ -1,0 +1,78 @@
+{
+  "tabs": {
+    "overview": "Prehľad",
+    "tables": "Tabuľky",
+    "receivables": "Pohľadávky",
+    "partners": "Partneri",
+    "health": "Zdravie"
+  },
+  "title": "Štatistiky",
+  "kpi": {
+    "revenue": "Tržby",
+    "costs": "Náklady",
+    "profit": "Zisk",
+    "this_month": "Tento mesiac",
+    "rolling_12m": "Posledných 12 mesiacov",
+    "ytd": "Od začiatku roka",
+    "vs_last_month": "oproti minulému mesiacu",
+    "yoy": "medziročne",
+    "margin": "Marža"
+  },
+  "chart": {
+    "profit_trend_title": "Tržby, náklady a zisk — posledných 12 mesiacov",
+    "revenue": "Tržby",
+    "costs": "Náklady",
+    "profit": "Zisk"
+  },
+  "tables": {
+    "by_year": "Podľa roka",
+    "by_month": "Podľa mesiaca",
+    "year": "Rok",
+    "column_period": "Obdobie",
+    "column_revenue": "Tržby",
+    "column_costs": "Náklady",
+    "column_profit": "Zisk",
+    "column_margin": "Marža"
+  },
+  "receivables": {
+    "title": "Vekovanie pohľadávok a záväzkov",
+    "as_of": "K dátumu",
+    "receivables": "Pohľadávky (dlžia vám)",
+    "payables": "Záväzky (dlžíte)",
+    "bucket": {
+      "not_yet_due": "Ešte nesplatné",
+      "d1_30": "1–30 dní",
+      "d31_60": "31–60 dní",
+      "d61_90": "61–90 dní",
+      "d90_plus": "90+ dní"
+    }
+  },
+  "partners": {
+    "top_clients": "Najlepší klienti",
+    "top_suppliers": "Najlepší dodávatelia",
+    "churn_risk": "Riziko odchodu",
+    "churn_empty": "Žiadni klienti nie sú označení ako rizikoví.",
+    "days_since_last_invoice": "{{days}} dní od poslednej faktúry",
+    "lifetime_revenue": "Celkové tržby"
+  },
+  "health": {
+    "dso": "Doba inkasa pohľadávok (DSO)",
+    "dpo": "Doba úhrady záväzkov (DPO)",
+    "working_capital_cycle": "Cyklus prevádzkového kapitálu",
+    "days": "dní",
+    "payment_morale": "Platobná morálka",
+    "on_time": "Načas",
+    "late": "Neskoro",
+    "avg_days_late": "Priem. dní meškania",
+    "client_concentration": "Koncentrácia klientov",
+    "supplier_concentration": "Koncentrácia dodávateľov",
+    "top1_share": "Podiel najväčšieho partnera",
+    "risk_level": {
+      "low": "Nízke riziko",
+      "medium": "Stredné riziko",
+      "high": "Vysoké riziko"
+    },
+    "pareto_count": "Partneri na 80 % tržieb",
+    "insufficient_data": "Nedostatok údajov pre toto obdobie."
+  }
+}

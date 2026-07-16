@@ -1,9 +1,10 @@
-import { FileTextIcon, MailIcon, PencilIcon, TrashIcon } from 'lucide-react'
+import { DownloadIcon, FileTextIcon, MailIcon, PencilIcon, TrashIcon } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useNavigate, useParams } from 'react-router'
 import { toast } from 'sonner'
 
+import { getInvoicesInvoiceExportIsdoc } from '@/api/generated/invoice-export/invoice-export'
 import { useDeleteInvoicesId, useGetInvoicesId } from '@/api/generated/invoices/invoices'
 import { EmailDialog } from '@/features/invoicing/components/EmailDialog'
 import { InvoiceItemsEditor } from '@/features/invoicing/components/InvoiceItemsEditor'
@@ -14,6 +15,7 @@ import { WorkReportCard } from '@/features/invoicing/components/WorkReportCard'
 import { isEditable } from '@/features/invoicing/lib/status-transitions'
 import { DateText } from '@/shared/components/DateText'
 import { MoneyText } from '@/shared/components/MoneyText'
+import { triggerBlobDownload } from '@/shared/lib/download'
 import { queryClient } from '@/shared/lib/query-client'
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
@@ -25,7 +27,9 @@ export function InvoiceDetailPage() {
   const navigate = useNavigate()
   const { t } = useTranslation('invoices')
   const { t: tCommon } = useTranslation()
+  const { t: tReports } = useTranslation('reports')
   const [emailDialogOpen, setEmailDialogOpen] = useState(false)
+  const [downloadingIsdoc, setDownloadingIsdoc] = useState(false)
 
   const invoice = useGetInvoicesId(id ?? '', { query: { enabled: Boolean(id) } })
 
@@ -59,6 +63,20 @@ export function InvoiceDetailPage() {
   const data = invoice.data
   const status = data.status ?? 'draft'
   const editable = isEditable(status)
+  const canExportIsdoc =
+    status !== 'draft' && (data.type === 'invoice' || data.type === 'credit_note')
+
+  const handleDownloadIsdoc = async () => {
+    setDownloadingIsdoc(true)
+    try {
+      const blob = await getInvoicesInvoiceExportIsdoc(id, { responseType: 'blob' })
+      triggerBlobDownload(blob as Blob, `${data.invoice_number ?? 'invoice'}.isdoc`)
+    } catch {
+      toast.error(tReports('isdoc.failed'))
+    } finally {
+      setDownloadingIsdoc(false)
+    }
+  }
 
   return (
     <div className="flex max-w-3xl flex-col gap-6">
@@ -80,6 +98,14 @@ export function InvoiceDetailPage() {
           <Button variant="outline" onClick={() => setEmailDialogOpen(true)}>
             <MailIcon />
             {t('detail.email')}
+          </Button>
+          <Button
+            variant="outline"
+            disabled={!canExportIsdoc || downloadingIsdoc}
+            onClick={() => void handleDownloadIsdoc()}
+          >
+            <DownloadIcon />
+            {tReports('isdoc.download')}
           </Button>
           {editable && (
             <Button asChild variant="outline">

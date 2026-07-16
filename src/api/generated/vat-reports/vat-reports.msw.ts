@@ -18,11 +18,14 @@ import type {
 } from 'msw';
 
 import type {
-  GetReportsEuSalesList200
+  GetReportsEuSalesList200,
+  GetReportsVatControlStatement200
 } from '../qASAAPIDocumentation.schemas';
 
 
 export const getGetReportsEuSalesListResponseMock = (overrideResponse: Partial<Extract<GetReportsEuSalesList200, object>> = {}): GetReportsEuSalesList200 => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({period: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), vat_id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), client_name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), code: faker.helpers.arrayElement([faker.number.int(), undefined])})), undefined]), ...overrideResponse})
+
+export const getGetReportsVatControlStatementResponseMock = (overrideResponse: Partial<Extract<GetReportsVatControlStatement200, object>> = {}): GetReportsVatControlStatement200 => ({country: faker.helpers.arrayElement([faker.helpers.arrayElement(['SK','CZ'] as const), undefined]), year: faker.helpers.arrayElement([faker.number.int(), undefined]), quarter: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined]), month: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined]), sections: faker.helpers.arrayElement([{}, undefined]), summary_sections: faker.helpers.arrayElement([{}, undefined]), assumptions: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), ...overrideResponse})
 
 
 export const getGetReportsEuSalesListMockHandler = (overrideResponse?: GetReportsEuSalesList200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetReportsEuSalesList200> | GetReportsEuSalesList200), options?: RequestHandlerOptions) => {
@@ -37,11 +40,13 @@ export const getGetReportsEuSalesListMockHandler = (overrideResponse?: GetReport
   }, options)
 }
 
-export const getGetReportsVatControlStatementMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getGetReportsVatControlStatementMockHandler = (overrideResponse?: GetReportsVatControlStatement200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetReportsVatControlStatement200> | GetReportsVatControlStatement200), options?: RequestHandlerOptions) => {
   return http.get('*/api/v1/reports/vat-control-statement', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetReportsVatControlStatementResponseMock(),
       { status: 200
       })
   }, options)

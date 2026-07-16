@@ -24,8 +24,24 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query';
 
+import type {
+  GetQuotes200,
+  GetQuotesParams,
+  Invoice,
+  Order,
+  PostQuotesBody,
+  PostQuotesQuoteEmailBody,
+  PostQuotesQuoteItemsBody,
+  PostQuotesQuotePublicLink200,
+  PostQuotesQuotePublicLinkBody,
+  PostQuotesQuoteStatusBody,
+  PutQuotesIdBody,
+  Quote,
+  QuoteItem
+} from '../qASAAPIDocumentation.schemas';
+
 import { apiMutator } from '../../mutator';
-import type { ErrorType } from '../../mutator';
+import type { ErrorType , BodyType } from '../../mutator';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -51,13 +67,14 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
  * @summary List quotes
  */
 export const getQuotes = (
-
+    params?: GetQuotesParams,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes`, method: 'GET', signal
+      return apiMutator<GetQuotes200>(
+      {url: `/api/v1/quotes`, method: 'GET',
+        params, signal
     },
       options);
     }
@@ -65,23 +82,23 @@ export const getQuotes = (
 
 
 
-export const getGetQuotesQueryKey = () => {
+export const getGetQuotesQueryKey = (params?: GetQuotesParams,) => {
     return [
-    `/api/v1/quotes`
+    `/api/v1/quotes`, ...(params ? [params] : [])
     ] as const;
     }
 
 
-export const getGetQuotesQueryOptions = <TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<unknown>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+export const getGetQuotesQueryOptions = <TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<void>>(params?: GetQuotesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getGetQuotesQueryKey();
+  const queryKey =  queryOptions?.queryKey ?? getGetQuotesQueryKey(params);
 
 
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getQuotes>>> = ({ signal }) => getQuotes(requestOptions, signal);
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getQuotes>>> = ({ signal }) => getQuotes(params, requestOptions, signal);
 
 
 
@@ -91,11 +108,11 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetQuotesQueryResult = NonNullable<Awaited<ReturnType<typeof getQuotes>>>
-export type GetQuotesQueryError = ErrorType<unknown>
+export type GetQuotesQueryError = ErrorType<void>
 
 
-export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<unknown>>(
-  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>> & Pick<
+export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<void>>(
+ params: undefined |  GetQuotesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getQuotes>>,
           TError,
@@ -104,8 +121,8 @@ export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TErr
       >, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<unknown>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>> & Pick<
+export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<void>>(
+ params?: GetQuotesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getQuotes>>,
           TError,
@@ -114,20 +131,20 @@ export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TErr
       >, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<unknown>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<void>>(
+ params?: GetQuotesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary List quotes
  */
 
-export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<unknown>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TError = ErrorType<void>>(
+ params?: GetQuotesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotes>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const queryOptions = getGetQuotesQueryOptions(options)
+  const queryOptions = getGetQuotesQueryOptions(params,options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
@@ -143,13 +160,15 @@ export function useGetQuotes<TData = Awaited<ReturnType<typeof getQuotes>>, TErr
  * @summary Create quote
  */
 export const postQuotes = (
-
+    postQuotesBody: BodyType<PostQuotesBody>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes`, method: 'POST', signal
+      return apiMutator<Quote>(
+      {url: `/api/v1/quotes`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postQuotesBody, signal
     },
       options);
     }
@@ -158,8 +177,8 @@ export const postQuotes = (
 
 
 export const getPostQuotesMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotes>>, TError,void, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postQuotes>>, TError,void, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotes>>, TError,{data: BodyType<PostQuotesBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postQuotes>>, TError,{data: BodyType<PostQuotesBody>}, TContext> => {
 
 const mutationKey = ['postQuotes'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -171,10 +190,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotes>>, void> = () => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotes>>, {data: BodyType<PostQuotesBody>}> = (props) => {
+          const {data} = props ?? {};
 
-
-          return  postQuotes(requestOptions)
+          return  postQuotes(data,requestOptions)
         }
 
 
@@ -185,18 +204,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PostQuotesMutationResult = NonNullable<Awaited<ReturnType<typeof postQuotes>>>
-
+    export type PostQuotesMutationBody = BodyType<PostQuotesBody>
     export type PostQuotesMutationError = ErrorType<void>
 
     /**
  * @summary Create quote
  */
 export const usePostQuotes = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotes>>, TError,void, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotes>>, TError,{data: BodyType<PostQuotesBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postQuotes>>,
         TError,
-        void,
+        {data: BodyType<PostQuotesBody>},
         TContext
       > => {
       return useMutation(getPostQuotesMutationOptions(options), queryClient);
@@ -210,7 +229,7 @@ export const getQuotesId = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<Quote>(
       {url: `/api/v1/quotes/${id}`, method: 'GET', signal
     },
       options);
@@ -298,12 +317,15 @@ export function useGetQuotesId<TData = Awaited<ReturnType<typeof getQuotesId>>, 
  */
 export const putQuotesId = (
     id: string,
+    putQuotesIdBody: BodyType<PutQuotesIdBody>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes/${id}`, method: 'PUT', signal
+      return apiMutator<Quote>(
+      {url: `/api/v1/quotes/${id}`, method: 'PUT',
+      headers: {'Content-Type': 'application/json', },
+      data: putQuotesIdBody, signal
     },
       options);
     }
@@ -312,8 +334,8 @@ export const putQuotesId = (
 
 
 export const getPutQuotesIdMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putQuotesId>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof putQuotesId>>, TError,{id: string}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putQuotesId>>, TError,{id: string;data: BodyType<PutQuotesIdBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof putQuotesId>>, TError,{id: string;data: BodyType<PutQuotesIdBody>}, TContext> => {
 
 const mutationKey = ['putQuotesId'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -325,10 +347,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putQuotesId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putQuotesId>>, {id: string;data: BodyType<PutQuotesIdBody>}> = (props) => {
+          const {id,data} = props ?? {};
 
-          return  putQuotesId(id,requestOptions)
+          return  putQuotesId(id,data,requestOptions)
         }
 
 
@@ -339,18 +361,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PutQuotesIdMutationResult = NonNullable<Awaited<ReturnType<typeof putQuotesId>>>
-
+    export type PutQuotesIdMutationBody = BodyType<PutQuotesIdBody>
     export type PutQuotesIdMutationError = ErrorType<void>
 
     /**
  * @summary Update draft quote header
  */
 export const usePutQuotesId = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putQuotesId>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putQuotesId>>, TError,{id: string;data: BodyType<PutQuotesIdBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof putQuotesId>>,
         TError,
-        {id: string},
+        {id: string;data: BodyType<PutQuotesIdBody>},
         TContext
       > => {
       return useMutation(getPutQuotesIdMutationOptions(options), queryClient);
@@ -422,12 +444,15 @@ export const useDeleteQuotesId = <TError = ErrorType<void>,
  */
 export const postQuotesQuoteItems = (
     quote: string,
+    postQuotesQuoteItemsBody: BodyType<PostQuotesQuoteItemsBody>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes/${quote}/items`, method: 'POST', signal
+      return apiMutator<QuoteItem>(
+      {url: `/api/v1/quotes/${quote}/items`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postQuotesQuoteItemsBody, signal
     },
       options);
     }
@@ -436,8 +461,8 @@ export const postQuotesQuoteItems = (
 
 
 export const getPostQuotesQuoteItemsMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteItems>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteItems>>, TError,{quote: string}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteItems>>, TError,{quote: string;data: BodyType<PostQuotesQuoteItemsBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteItems>>, TError,{quote: string;data: BodyType<PostQuotesQuoteItemsBody>}, TContext> => {
 
 const mutationKey = ['postQuotesQuoteItems'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -449,10 +474,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotesQuoteItems>>, {quote: string}> = (props) => {
-          const {quote} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotesQuoteItems>>, {quote: string;data: BodyType<PostQuotesQuoteItemsBody>}> = (props) => {
+          const {quote,data} = props ?? {};
 
-          return  postQuotesQuoteItems(quote,requestOptions)
+          return  postQuotesQuoteItems(quote,data,requestOptions)
         }
 
 
@@ -463,18 +488,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PostQuotesQuoteItemsMutationResult = NonNullable<Awaited<ReturnType<typeof postQuotesQuoteItems>>>
-
+    export type PostQuotesQuoteItemsMutationBody = BodyType<PostQuotesQuoteItemsBody>
     export type PostQuotesQuoteItemsMutationError = ErrorType<void>
 
     /**
  * @summary Add item to quote
  */
 export const usePostQuotesQuoteItems = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteItems>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteItems>>, TError,{quote: string;data: BodyType<PostQuotesQuoteItemsBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postQuotesQuoteItems>>,
         TError,
-        {quote: string},
+        {quote: string;data: BodyType<PostQuotesQuoteItemsBody>},
         TContext
       > => {
       return useMutation(getPostQuotesQuoteItemsMutationOptions(options), queryClient);
@@ -547,12 +572,15 @@ export const useDeleteQuotesQuoteItemsItem = <TError = ErrorType<void>,
  */
 export const postQuotesQuoteStatus = (
     quote: string,
+    postQuotesQuoteStatusBody: BodyType<PostQuotesQuoteStatusBody>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes/${quote}/status`, method: 'POST', signal
+      return apiMutator<Quote>(
+      {url: `/api/v1/quotes/${quote}/status`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postQuotesQuoteStatusBody, signal
     },
       options);
     }
@@ -561,8 +589,8 @@ export const postQuotesQuoteStatus = (
 
 
 export const getPostQuotesQuoteStatusMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteStatus>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteStatus>>, TError,{quote: string}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteStatus>>, TError,{quote: string;data: BodyType<PostQuotesQuoteStatusBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteStatus>>, TError,{quote: string;data: BodyType<PostQuotesQuoteStatusBody>}, TContext> => {
 
 const mutationKey = ['postQuotesQuoteStatus'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -574,10 +602,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotesQuoteStatus>>, {quote: string}> = (props) => {
-          const {quote} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotesQuoteStatus>>, {quote: string;data: BodyType<PostQuotesQuoteStatusBody>}> = (props) => {
+          const {quote,data} = props ?? {};
 
-          return  postQuotesQuoteStatus(quote,requestOptions)
+          return  postQuotesQuoteStatus(quote,data,requestOptions)
         }
 
 
@@ -588,18 +616,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PostQuotesQuoteStatusMutationResult = NonNullable<Awaited<ReturnType<typeof postQuotesQuoteStatus>>>
-
+    export type PostQuotesQuoteStatusMutationBody = BodyType<PostQuotesQuoteStatusBody>
     export type PostQuotesQuoteStatusMutationError = ErrorType<void>
 
     /**
  * @summary Manually update quote status
  */
 export const usePostQuotesQuoteStatus = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteStatus>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteStatus>>, TError,{quote: string;data: BodyType<PostQuotesQuoteStatusBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postQuotesQuoteStatus>>,
         TError,
-        {quote: string},
+        {quote: string;data: BodyType<PostQuotesQuoteStatusBody>},
         TContext
       > => {
       return useMutation(getPostQuotesQuoteStatusMutationOptions(options), queryClient);
@@ -609,12 +637,15 @@ export const usePostQuotesQuoteStatus = <TError = ErrorType<void>,
  */
 export const postQuotesQuoteEmail = (
     quote: string,
+    postQuotesQuoteEmailBody?: BodyType<PostQuotesQuoteEmailBody>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes/${quote}/email`, method: 'POST', signal
+      return apiMutator<Quote>(
+      {url: `/api/v1/quotes/${quote}/email`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postQuotesQuoteEmailBody, signal
     },
       options);
     }
@@ -623,8 +654,8 @@ export const postQuotesQuoteEmail = (
 
 
 export const getPostQuotesQuoteEmailMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteEmail>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteEmail>>, TError,{quote: string}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteEmail>>, TError,{quote: string;data?: BodyType<PostQuotesQuoteEmailBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteEmail>>, TError,{quote: string;data?: BodyType<PostQuotesQuoteEmailBody>}, TContext> => {
 
 const mutationKey = ['postQuotesQuoteEmail'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -636,10 +667,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotesQuoteEmail>>, {quote: string}> = (props) => {
-          const {quote} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotesQuoteEmail>>, {quote: string;data?: BodyType<PostQuotesQuoteEmailBody>}> = (props) => {
+          const {quote,data} = props ?? {};
 
-          return  postQuotesQuoteEmail(quote,requestOptions)
+          return  postQuotesQuoteEmail(quote,data,requestOptions)
         }
 
 
@@ -650,18 +681,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PostQuotesQuoteEmailMutationResult = NonNullable<Awaited<ReturnType<typeof postQuotesQuoteEmail>>>
-
+    export type PostQuotesQuoteEmailMutationBody = BodyType<PostQuotesQuoteEmailBody> | undefined
     export type PostQuotesQuoteEmailMutationError = ErrorType<void>
 
     /**
  * @summary Email the quote PDF to the client (sends the quote first when still a draft)
  */
 export const usePostQuotesQuoteEmail = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteEmail>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuoteEmail>>, TError,{quote: string;data?: BodyType<PostQuotesQuoteEmailBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postQuotesQuoteEmail>>,
         TError,
-        {quote: string},
+        {quote: string;data?: BodyType<PostQuotesQuoteEmailBody>},
         TContext
       > => {
       return useMutation(getPostQuotesQuoteEmailMutationOptions(options), queryClient);
@@ -675,8 +706,9 @@ export const getQuotesQuotePdfDownload = (
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes/${quote}/pdf/download`, method: 'GET', signal
+      return apiMutator<Blob>(
+      {url: `/api/v1/quotes/${quote}/pdf/download`, method: 'GET',
+        responseType: 'blob', signal
     },
       options);
     }
@@ -691,7 +723,7 @@ export const getGetQuotesQuotePdfDownloadQueryKey = (quote: string,) => {
     }
 
 
-export const getGetQuotesQuotePdfDownloadQueryOptions = <TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<unknown>>(quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+export const getGetQuotesQuotePdfDownloadQueryOptions = <TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<void>>(quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -710,10 +742,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetQuotesQuotePdfDownloadQueryResult = NonNullable<Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>>
-export type GetQuotesQuotePdfDownloadQueryError = ErrorType<unknown>
+export type GetQuotesQuotePdfDownloadQueryError = ErrorType<void>
 
 
-export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<unknown>>(
+export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<void>>(
  quote: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>,
@@ -723,7 +755,7 @@ export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof g
       >, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<unknown>>(
+export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<void>>(
  quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>,
@@ -733,7 +765,7 @@ export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof g
       >, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<unknown>>(
+export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<void>>(
  quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -741,7 +773,7 @@ export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof g
  * @summary Download quote PDF
  */
 
-export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<unknown>>(
+export function useGetQuotesQuotePdfDownload<TData = Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError = ErrorType<void>>(
  quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfDownload>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -767,8 +799,9 @@ export const getQuotesQuotePdfPreview = (
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes/${quote}/pdf/preview`, method: 'GET', signal
+      return apiMutator<Blob>(
+      {url: `/api/v1/quotes/${quote}/pdf/preview`, method: 'GET',
+        responseType: 'blob', signal
     },
       options);
     }
@@ -783,7 +816,7 @@ export const getGetQuotesQuotePdfPreviewQueryKey = (quote: string,) => {
     }
 
 
-export const getGetQuotesQuotePdfPreviewQueryOptions = <TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<unknown>>(quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+export const getGetQuotesQuotePdfPreviewQueryOptions = <TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<void>>(quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -802,10 +835,10 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type GetQuotesQuotePdfPreviewQueryResult = NonNullable<Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>>
-export type GetQuotesQuotePdfPreviewQueryError = ErrorType<unknown>
+export type GetQuotesQuotePdfPreviewQueryError = ErrorType<void>
 
 
-export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<unknown>>(
+export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<void>>(
  quote: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>,
@@ -815,7 +848,7 @@ export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof ge
       >, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<unknown>>(
+export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<void>>(
  quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>,
@@ -825,7 +858,7 @@ export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof ge
       >, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<unknown>>(
+export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<void>>(
  quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -833,7 +866,7 @@ export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof ge
  * @summary Preview quote PDF in browser
  */
 
-export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<unknown>>(
+export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError = ErrorType<void>>(
  quote: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getQuotesQuotePdfPreview>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -855,12 +888,15 @@ export function useGetQuotesQuotePdfPreview<TData = Awaited<ReturnType<typeof ge
  */
 export const postQuotesQuotePublicLink = (
     quote: string,
+    postQuotesQuotePublicLinkBody?: BodyType<PostQuotesQuotePublicLinkBody>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/quotes/${quote}/public-link`, method: 'POST', signal
+      return apiMutator<PostQuotesQuotePublicLink200>(
+      {url: `/api/v1/quotes/${quote}/public-link`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postQuotesQuotePublicLinkBody, signal
     },
       options);
     }
@@ -869,8 +905,8 @@ export const postQuotesQuotePublicLink = (
 
 
 export const getPostQuotesQuotePublicLinkMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>, TError,{quote: string}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>, TError,{quote: string;data?: BodyType<PostQuotesQuotePublicLinkBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>, TError,{quote: string;data?: BodyType<PostQuotesQuotePublicLinkBody>}, TContext> => {
 
 const mutationKey = ['postQuotesQuotePublicLink'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -882,10 +918,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>, {quote: string}> = (props) => {
-          const {quote} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>, {quote: string;data?: BodyType<PostQuotesQuotePublicLinkBody>}> = (props) => {
+          const {quote,data} = props ?? {};
 
-          return  postQuotesQuotePublicLink(quote,requestOptions)
+          return  postQuotesQuotePublicLink(quote,data,requestOptions)
         }
 
 
@@ -896,18 +932,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PostQuotesQuotePublicLinkMutationResult = NonNullable<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>>
-
+    export type PostQuotesQuotePublicLinkMutationBody = BodyType<PostQuotesQuotePublicLinkBody> | undefined
     export type PostQuotesQuotePublicLinkMutationError = ErrorType<void>
 
     /**
  * @summary Create (or return the existing) public link for the quote; pass regenerate=true for a fresh token
  */
 export const usePostQuotesQuotePublicLink = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postQuotesQuotePublicLink>>, TError,{quote: string;data?: BodyType<PostQuotesQuotePublicLinkBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postQuotesQuotePublicLink>>,
         TError,
-        {quote: string},
+        {quote: string;data?: BodyType<PostQuotesQuotePublicLinkBody>},
         TContext
       > => {
       return useMutation(getPostQuotesQuotePublicLinkMutationOptions(options), queryClient);
@@ -930,7 +966,7 @@ export const deleteQuotesQuotePublicLink = (
 
 
 
-export const getDeleteQuotesQuotePublicLinkMutationOptions = <TError = ErrorType<unknown>,
+export const getDeleteQuotesQuotePublicLinkMutationOptions = <TError = ErrorType<void>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteQuotesQuotePublicLink>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
 ): UseMutationOptions<Awaited<ReturnType<typeof deleteQuotesQuotePublicLink>>, TError,{quote: string}, TContext> => {
 
@@ -959,12 +995,12 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
     export type DeleteQuotesQuotePublicLinkMutationResult = NonNullable<Awaited<ReturnType<typeof deleteQuotesQuotePublicLink>>>
 
-    export type DeleteQuotesQuotePublicLinkMutationError = ErrorType<unknown>
+    export type DeleteQuotesQuotePublicLinkMutationError = ErrorType<void>
 
     /**
  * @summary Revoke the quote public link
  */
-export const useDeleteQuotesQuotePublicLink = <TError = ErrorType<unknown>,
+export const useDeleteQuotesQuotePublicLink = <TError = ErrorType<void>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteQuotesQuotePublicLink>>, TError,{quote: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteQuotesQuotePublicLink>>,
@@ -983,7 +1019,7 @@ export const postQuotesQuoteConvertToInvoice = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<Invoice>(
       {url: `/api/v1/quotes/${quote}/convert-to-invoice`, method: 'POST', signal
     },
       options);
@@ -1045,7 +1081,7 @@ export const postQuotesQuoteConvertToOrder = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<Order>(
       {url: `/api/v1/quotes/${quote}/convert-to-order`, method: 'POST', signal
     },
       options);

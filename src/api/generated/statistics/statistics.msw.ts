@@ -6,6 +6,10 @@
  * OpenAPI spec version: 1.0.0
  */
 import {
+  faker
+} from '@faker-js/faker';
+
+import {
   HttpResponse,
   http
 } from 'msw';
@@ -13,53 +17,81 @@ import type {
   RequestHandlerOptions
 } from 'msw';
 
+import type {
+  GetStatisticsHealth200,
+  GetStatisticsOverview200,
+  GetStatisticsPartners200,
+  GetStatisticsReceivables200,
+  GetStatisticsTables200
+} from '../qASAAPIDocumentation.schemas';
 
 
-export const getGetStatisticsOverviewMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getGetStatisticsOverviewResponseMock = (overrideResponse: Partial<Extract<GetStatisticsOverview200, object>> = {}): GetStatisticsOverview200 => ({data: faker.helpers.arrayElement([{currency: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), kpi: faker.helpers.arrayElement([{revenue: faker.helpers.arrayElement([{this_month: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined]), trend_vs_last_month_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), rolling_12m: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), yoy_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined]), ytd: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), yoy_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined])}, undefined]), costs: faker.helpers.arrayElement([{this_month: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined]), trend_vs_last_month_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), rolling_12m: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), yoy_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined]), ytd: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), yoy_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined])}, undefined]), profit: faker.helpers.arrayElement([{...{this_month: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined]), trend_vs_last_month_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), rolling_12m: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), yoy_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined]), ytd: faker.helpers.arrayElement([{value: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), yoy_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined])}, undefined])},...{ytd_margin_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined])},}, undefined])}, undefined]), comparison: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({period: faker.helpers.arrayElement([faker.helpers.arrayElement(['this_month','last_month','rolling_12m','ytd','last_year'] as const), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), revenue: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), costs: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), profit: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), margin_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined])})), undefined]), monthly_trend: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({month: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), revenue: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), costs: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), profit: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined])})), undefined]), profit_chart: faker.helpers.arrayElement([{monthly: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({month: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), profit: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), profit_previous_year: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined])})), undefined]), cumulative_ytd: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({month: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), current: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), previous_year: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined])})), undefined])}, undefined]), assumptions: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined])}, undefined]), ...overrideResponse})
+
+export const getGetStatisticsTablesResponseMock = (overrideResponse: Partial<Extract<GetStatisticsTables200, object>> = {}): GetStatisticsTables200 => ({data: faker.helpers.arrayElement([{currency: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), by_year: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({year: faker.helpers.arrayElement([faker.number.int(), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), revenue: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), costs: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), profit: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), margin_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined])})), undefined]), by_month: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({month: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), date_from: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), date_to: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), revenue: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), costs: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), profit: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), margin_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined])})), undefined]), assumptions: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined])}, undefined]), ...overrideResponse})
+
+export const getGetStatisticsReceivablesResponseMock = (overrideResponse: Partial<Extract<GetStatisticsReceivables200, object>> = {}): GetStatisticsReceivables200 => ({data: faker.helpers.arrayElement([{as_of: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), receivables: faker.helpers.arrayElement([{}, undefined]), payables: faker.helpers.arrayElement([{}, undefined])}, undefined]), ...overrideResponse})
+
+export const getGetStatisticsPartnersResponseMock = (overrideResponse: Partial<Extract<GetStatisticsPartners200, object>> = {}): GetStatisticsPartners200 => ({data: faker.helpers.arrayElement([{top_clients: faker.helpers.arrayElement([{}, undefined]), top_suppliers: faker.helpers.arrayElement([{}, undefined]), churn_risk: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({client_id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), name: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), last_invoice_at: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), days_since_last_invoice: faker.helpers.arrayElement([faker.number.int(), undefined]), lifetime_revenue: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), currency: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined])}, undefined]), ...overrideResponse})
+
+export const getGetStatisticsHealthResponseMock = (overrideResponse: Partial<Extract<GetStatisticsHealth200, object>> = {}): GetStatisticsHealth200 => ({data: faker.helpers.arrayElement([{currency: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), dso: faker.helpers.arrayElement([{days: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), sample_size: faker.helpers.arrayElement([faker.number.int(), undefined])}, undefined]), payment_morale: faker.helpers.arrayElement([{on_time_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), late_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), avg_days_late: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), sample_size: faker.helpers.arrayElement([faker.number.int(), undefined])}, undefined]), client_concentration: faker.helpers.arrayElement([{top1_share_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), risk_level: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.helpers.arrayElement(['low','medium','high'] as const), null]), undefined]), pareto_count: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined])}, undefined]), dpo: faker.helpers.arrayElement([{days: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), sample_size: faker.helpers.arrayElement([faker.number.int(), undefined])}, undefined]), supplier_concentration: faker.helpers.arrayElement([{top1_share_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), risk_level: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.helpers.arrayElement(['low','medium','high'] as const), null]), undefined]), pareto_count: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined])}, undefined]), working_capital_cycle_days: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined])}, undefined]), ...overrideResponse})
+
+
+export const getGetStatisticsOverviewMockHandler = (overrideResponse?: GetStatisticsOverview200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetStatisticsOverview200> | GetStatisticsOverview200), options?: RequestHandlerOptions) => {
   return http.get('*/api/v1/statistics/overview', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetStatisticsOverviewResponseMock(),
       { status: 200
       })
   }, options)
 }
 
-export const getGetStatisticsTablesMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getGetStatisticsTablesMockHandler = (overrideResponse?: GetStatisticsTables200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetStatisticsTables200> | GetStatisticsTables200), options?: RequestHandlerOptions) => {
   return http.get('*/api/v1/statistics/tables', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetStatisticsTablesResponseMock(),
       { status: 200
       })
   }, options)
 }
 
-export const getGetStatisticsReceivablesMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getGetStatisticsReceivablesMockHandler = (overrideResponse?: GetStatisticsReceivables200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetStatisticsReceivables200> | GetStatisticsReceivables200), options?: RequestHandlerOptions) => {
   return http.get('*/api/v1/statistics/receivables', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetStatisticsReceivablesResponseMock(),
       { status: 200
       })
   }, options)
 }
 
-export const getGetStatisticsPartnersMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getGetStatisticsPartnersMockHandler = (overrideResponse?: GetStatisticsPartners200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetStatisticsPartners200> | GetStatisticsPartners200), options?: RequestHandlerOptions) => {
   return http.get('*/api/v1/statistics/partners', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetStatisticsPartnersResponseMock(),
       { status: 200
       })
   }, options)
 }
 
-export const getGetStatisticsHealthMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getGetStatisticsHealthMockHandler = (overrideResponse?: GetStatisticsHealth200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetStatisticsHealth200> | GetStatisticsHealth200), options?: RequestHandlerOptions) => {
   return http.get('*/api/v1/statistics/health', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetStatisticsHealthResponseMock(),
       { status: 200
       })
   }, options)

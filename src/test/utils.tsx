@@ -5,6 +5,7 @@ import { RouterProvider } from 'react-router/dom'
 
 import { routes } from '@/app/router'
 import { createQueryClient } from '@/shared/lib/query-client'
+import { TooltipProvider } from '@/shared/ui/tooltip'
 
 /** Renders the real route tree at the given URL with a fresh query client. */
 export function renderApp(initialEntry: string) {
@@ -13,7 +14,9 @@ export function renderApp(initialEntry: string) {
 
   const result = render(
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <TooltipProvider>
+        <RouterProvider router={router} />
+      </TooltipProvider>
     </QueryClientProvider>,
   )
 

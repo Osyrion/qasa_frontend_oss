@@ -23,6 +23,7 @@ import type {
 import type {
   GetReportsEuSalesList200,
   GetReportsEuSalesListParams,
+  GetReportsVatControlStatement200,
   GetReportsVatControlStatementParams,
   GetReportsVatControlStatementXmlParams
 } from '../qASAAPIDocumentation.schemas';
@@ -152,7 +153,7 @@ export const getReportsVatControlStatement = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<GetReportsVatControlStatement200>(
       {url: `/api/v1/reports/vat-control-statement`, method: 'GET',
         params, signal
     },

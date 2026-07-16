@@ -5,4 +5,16 @@
  * API documentation for QASA Laravel application - invoicing and client management system
  * OpenAPI spec version: 1.0.0
  */
+import {
+  faker
+} from '@faker-js/faker';
+
+import type {
+  Expense
+} from '../qASAAPIDocumentation.schemas';
+
+
+export const getGetExpensesExpenseAttachmentResponseMock = (): ArrayBuffer => (new ArrayBuffer(faker.number.int({ min: 1, max: 64 })))
+
+export const getPostExpensesExpenseAttachmentResponseMock = (overrideResponse: Partial<Extract<Expense, object>> = {}): Expense => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), category: faker.helpers.arrayElement([faker.helpers.arrayElement(['office','travel','software','hardware','marketing','education','services','other'] as const), undefined]), amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), currency: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), null]), undefined]), date: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), null]), undefined]), note: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), attachment: faker.helpers.arrayElement([faker.helpers.arrayElement([{filename: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), mime_type: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), size_bytes: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined])},null,]), undefined]), created_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), updated_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), ...overrideResponse})
 

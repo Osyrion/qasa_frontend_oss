@@ -1,0 +1,103 @@
+{
+  "status": {
+    "active": "Active",
+    "paused": "Paused",
+    "completed": "Completed",
+    "archived": "Archived"
+  },
+  "billing_type": {
+    "hourly": "Hourly rate",
+    "daily": "Daily rate",
+    "monthly": "Monthly rate",
+    "fixed_per_item": "Fixed per item",
+    "mixed": "Mixed (items)"
+  },
+  "list": {
+    "title": "Orders",
+    "new_order": "New order",
+    "personal_placeholder": "Personal order",
+    "filter_status": "Status",
+    "filter_status_all": "All statuses",
+    "filter_client": "Client",
+    "column_name": "Name",
+    "column_client": "Client",
+    "column_status": "Status",
+    "column_billing_type": "Billing",
+    "empty": "No orders yet."
+  },
+  "form": {
+    "create_title": "New order",
+    "edit_title": "Edit order",
+    "name": "Name",
+    "client": "Client",
+    "client_placeholder": "Select a client…",
+    "client_none": "No client (personal order)",
+    "billing_type": "Billing type",
+    "color": "Color",
+    "readme": "Description",
+    "rate": "Rate",
+    "currency": "Currency",
+    "estimated_hours": "Estimated hours",
+    "estimated_price": "Estimated price",
+    "deadline": "Deadline",
+    "status": "Status",
+    "created": "Order created.",
+    "updated": "Order updated.",
+    "not_editable": "This order can no longer be edited.",
+    "rate_required": "A billable order with this billing type needs a rate."
+  },
+  "validation": {
+    "name_required": "Name is required.",
+    "description_required": "Description is required.",
+    "quantity_positive": "Quantity must be greater than zero.",
+    "unit_price_non_negative": "Unit price cannot be negative."
+  },
+  "items": {
+    "type": "Type",
+    "type_service": "Service",
+    "type_product": "Product",
+    "type_time": "Time",
+    "description": "Description",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "unit_price": "Unit price",
+    "vat_rate": "VAT",
+    "total_incl_vat": "Total",
+    "empty": "No items yet.",
+    "add": "Add item",
+    "edit": "Edit item",
+    "save": "Save",
+    "cancel_edit": "Cancel",
+    "delete": "Delete item",
+    "preview_total": "Line total: {{total}}"
+  },
+  "notes": {
+    "empty": "No notes yet.",
+    "placeholder": "Write a note…",
+    "add": "Add note",
+    "added": "Note added.",
+    "delete_forbidden": "You can only delete your own notes."
+  },
+  "attachments": {
+    "upload_failed": "Could not upload the attachment."
+  },
+  "detail": {
+    "overview": "Overview",
+    "tab_items": "Items",
+    "tab_notes": "Notes",
+    "tab_attachments": "Attachments",
+    "generate_invoice": "Generate invoice",
+    "deleted": "Order deleted.",
+    "delete_failed_has_invoices": "This order has invoices and cannot be deleted."
+  },
+  "generate_invoice": {
+    "title": "Generate invoice from order",
+    "issued_at": "Issue date",
+    "due_at": "Due date",
+    "currency": "Currency",
+    "note": "Note",
+    "submit": "Generate",
+    "no_client": "Assign a client to this order before generating an invoice.",
+    "created": "Draft invoice created."
+  }
+}

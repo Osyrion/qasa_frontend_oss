@@ -1,0 +1,67 @@
+{
+  "title": "Reports",
+  "tabs": {
+    "eu_sales_list": "EU Sales List",
+    "control_statement": "VAT control statement",
+    "exports": "Exports"
+  },
+  "period": {
+    "year": "Year",
+    "granularity": "Period",
+    "whole_year": "Whole year",
+    "quarter": "Quarter",
+    "month": "Month"
+  },
+  "eu_sales_list": {
+    "column_period": "Period",
+    "column_vat_id": "VAT ID",
+    "column_client": "Client",
+    "column_amount": "Amount",
+    "column_code": "Code",
+    "empty": "No intra-EU reverse-charged invoices for this period."
+  },
+  "control_statement": {
+    "country": "Country",
+    "not_a_payer_title": "Not a VAT payer",
+    "not_a_payer_body": "This report is only available for VAT payers.",
+    "assumptions_title": "Assumptions",
+    "download_xml": "Download XML draft",
+    "xml_period_required": "SK requires a month or quarter — select one to enable the XML draft.",
+    "section": "Section",
+    "summary_section": "Summary",
+    "column_document": "Document",
+    "column_date": "Date",
+    "column_partner": "Partner",
+    "column_tax_id": "Tax ID",
+    "column_rate": "Rate",
+    "column_base": "Base",
+    "column_vat": "VAT",
+    "column_related_document": "Related document"
+  },
+  "export": {
+    "title_invoices": "Export invoices",
+    "title_supplier_invoices": "Export supplier invoices",
+    "invoices": "Invoices",
+    "supplier_invoices": "Supplier invoices",
+    "date_from": "From",
+    "date_to": "To",
+    "date_range_required": "Select a date range first.",
+    "period_basis": "Period basis",
+    "period_basis_issue": "Issue date",
+    "period_basis_tax": "Taxable supply date",
+    "document_types": "Document types",
+    "type_invoice": "Invoices",
+    "type_credit_note": "Credit notes",
+    "type_storno": "Stornos",
+    "download_pohoda": "Pohoda XML",
+    "download_csv": "CSV",
+    "download_omega": "Omega",
+    "downloading": "Downloading…",
+    "failed": "Could not download the export.",
+    "close": "Close"
+  },
+  "isdoc": {
+    "download": "ISDOC",
+    "failed": "Could not download the ISDOC file."
+  }
+}

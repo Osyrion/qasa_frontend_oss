@@ -6,9 +6,23 @@
   "delete": "Vymazať",
   "error_generic": "Niečo sa pokazilo. Skúste to znova.",
   "nav": {
-    "dashboard": "Prehľad",
+    "group_overview": "Prehľad",
+    "group_sales": "Predaj",
+    "dashboard": "Dashboard",
     "clients": "Klienti",
     "invoices": "Faktúry",
+    "quotes": "Ponuky",
+    "orders": "Zákazky",
+    "recurring": "Opakované faktúry",
+    "group_purchases": "Nákup",
+    "supplier_invoices": "Došlé faktúry",
+    "inbox": "Inbox",
+    "expenses": "Výdavky",
+    "group_analysis": "Analýza",
+    "statistics": "Štatistiky",
+    "reports": "Reporty",
+    "activity": "Denník aktivít",
+    "settings": "Nastavenia",
     "logout": "Odhlásiť sa"
   },
   "not_found": "Táto stránka neexistuje.",
@@ -22,5 +36,37 @@
   "confirm_delete": "Naozaj? Túto akciu nemožno vrátiť späť.",
   "add": "Pridať",
   "edit": "Upraviť",
-  "back": "Späť"
+  "back": "Späť",
+  "file_upload": {
+    "hint": "Sem presuňte súbor, alebo kliknite pre výber",
+    "max_size": "Max {{max}}",
+    "type_not_allowed": "Tento typ súboru nie je povolený.",
+    "too_large": "Súbor je príliš veľký — max {{max}}."
+  },
+  "attachments": {
+    "empty": "Zatiaľ žiadne prílohy.",
+    "download": "Stiahnuť",
+    "delete": "Zmazať prílohu"
+  },
+  "dashboard": {
+    "setup_title": "Prvé kroky",
+    "setup_done": "Všetko je nastavené!",
+    "setup": {
+      "billing_identity": "Doplňte fakturačnú identitu",
+      "vat_status": "Nastavte stav platcu DPH",
+      "bank_account": "Pridajte bankový účet",
+      "invoice_numbering": "Nastavte číslovanie faktúr",
+      "logo": "Nahrajte logo",
+      "first_client": "Pridajte prvého klienta",
+      "first_invoice": "Odošlite prvú faktúru"
+    },
+    "kpi_revenue": "Tržby",
+    "kpi_costs": "Náklady",
+    "kpi_profit": "Zisk",
+    "this_month": "Tento mesiac",
+    "ytd": "Od začiatku roka",
+    "rolling_12m": "Posledných 12 mesiacov",
+    "vs_last_month": "oproti minulému mesiacu",
+    "vs_last_year": "oproti minulému roku"
+  }
 }

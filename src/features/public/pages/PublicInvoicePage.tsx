@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios'
 import { DownloadIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router'
@@ -26,9 +27,12 @@ export function PublicInvoicePage() {
   }
 
   if (invoice.isError || !invoice.data) {
+    const isRateLimited = isAxiosError(invoice.error) && invoice.error.response?.status === 429
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-muted-foreground">{t('public.not_found')}</p>
+        <p className="text-lg text-muted-foreground">
+          {isRateLimited ? t('public.rate_limited') : t('public.not_found')}
+        </p>
       </div>
     )
   }

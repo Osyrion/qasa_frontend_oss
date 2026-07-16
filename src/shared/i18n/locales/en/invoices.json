@@ -174,6 +174,7 @@
   },
   "public": {
     "not_found": "This invoice link is not valid.",
+    "rate_limited": "Too many requests. Please wait a moment and try again.",
     "supplier": "Supplier",
     "client": "Client",
     "vat_id": "VAT ID",

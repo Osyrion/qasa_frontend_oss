@@ -1,0 +1,31 @@
+{
+  "title": "Activity log",
+  "system_actor": "System",
+  "column_when": "When",
+  "column_actor": "Actor",
+  "column_event": "Event",
+  "column_subject": "Subject",
+  "empty": "No activity yet.",
+  "show_changes": "Show changes",
+  "hide_changes": "Hide changes",
+  "change_from": "From",
+  "change_to": "To",
+  "forbidden_title": "Activity log unavailable",
+  "forbidden_body": "You don't have permission to view the activity log.",
+  "event": {
+    "client.created": "Client created",
+    "client.updated": "Client updated",
+    "client.deleted": "Client deleted",
+    "order.created": "Order created",
+    "order.updated": "Order updated",
+    "order.deleted": "Order deleted",
+    "invoice.created": "Invoice created",
+    "invoice.sent": "Invoice sent",
+    "invoice.paid": "Invoice paid",
+    "invoice.reminded": "Reminder sent",
+    "invoice.status_changed": "Invoice status changed",
+    "payment.recorded": "Payment recorded",
+    "quote.accepted": "Quote accepted",
+    "quote.rejected": "Quote rejected"
+  }
+}

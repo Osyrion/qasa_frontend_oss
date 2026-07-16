@@ -196,6 +196,94 @@ export interface ContactPerson {
   created_at?: string | null;
 }
 
+export type ExchangeRateBaseCurrency = typeof ExchangeRateBaseCurrency[keyof typeof ExchangeRateBaseCurrency];
+
+
+export const ExchangeRateBaseCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type ExchangeRateTargetCurrency = typeof ExchangeRateTargetCurrency[keyof typeof ExchangeRateTargetCurrency];
+
+
+export const ExchangeRateTargetCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type ExchangeRateSource = typeof ExchangeRateSource[keyof typeof ExchangeRateSource];
+
+
+export const ExchangeRateSource = {
+  manual: 'manual',
+  ecb: 'ecb',
+  fixer: 'fixer',
+  cnb: 'cnb',
+} as const;
+
+export interface ExchangeRate {
+  id?: string;
+  base_currency?: ExchangeRateBaseCurrency;
+  target_currency?: ExchangeRateTargetCurrency;
+  rate?: number;
+  date?: string;
+  source?: ExchangeRateSource;
+}
+
+export type StatisticsKpiBlockThisMonth = {
+  value?: number;
+  date_from?: string;
+  date_to?: string;
+};
+
+export type StatisticsKpiBlockRolling12m = {
+  value?: number;
+  /** @nullable */
+  yoy_percent?: number | null;
+  date_from?: string;
+  date_to?: string;
+};
+
+export type StatisticsKpiBlockYtd = {
+  value?: number;
+  /** @nullable */
+  yoy_percent?: number | null;
+  date_from?: string;
+  date_to?: string;
+};
+
+export interface StatisticsKpiBlock {
+  this_month?: StatisticsKpiBlockThisMonth;
+  /** @nullable */
+  trend_vs_last_month_percent?: number | null;
+  rolling_12m?: StatisticsKpiBlockRolling12m;
+  ytd?: StatisticsKpiBlockYtd;
+}
+
+/**
+ * @nullable
+ */
+export type StatisticsConcentrationRiskLevel = typeof StatisticsConcentrationRiskLevel[keyof typeof StatisticsConcentrationRiskLevel] | null;
+
+
+export const StatisticsConcentrationRiskLevel = {
+  low: 'low',
+  medium: 'medium',
+  high: 'high',
+} as const;
+
+export interface StatisticsConcentration {
+  /** @nullable */
+  top1_share_percent?: number | null;
+  /** @nullable */
+  risk_level?: StatisticsConcentrationRiskLevel;
+  /** @nullable */
+  pareto_count?: number | null;
+}
+
 export type BankAccountCurrency = typeof BankAccountCurrency[keyof typeof BankAccountCurrency];
 
 
@@ -218,6 +306,63 @@ export interface BankAccount {
   bic?: string | null;
   currency?: BankAccountCurrency;
   is_default?: boolean;
+  /** @nullable */
+  created_at?: string | null;
+  /** @nullable */
+  updated_at?: string | null;
+}
+
+export type ExpenseCategory = typeof ExpenseCategory[keyof typeof ExpenseCategory];
+
+
+export const ExpenseCategory = {
+  office: 'office',
+  travel: 'travel',
+  software: 'software',
+  hardware: 'hardware',
+  marketing: 'marketing',
+  education: 'education',
+  services: 'services',
+  other: 'other',
+} as const;
+
+/**
+ * @nullable
+ */
+export type ExpenseCurrency = typeof ExpenseCurrency[keyof typeof ExpenseCurrency] | null;
+
+
+export const ExpenseCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+/**
+ * @nullable
+ */
+export type ExpenseAttachment = {
+  /** @nullable */
+  filename?: string | null;
+  /** @nullable */
+  mime_type?: string | null;
+  /** @nullable */
+  size_bytes?: number | null;
+} | null;
+
+export interface Expense {
+  id?: string;
+  description?: string;
+  category?: ExpenseCategory;
+  amount?: number;
+  /** @nullable */
+  currency?: ExpenseCurrency;
+  /** @nullable */
+  date?: string | null;
+  /** @nullable */
+  note?: string | null;
+  /** @nullable */
+  attachment?: ExpenseAttachment;
   /** @nullable */
   created_at?: string | null;
   /** @nullable */
@@ -872,6 +1017,7 @@ export type OrderItemType = typeof OrderItemType[keyof typeof OrderItemType];
 export const OrderItemType = {
   service: 'service',
   product: 'product',
+  time: 'time',
 } as const;
 
 export interface OrderItem {
@@ -903,8 +1049,8 @@ export type OrderStatus = typeof OrderStatus[keyof typeof OrderStatus];
 
 
 export const OrderStatus = {
-  draft: 'draft',
   active: 'active',
+  paused: 'paused',
   completed: 'completed',
   archived: 'archived',
 } as const;
@@ -916,9 +1062,11 @@ export type OrderBillingType = typeof OrderBillingType[keyof typeof OrderBilling
 
 
 export const OrderBillingType = {
-  fixed_price: 'fixed_price',
-  hourly_rate: 'hourly_rate',
-  retainer: 'retainer',
+  hourly: 'hourly',
+  daily: 'daily',
+  monthly: 'monthly',
+  fixed_per_item: 'fixed_per_item',
+  mixed: 'mixed',
 } as const;
 
 /**
@@ -1763,9 +1911,188 @@ export type PutBankAccountsIdBody = {
   is_default?: boolean;
 };
 
+export type GetExchangeRatesParams = {
+/**
+ * Items per page
+ */
+per_page?: number;
+};
+
+export type GetExchangeRates200 = {
+  current_page?: number;
+  data?: ExchangeRate[];
+  /** @nullable */
+  first_page_url?: string | null;
+  /** @nullable */
+  from?: number | null;
+  last_page?: number;
+  /** @nullable */
+  last_page_url?: string | null;
+  /** @nullable */
+  next_page_url?: string | null;
+  path?: string;
+  per_page?: number;
+  /** @nullable */
+  prev_page_url?: string | null;
+  /** @nullable */
+  to?: number | null;
+  total?: number;
+};
+
+export type PostExchangeRatesBodyBaseCurrency = typeof PostExchangeRatesBodyBaseCurrency[keyof typeof PostExchangeRatesBodyBaseCurrency];
+
+
+export const PostExchangeRatesBodyBaseCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type PostExchangeRatesBodyTargetCurrency = typeof PostExchangeRatesBodyTargetCurrency[keyof typeof PostExchangeRatesBodyTargetCurrency];
+
+
+export const PostExchangeRatesBodyTargetCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type PostExchangeRatesBody = {
+  base_currency: PostExchangeRatesBodyBaseCurrency;
+  target_currency: PostExchangeRatesBodyTargetCurrency;
+  /** @minimum 0.000001 */
+  rate: number;
+  date: string;
+};
+
 export type PostExpensesExpenseAttachmentBody = {
   /** Receipt/invoice file (max 20MB) */
   file: Blob;
+};
+
+export type GetExpensesParams = {
+/**
+ * Items per page
+ */
+per_page?: number;
+/**
+ * Filter by category
+ */
+category?: GetExpensesCategory;
+/**
+ * Filter by currency
+ */
+currency?: GetExpensesCurrency;
+/**
+ * Filter from date
+ */
+date_from?: string;
+/**
+ * Filter to date
+ */
+date_to?: string;
+/**
+ * Filter by year
+ */
+year?: number;
+};
+
+export type GetExpensesCategory = typeof GetExpensesCategory[keyof typeof GetExpensesCategory];
+
+
+export const GetExpensesCategory = {
+  office: 'office',
+  travel: 'travel',
+  software: 'software',
+  hardware: 'hardware',
+  marketing: 'marketing',
+  education: 'education',
+  services: 'services',
+  other: 'other',
+} as const;
+
+export type GetExpensesCurrency = typeof GetExpensesCurrency[keyof typeof GetExpensesCurrency];
+
+
+export const GetExpensesCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type GetExpenses200Meta = { [key: string]: unknown };
+
+export type GetExpenses200 = {
+  data?: Expense[];
+  meta?: GetExpenses200Meta;
+};
+
+export type PostExpensesBodyCategory = typeof PostExpensesBodyCategory[keyof typeof PostExpensesBodyCategory];
+
+
+export const PostExpensesBodyCategory = {
+  office: 'office',
+  travel: 'travel',
+  software: 'software',
+  hardware: 'hardware',
+  marketing: 'marketing',
+  education: 'education',
+  services: 'services',
+  other: 'other',
+} as const;
+
+export type PostExpensesBodyCurrency = typeof PostExpensesBodyCurrency[keyof typeof PostExpensesBodyCurrency];
+
+
+export const PostExpensesBodyCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type PostExpensesBody = {
+  description: string;
+  category: PostExpensesBodyCategory;
+  /** @minimum 0.01 */
+  amount: number;
+  currency: PostExpensesBodyCurrency;
+  date: string;
+  /** @nullable */
+  note?: string | null;
+};
+
+export type PutExpensesExpenseBodyCategory = typeof PutExpensesExpenseBodyCategory[keyof typeof PutExpensesExpenseBodyCategory];
+
+
+export const PutExpensesExpenseBodyCategory = {
+  office: 'office',
+  travel: 'travel',
+  software: 'software',
+  hardware: 'hardware',
+  marketing: 'marketing',
+  education: 'education',
+  services: 'services',
+  other: 'other',
+} as const;
+
+export type PutExpensesExpenseBodyCurrency = typeof PutExpensesExpenseBodyCurrency[keyof typeof PutExpensesExpenseBodyCurrency];
+
+
+export const PutExpensesExpenseBodyCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type PutExpensesExpenseBody = {
+  description: string;
+  category: PutExpensesExpenseBodyCategory;
+  /** @minimum 0.01 */
+  amount: number;
+  currency: PutExpensesExpenseBodyCurrency;
+  date: string;
+  /** @nullable */
+  note?: string | null;
 };
 
 export type GetInvoicesExportPohodaParams = {
@@ -1904,6 +2231,15 @@ export const PostInvoiceInboxInboxItemConvertBodyCurrency = {
   USD: 'USD',
 } as const;
 
+export type PostInvoiceInboxInboxItemConvertBodyVatRegime = typeof PostInvoiceInboxInboxItemConvertBodyVatRegime[keyof typeof PostInvoiceInboxInboxItemConvertBodyVatRegime];
+
+
+export const PostInvoiceInboxInboxItemConvertBodyVatRegime = {
+  domestic: 'domestic',
+  eu_reverse_charge: 'eu_reverse_charge',
+  import: 'import',
+} as const;
+
 export type PostInvoiceInboxInboxItemConvertBodyVatLinesItem = {
   vat_rate?: number;
   base?: number;
@@ -1932,6 +2268,24 @@ export type PostInvoiceInboxInboxItemConvertBody = {
   variable_symbol?: string | null;
   /** @nullable */
   note?: string | null;
+  vat_regime?: PostInvoiceInboxInboxItemConvertBodyVatRegime;
+  /**
+     * Domestic format [prefix-]number; requires vendor_bank_code
+     * @nullable
+     */
+  vendor_account_number?: string | null;
+  /**
+     * 4 digits; requires vendor_account_number
+     * @nullable
+     */
+  vendor_bank_code?: string | null;
+  /**
+     * Requires vendor_bic
+     * @nullable
+     */
+  vendor_iban?: string | null;
+  /** @nullable */
+  vendor_bic?: string | null;
   vat_lines: PostInvoiceInboxInboxItemConvertBodyVatLinesItem[];
 };
 
@@ -2088,6 +2442,325 @@ export type GetPublicInvoicesToken200 = {
   public_status?: GetPublicInvoicesToken200PublicStatus;
 };
 
+export type GetPublicQuotesToken200Supplier = {
+  /** @nullable */
+  name?: string | null;
+  /** @nullable */
+  ico?: string | null;
+  /** @nullable */
+  dic?: string | null;
+  /** @nullable */
+  vat_id?: string | null;
+  is_vat_payer?: boolean;
+  vat_status?: string;
+  /** @nullable */
+  address?: string | null;
+  /** @nullable */
+  city?: string | null;
+  /** @nullable */
+  postal_code?: string | null;
+  /** @nullable */
+  country?: string | null;
+  /** @nullable */
+  email?: string | null;
+  /** @nullable */
+  phone?: string | null;
+  /** @nullable */
+  website?: string | null;
+  /** @nullable */
+  logo_path?: string | null;
+  /** @nullable */
+  invoice_footer_text?: string | null;
+};
+
+/**
+ * @nullable
+ */
+export type GetPublicQuotesToken200Client = {
+  /** @nullable */
+  name?: string | null;
+  /** @nullable */
+  ico?: string | null;
+  /** @nullable */
+  dic?: string | null;
+  /** @nullable */
+  vat_id?: string | null;
+  is_vat_payer?: boolean;
+  /** @nullable */
+  address?: string | null;
+  /** @nullable */
+  city?: string | null;
+  /** @nullable */
+  postal_code?: string | null;
+  /** @nullable */
+  country?: string | null;
+  /** @nullable */
+  email?: string | null;
+  /** @nullable */
+  phone?: string | null;
+} | null;
+
+export type GetPublicQuotesToken200ItemsItem = {
+  description?: string;
+  quantity?: number;
+  unit?: string;
+  unit_price?: number;
+  vat_rate?: number;
+  vat_amount?: number;
+  total_excl_vat?: number;
+  total_incl_vat?: number;
+};
+
+export type GetPublicQuotesToken200VatRecapItem = {
+  rate?: number;
+  base?: number;
+  vat?: number;
+  total?: number;
+};
+
+export type GetPublicQuotesToken200EffectiveStatus = typeof GetPublicQuotesToken200EffectiveStatus[keyof typeof GetPublicQuotesToken200EffectiveStatus];
+
+
+export const GetPublicQuotesToken200EffectiveStatus = {
+  draft: 'draft',
+  sent: 'sent',
+  accepted: 'accepted',
+  rejected: 'rejected',
+  expired: 'expired',
+} as const;
+
+export type GetPublicQuotesToken200 = {
+  quote_number?: string;
+  issued_at?: string;
+  /** @nullable */
+  valid_until?: string | null;
+  currency?: string;
+  supplier?: GetPublicQuotesToken200Supplier;
+  /** @nullable */
+  client?: GetPublicQuotesToken200Client;
+  items?: GetPublicQuotesToken200ItemsItem[];
+  vat_recap?: GetPublicQuotesToken200VatRecapItem[];
+  /** @nullable */
+  discount_percent?: number | null;
+  discount_amount?: number;
+  subtotal?: number;
+  vat_amount?: number;
+  total?: number;
+  effective_status?: GetPublicQuotesToken200EffectiveStatus;
+  can_decide?: boolean;
+};
+
+export type PostPublicQuotesTokenAcceptBody = {
+  /**
+     * @maxLength 1000
+     * @nullable
+     */
+  decision_note?: string | null;
+};
+
+export type PostPublicQuotesTokenAccept200Status = typeof PostPublicQuotesTokenAccept200Status[keyof typeof PostPublicQuotesTokenAccept200Status];
+
+
+export const PostPublicQuotesTokenAccept200Status = {
+  draft: 'draft',
+  sent: 'sent',
+  accepted: 'accepted',
+  rejected: 'rejected',
+  expired: 'expired',
+} as const;
+
+export type PostPublicQuotesTokenAccept200 = {
+  status?: PostPublicQuotesTokenAccept200Status;
+  /** @nullable */
+  accepted_at?: string | null;
+  /** @nullable */
+  rejected_at?: string | null;
+};
+
+export type PostPublicQuotesTokenRejectBody = {
+  /**
+     * @maxLength 1000
+     * @nullable
+     */
+  decision_note?: string | null;
+};
+
+export type PostPublicQuotesTokenReject200Status = typeof PostPublicQuotesTokenReject200Status[keyof typeof PostPublicQuotesTokenReject200Status];
+
+
+export const PostPublicQuotesTokenReject200Status = {
+  draft: 'draft',
+  sent: 'sent',
+  accepted: 'accepted',
+  rejected: 'rejected',
+  expired: 'expired',
+} as const;
+
+export type PostPublicQuotesTokenReject200 = {
+  status?: PostPublicQuotesTokenReject200Status;
+  /** @nullable */
+  accepted_at?: string | null;
+  /** @nullable */
+  rejected_at?: string | null;
+};
+
+export type GetQuotesParams = {
+/**
+ * Items per page
+ */
+per_page?: number;
+/**
+ * Filter by status
+ */
+status?: GetQuotesStatus;
+/**
+ * Filter by client
+ */
+client_id?: string;
+/**
+ * Filter from date
+ */
+date_from?: string;
+/**
+ * Filter to date
+ */
+date_to?: string;
+/**
+ * Sort field
+ */
+sort?: string;
+/**
+ * Sort direction
+ */
+direction?: GetQuotesDirection;
+};
+
+export type GetQuotesStatus = typeof GetQuotesStatus[keyof typeof GetQuotesStatus];
+
+
+export const GetQuotesStatus = {
+  draft: 'draft',
+  sent: 'sent',
+  accepted: 'accepted',
+  rejected: 'rejected',
+  expired: 'expired',
+} as const;
+
+export type GetQuotesDirection = typeof GetQuotesDirection[keyof typeof GetQuotesDirection];
+
+
+export const GetQuotesDirection = {
+  asc: 'asc',
+  desc: 'desc',
+} as const;
+
+export type GetQuotes200Meta = { [key: string]: unknown };
+
+export type GetQuotes200 = {
+  data?: Quote[];
+  meta?: GetQuotes200Meta;
+};
+
+export type PostQuotesBodyCurrency = typeof PostQuotesBodyCurrency[keyof typeof PostQuotesBodyCurrency];
+
+
+export const PostQuotesBodyCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type PostQuotesBody = {
+  client_id: string;
+  issued_at: string;
+  currency: PostQuotesBodyCurrency;
+  /** @nullable */
+  valid_until?: string | null;
+  /** @nullable */
+  discount_percent?: number | null;
+  /** @nullable */
+  note?: string | null;
+  /** @nullable */
+  note_above?: string | null;
+};
+
+export type PutQuotesIdBodyCurrency = typeof PutQuotesIdBodyCurrency[keyof typeof PutQuotesIdBodyCurrency];
+
+
+export const PutQuotesIdBodyCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type PutQuotesIdBody = {
+  client_id: string;
+  issued_at: string;
+  currency: PutQuotesIdBodyCurrency;
+  /** @nullable */
+  valid_until?: string | null;
+  /** @nullable */
+  discount_percent?: number | null;
+  /** @nullable */
+  note?: string | null;
+  /** @nullable */
+  note_above?: string | null;
+};
+
+export type PostQuotesQuoteItemsBody = {
+  /** @maxLength 500 */
+  description: string;
+  quantity: number;
+  /** @maxLength 20 */
+  unit?: string;
+  unit_price: number;
+  vat_rate?: number;
+  /** @nullable */
+  sort_order?: number | null;
+};
+
+export type PostQuotesQuoteStatusBodyStatus = typeof PostQuotesQuoteStatusBodyStatus[keyof typeof PostQuotesQuoteStatusBodyStatus];
+
+
+export const PostQuotesQuoteStatusBodyStatus = {
+  sent: 'sent',
+  accepted: 'accepted',
+  rejected: 'rejected',
+  expired: 'expired',
+} as const;
+
+export type PostQuotesQuoteStatusBody = {
+  status: PostQuotesQuoteStatusBodyStatus;
+};
+
+export type PostQuotesQuoteEmailBody = {
+  /**
+     * Override recipient; defaults to the client email
+     * @nullable
+     */
+  to?: string | null;
+  /**
+     * @maxItems 5
+     * @nullable
+     */
+  cc?: string[] | null;
+  /**
+     * Custom message shown in the email body
+     * @maxLength 2000
+     * @nullable
+     */
+  message?: string | null;
+};
+
+export type PostQuotesQuotePublicLinkBody = {
+  regenerate?: boolean;
+};
+
+export type PostQuotesQuotePublicLink200 = {
+  token?: string;
+  url?: string;
+};
+
 export type GetRecurringInvoiceTemplatesParams = {
 /**
  * Items per page
@@ -2179,7 +2852,11 @@ export type PostRecurringInvoiceTemplatesBody = {
   due_days: number;
   /** @nullable */
   discount_percent?: number | null;
+  /** Intent only — re-resolved from the current client at each generation */
+  reverse_charge?: boolean;
   tax_date_mode?: PostRecurringInvoiceTemplatesBodyTaxDateMode;
+  /** Issue and email generated invoices automatically */
+  auto_send?: boolean;
   /**
      * Supports {BOM}, {EOM}, {MONTH}, {YEAR} placeholders
      * @nullable
@@ -2193,6 +2870,153 @@ export type PostRecurringInvoiceTemplatesBody = {
   items: RecurringTemplateItem[];
 };
 
+export type PutRecurringInvoiceTemplatesIdBodyPeriod = typeof PutRecurringInvoiceTemplatesIdBodyPeriod[keyof typeof PutRecurringInvoiceTemplatesIdBodyPeriod];
+
+
+export const PutRecurringInvoiceTemplatesIdBodyPeriod = {
+  monthly: 'monthly',
+  quarterly: 'quarterly',
+  semiannually: 'semiannually',
+  yearly: 'yearly',
+} as const;
+
+export type PutRecurringInvoiceTemplatesIdBodyType = typeof PutRecurringInvoiceTemplatesIdBodyType[keyof typeof PutRecurringInvoiceTemplatesIdBodyType];
+
+
+export const PutRecurringInvoiceTemplatesIdBodyType = {
+  invoice: 'invoice',
+  proforma: 'proforma',
+} as const;
+
+export type PutRecurringInvoiceTemplatesIdBodyCurrency = typeof PutRecurringInvoiceTemplatesIdBodyCurrency[keyof typeof PutRecurringInvoiceTemplatesIdBodyCurrency];
+
+
+export const PutRecurringInvoiceTemplatesIdBodyCurrency = {
+  CZK: 'CZK',
+  EUR: 'EUR',
+  USD: 'USD',
+} as const;
+
+export type PutRecurringInvoiceTemplatesIdBodyTaxDateMode = typeof PutRecurringInvoiceTemplatesIdBodyTaxDateMode[keyof typeof PutRecurringInvoiceTemplatesIdBodyTaxDateMode];
+
+
+export const PutRecurringInvoiceTemplatesIdBodyTaxDateMode = {
+  issue_date: 'issue_date',
+  previous_month_end: 'previous_month_end',
+} as const;
+
+export type PutRecurringInvoiceTemplatesIdBody = {
+  /** @maxLength 255 */
+  name: string;
+  client_id: string;
+  period: PutRecurringInvoiceTemplatesIdBodyPeriod;
+  /**
+     * Ignored when last_day_of_month is true
+     * @minimum 1
+     * @maximum 28
+     */
+  day_of_month?: number;
+  last_day_of_month?: boolean;
+  first_issue_date: string;
+  /** @nullable */
+  end_date?: string | null;
+  type?: PutRecurringInvoiceTemplatesIdBodyType;
+  currency: PutRecurringInvoiceTemplatesIdBodyCurrency;
+  /**
+     * @minimum 0
+     * @maximum 365
+     */
+  due_days: number;
+  /** @nullable */
+  discount_percent?: number | null;
+  /** Intent only — re-resolved from the current client at each generation */
+  reverse_charge?: boolean;
+  tax_date_mode?: PutRecurringInvoiceTemplatesIdBodyTaxDateMode;
+  /** Issue and email generated invoices automatically */
+  auto_send?: boolean;
+  /**
+     * Supports {BOM}, {EOM}, {MONTH}, {YEAR} placeholders
+     * @nullable
+     */
+  note_above?: string | null;
+  /**
+     * Supports {BOM}, {EOM}, {MONTH}, {YEAR} placeholders
+     * @nullable
+     */
+  note_below?: string | null;
+  items: RecurringTemplateItem[];
+};
+
+export type GetStatisticsOverview200DataKpiProfit = StatisticsKpiBlock & ({
+  /** @nullable */
+  ytd_margin_percent?: number | null;
+});
+
+export type GetStatisticsOverview200DataKpi = {
+  revenue?: StatisticsKpiBlock;
+  costs?: StatisticsKpiBlock;
+  profit?: GetStatisticsOverview200DataKpiProfit;
+};
+
+export type GetStatisticsOverview200DataComparisonItemPeriod = typeof GetStatisticsOverview200DataComparisonItemPeriod[keyof typeof GetStatisticsOverview200DataComparisonItemPeriod];
+
+
+export const GetStatisticsOverview200DataComparisonItemPeriod = {
+  this_month: 'this_month',
+  last_month: 'last_month',
+  rolling_12m: 'rolling_12m',
+  ytd: 'ytd',
+  last_year: 'last_year',
+} as const;
+
+export type GetStatisticsOverview200DataComparisonItem = {
+  period?: GetStatisticsOverview200DataComparisonItemPeriod;
+  date_from?: string;
+  date_to?: string;
+  revenue?: number;
+  costs?: number;
+  profit?: number;
+  /** @nullable */
+  margin_percent?: number | null;
+};
+
+export type GetStatisticsOverview200DataMonthlyTrendItem = {
+  month?: string;
+  revenue?: number;
+  costs?: number;
+  profit?: number;
+};
+
+export type GetStatisticsOverview200DataProfitChartMonthlyItem = {
+  month?: string;
+  profit?: number;
+  profit_previous_year?: number;
+};
+
+export type GetStatisticsOverview200DataProfitChartCumulativeYtdItem = {
+  month?: string;
+  current?: number;
+  previous_year?: number;
+};
+
+export type GetStatisticsOverview200DataProfitChart = {
+  monthly?: GetStatisticsOverview200DataProfitChartMonthlyItem[];
+  cumulative_ytd?: GetStatisticsOverview200DataProfitChartCumulativeYtdItem[];
+};
+
+export type GetStatisticsOverview200Data = {
+  currency?: string;
+  kpi?: GetStatisticsOverview200DataKpi;
+  comparison?: GetStatisticsOverview200DataComparisonItem[];
+  monthly_trend?: GetStatisticsOverview200DataMonthlyTrendItem[];
+  profit_chart?: GetStatisticsOverview200DataProfitChart;
+  assumptions?: string[];
+};
+
+export type GetStatisticsOverview200 = {
+  data?: GetStatisticsOverview200Data;
+};
+
 export type GetStatisticsTablesParams = {
 /**
  * Year for the by_month breakdown (defaults to the current year)
@@ -2202,6 +3026,53 @@ export type GetStatisticsTablesParams = {
 year?: number;
 };
 
+export type GetStatisticsTables200DataByYearItem = {
+  year?: number;
+  date_from?: string;
+  date_to?: string;
+  revenue?: number;
+  costs?: number;
+  profit?: number;
+  /** @nullable */
+  margin_percent?: number | null;
+};
+
+export type GetStatisticsTables200DataByMonthItem = {
+  month?: string;
+  date_from?: string;
+  date_to?: string;
+  revenue?: number;
+  costs?: number;
+  profit?: number;
+  /** @nullable */
+  margin_percent?: number | null;
+};
+
+export type GetStatisticsTables200Data = {
+  currency?: string;
+  by_year?: GetStatisticsTables200DataByYearItem[];
+  by_month?: GetStatisticsTables200DataByMonthItem[];
+  assumptions?: string[];
+};
+
+export type GetStatisticsTables200 = {
+  data?: GetStatisticsTables200Data;
+};
+
+export type GetStatisticsReceivables200DataReceivables = { [key: string]: unknown };
+
+export type GetStatisticsReceivables200DataPayables = { [key: string]: unknown };
+
+export type GetStatisticsReceivables200Data = {
+  as_of?: string;
+  receivables?: GetStatisticsReceivables200DataReceivables;
+  payables?: GetStatisticsReceivables200DataPayables;
+};
+
+export type GetStatisticsReceivables200 = {
+  data?: GetStatisticsReceivables200Data;
+};
+
 export type GetStatisticsPartnersParams = {
 /**
  * Max entries per currency for the top-clients/top-suppliers rankings (default 10, max 50)
@@ -2209,6 +3080,67 @@ export type GetStatisticsPartnersParams = {
  * @maximum 50
  */
 limit?: number;
+};
+
+export type GetStatisticsPartners200DataTopClients = { [key: string]: unknown };
+
+export type GetStatisticsPartners200DataTopSuppliers = { [key: string]: unknown };
+
+export type GetStatisticsPartners200DataChurnRiskItem = {
+  client_id?: string;
+  /** @nullable */
+  name?: string | null;
+  last_invoice_at?: string;
+  days_since_last_invoice?: number;
+  lifetime_revenue?: number;
+  currency?: string;
+};
+
+export type GetStatisticsPartners200Data = {
+  top_clients?: GetStatisticsPartners200DataTopClients;
+  top_suppliers?: GetStatisticsPartners200DataTopSuppliers;
+  churn_risk?: GetStatisticsPartners200DataChurnRiskItem[];
+};
+
+export type GetStatisticsPartners200 = {
+  data?: GetStatisticsPartners200Data;
+};
+
+export type GetStatisticsHealth200DataDso = {
+  /** @nullable */
+  days?: number | null;
+  sample_size?: number;
+};
+
+export type GetStatisticsHealth200DataPaymentMorale = {
+  /** @nullable */
+  on_time_percent?: number | null;
+  /** @nullable */
+  late_percent?: number | null;
+  /** @nullable */
+  avg_days_late?: number | null;
+  sample_size?: number;
+};
+
+export type GetStatisticsHealth200DataDpo = {
+  /** @nullable */
+  days?: number | null;
+  sample_size?: number;
+};
+
+export type GetStatisticsHealth200Data = {
+  currency?: string;
+  dso?: GetStatisticsHealth200DataDso;
+  payment_morale?: GetStatisticsHealth200DataPaymentMorale;
+  client_concentration?: StatisticsConcentration;
+  dpo?: GetStatisticsHealth200DataDpo;
+  supplier_concentration?: StatisticsConcentration;
+  /** @nullable */
+  working_capital_cycle_days?: number | null;
+};
+
+export type GetStatisticsHealth200 = {
+  data?: GetStatisticsHealth200Data;
 };
 
 export type GetSupplierInvoicesParams = {
@@ -2281,6 +3213,15 @@ export const PostSupplierInvoicesBodyCurrency = {
   USD: 'USD',
 } as const;
 
+export type PostSupplierInvoicesBodyVatRegime = typeof PostSupplierInvoicesBodyVatRegime[keyof typeof PostSupplierInvoicesBodyVatRegime];
+
+
+export const PostSupplierInvoicesBodyVatRegime = {
+  domestic: 'domestic',
+  eu_reverse_charge: 'eu_reverse_charge',
+  import: 'import',
+} as const;
+
 export type PostSupplierInvoicesBodyVatLinesItem = {
   vat_rate?: number;
   base?: number;
@@ -2309,6 +3250,24 @@ export type PostSupplierInvoicesBody = {
   variable_symbol?: string | null;
   /** @nullable */
   note?: string | null;
+  vat_regime?: PostSupplierInvoicesBodyVatRegime;
+  /**
+     * Domestic format [prefix-]number; requires vendor_bank_code
+     * @nullable
+     */
+  vendor_account_number?: string | null;
+  /**
+     * 4 digits; requires vendor_account_number
+     * @nullable
+     */
+  vendor_bank_code?: string | null;
+  /**
+     * Requires vendor_bic
+     * @nullable
+     */
+  vendor_iban?: string | null;
+  /** @nullable */
+  vendor_bic?: string | null;
   vat_lines: PostSupplierInvoicesBodyVatLinesItem[];
 };
 
@@ -2319,6 +3278,15 @@ export const PutSupplierInvoicesIdBodyCurrency = {
   CZK: 'CZK',
   EUR: 'EUR',
   USD: 'USD',
+} as const;
+
+export type PutSupplierInvoicesIdBodyVatRegime = typeof PutSupplierInvoicesIdBodyVatRegime[keyof typeof PutSupplierInvoicesIdBodyVatRegime];
+
+
+export const PutSupplierInvoicesIdBodyVatRegime = {
+  domestic: 'domestic',
+  eu_reverse_charge: 'eu_reverse_charge',
+  import: 'import',
 } as const;
 
 export type PutSupplierInvoicesIdBodyVatLinesItem = {
@@ -2349,6 +3317,24 @@ export type PutSupplierInvoicesIdBody = {
   variable_symbol?: string | null;
   /** @nullable */
   note?: string | null;
+  vat_regime?: PutSupplierInvoicesIdBodyVatRegime;
+  /**
+     * Domestic format [prefix-]number; requires vendor_bank_code
+     * @nullable
+     */
+  vendor_account_number?: string | null;
+  /**
+     * 4 digits; requires vendor_account_number
+     * @nullable
+     */
+  vendor_bank_code?: string | null;
+  /**
+     * Requires vendor_bic
+     * @nullable
+     */
+  vendor_iban?: string | null;
+  /** @nullable */
+  vendor_bic?: string | null;
   vat_lines: PutSupplierInvoicesIdBodyVatLinesItem[];
 };
 
@@ -2380,7 +3366,14 @@ export const PostSupplierInvoicesSupplierInvoiceVerifyAccount200Result = {
   unreliable: 'unreliable',
 } as const;
 
-export type PostSupplierInvoicesSupplierInvoiceVerifyAccount200PublishedAccountsItem = { [key: string]: unknown };
+export type PostSupplierInvoicesSupplierInvoiceVerifyAccount200PublishedAccountsItem = {
+  /** @nullable */
+  account_number?: string | null;
+  /** @nullable */
+  bank_code?: string | null;
+  /** @nullable */
+  iban?: string | null;
+};
 
 export type PostSupplierInvoicesSupplierInvoiceVerifyAccount200 = {
   result?: PostSupplierInvoicesSupplierInvoiceVerifyAccount200Result;
@@ -2469,6 +3462,30 @@ export const GetReportsVatControlStatementCountry = {
   SK: 'SK',
   CZ: 'CZ',
 } as const;
+
+export type GetReportsVatControlStatement200Country = typeof GetReportsVatControlStatement200Country[keyof typeof GetReportsVatControlStatement200Country];
+
+
+export const GetReportsVatControlStatement200Country = {
+  SK: 'SK',
+  CZ: 'CZ',
+} as const;
+
+export type GetReportsVatControlStatement200Sections = { [key: string]: unknown };
+
+export type GetReportsVatControlStatement200SummarySections = { [key: string]: unknown };
+
+export type GetReportsVatControlStatement200 = {
+  country?: GetReportsVatControlStatement200Country;
+  year?: number;
+  /** @nullable */
+  quarter?: number | null;
+  /** @nullable */
+  month?: number | null;
+  sections?: GetReportsVatControlStatement200Sections;
+  summary_sections?: GetReportsVatControlStatement200SummarySections;
+  assumptions?: string[];
+};
 
 export type GetReportsVatControlStatementXmlParams = {
 country: GetReportsVatControlStatementXmlCountry;
@@ -2948,6 +3965,7 @@ export type PostOrdersOrderItemsBodyType = typeof PostOrdersOrderItemsBodyType[k
 export const PostOrdersOrderItemsBodyType = {
   service: 'service',
   product: 'product',
+  time: 'time',
 } as const;
 
 export type PostOrdersOrderItemsBody = {
@@ -2970,6 +3988,7 @@ export type PutOrdersOrderItemsItemBodyType = typeof PutOrdersOrderItemsItemBody
 export const PutOrdersOrderItemsItemBodyType = {
   service: 'service',
   product: 'product',
+  time: 'time',
 } as const;
 
 export type PutOrdersOrderItemsItemBody = {

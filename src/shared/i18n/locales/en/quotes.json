@@ -1,0 +1,145 @@
+{
+  "status": {
+    "draft": "Draft",
+    "sent": "Sent",
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "expired": "Expired"
+  },
+  "list": {
+    "title": "Quotes",
+    "new_quote": "New quote",
+    "draft_placeholder": "Draft",
+    "filter_status": "Status",
+    "filter_status_all": "All statuses",
+    "filter_client": "Client",
+    "filter_date_from": "From",
+    "filter_date_to": "To",
+    "column_number": "Number",
+    "column_client": "Client",
+    "column_status": "Status",
+    "column_total": "Total",
+    "column_valid_until": "Valid until",
+    "empty": "No quotes yet."
+  },
+  "form": {
+    "create_title": "New quote",
+    "edit_title": "Edit quote",
+    "client": "Client",
+    "client_placeholder": "Select a client…",
+    "issued_at": "Issue date",
+    "valid_until": "Valid until",
+    "currency": "Currency",
+    "discount_percent": "Discount (%)",
+    "note_above": "Note (above items)",
+    "note": "Note",
+    "created": "Quote created.",
+    "updated": "Quote updated.",
+    "not_editable": "This quote can no longer be edited."
+  },
+  "validation": {
+    "client_required": "Select a client.",
+    "valid_until_after_issued_at": "Valid until date must be on or after the issue date.",
+    "description_required": "Description is required.",
+    "quantity_positive": "Quantity must be greater than zero.",
+    "unit_price_non_negative": "Unit price cannot be negative.",
+    "email": "Enter a valid e-mail address."
+  },
+  "items": {
+    "description": "Description",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "unit_price": "Unit price",
+    "vat_rate": "VAT",
+    "total_incl_vat": "Total",
+    "empty": "No items yet.",
+    "add": "Add item",
+    "delete": "Delete item",
+    "preview_total": "Line total: {{total}}"
+  },
+  "actions": {
+    "change_status": "Change status",
+    "status_updated": "Status updated.",
+    "status_update_failed": "Could not update the status.",
+    "transition_to": {
+      "sent": "Mark as sent",
+      "accepted": "Mark as accepted",
+      "rejected": "Mark as rejected",
+      "expired": "Mark as expired"
+    },
+    "confirm_terminal": "Set this quote to \"{{status}}\"? This cannot be undone.",
+    "convert_to_invoice": "Convert to invoice",
+    "convert_to_order": "Convert to order",
+    "converted": "Quote converted.",
+    "convert_failed": "Could not convert the quote.",
+    "already_converted_invoice": "This quote was already converted to an invoice.",
+    "already_converted_order": "This quote was already converted to an order.",
+    "view_invoice": "View invoice",
+    "view_order": "View order"
+  },
+  "email": {
+    "title": "Send quote by e-mail",
+    "to": "To (defaults to client e-mail)",
+    "cc": "Cc",
+    "cc_placeholder": "comma-separated e-mails",
+    "cc_max": "At most 5 Cc recipients.",
+    "message": "Message",
+    "send": "Send",
+    "sent": "Quote e-mail sent.",
+    "throttled": "Too many e-mails sent — try again in a minute.",
+    "failed": "Could not send the e-mail."
+  },
+  "public_link": {
+    "title": "Public link",
+    "generate": "Generate public link",
+    "regenerate": "Regenerate",
+    "confirm_regenerate": "Regenerate the link? The old link will stop working.",
+    "revoke": "Revoke",
+    "copy": "Copy link",
+    "copied": "Link copied.",
+    "view_count_one": "{{count}} view",
+    "view_count_other": "{{count}} views",
+    "first_viewed": "first viewed",
+    "created": "Public link created.",
+    "create_failed": "Could not create the public link.",
+    "revoked": "Public link revoked."
+  },
+  "detail": {
+    "overview": "Overview",
+    "items": "Items",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "vat": "VAT",
+    "pdf": "PDF",
+    "pdf_download": "Download",
+    "pdf_download_failed": "Could not download the PDF.",
+    "email": "E-mail",
+    "deleted": "Quote deleted."
+  },
+  "public": {
+    "not_found": "This quote link is not valid.",
+    "rate_limited": "Too many requests. Please wait a moment and try again.",
+    "supplier": "Supplier",
+    "client": "Client",
+    "vat_id": "VAT ID",
+    "status": {
+      "draft": "Draft",
+      "sent": "Sent",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "expired": "Expired"
+    },
+    "decision": {
+      "accept": "Accept quote",
+      "reject": "Reject quote",
+      "note_label": "Message (optional)",
+      "confirm_accept": "Accept this quote? This cannot be undone.",
+      "confirm_reject": "Reject this quote? This cannot be undone.",
+      "accepted": "Quote accepted. Thank you!",
+      "rejected": "Quote rejected.",
+      "already_decided": "This quote has already been decided.",
+      "expired": "This quote has expired and can no longer be decided.",
+      "failed": "Could not record your decision. Please try again."
+    }
+  }
+}

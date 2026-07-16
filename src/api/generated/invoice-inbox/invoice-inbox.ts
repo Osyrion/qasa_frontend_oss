@@ -312,8 +312,9 @@ export const getInvoiceInboxInboxItemDownload = (
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/invoice-inbox/${inboxItem}/download`, method: 'GET', signal
+      return apiMutator<Blob>(
+      {url: `/api/v1/invoice-inbox/${inboxItem}/download`, method: 'GET',
+        responseType: 'blob', signal
     },
       options);
     }

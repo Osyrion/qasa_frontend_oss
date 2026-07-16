@@ -1,0 +1,41 @@
+{
+  "status": {
+    "pending": "Čaká",
+    "imported": "Naimportovaná",
+    "ignored": "Ignorovaná",
+    "failed": "Zlyhala"
+  },
+  "list": {
+    "title": "Inbox faktúr",
+    "column_filename": "Súbor",
+    "column_status": "Stav",
+    "column_ocr_engine": "OCR engine",
+    "column_matched_client": "Priradený dodávateľ",
+    "column_error": "Chyba",
+    "empty": "Inbox je prázdny."
+  },
+  "upload": {
+    "hint": "Sem presuňte naskenovanú faktúru, alebo kliknite pre výber",
+    "analyzing": "Analyzujem dokument…",
+    "duplicate": "Tento súbor už bol nahraný skôr.",
+    "throttled": "Príliš veľa nahrávaní — skúste to o chvíľu znova.",
+    "failed": "Dokument sa nepodarilo nahrať."
+  },
+  "actions": {
+    "convert": "Previesť",
+    "ignore": "Ignorovať",
+    "ignored": "Položka ignorovaná.",
+    "ignore_failed": "Položku sa nepodarilo ignorovať.",
+    "delete": "Zmazať",
+    "deleted": "Položka zmazaná.",
+    "view_invoice": "Zobraziť faktúru"
+  },
+  "convert_sheet": {
+    "title": "Previesť na došlú faktúru",
+    "preview": "Originálny dokument",
+    "preview_unavailable": "Náhľad nie je pre tento typ súboru k dispozícii.",
+    "submit": "Previesť",
+    "converted": "Došlá faktúra vytvorená.",
+    "matched_vendor": "Dodávateľ priradený podľa extrahovaného IČO"
+  }
+}

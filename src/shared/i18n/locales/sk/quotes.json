@@ -1,0 +1,146 @@
+{
+  "status": {
+    "draft": "Koncept",
+    "sent": "Odoslaná",
+    "accepted": "Prijatá",
+    "rejected": "Odmietnutá",
+    "expired": "Expirovaná"
+  },
+  "list": {
+    "title": "Ponuky",
+    "new_quote": "Nová ponuka",
+    "draft_placeholder": "Koncept",
+    "filter_status": "Stav",
+    "filter_status_all": "Všetky stavy",
+    "filter_client": "Klient",
+    "filter_date_from": "Od",
+    "filter_date_to": "Do",
+    "column_number": "Číslo",
+    "column_client": "Klient",
+    "column_status": "Stav",
+    "column_total": "Suma",
+    "column_valid_until": "Platnosť do",
+    "empty": "Zatiaľ žiadne ponuky."
+  },
+  "form": {
+    "create_title": "Nová ponuka",
+    "edit_title": "Upraviť ponuku",
+    "client": "Klient",
+    "client_placeholder": "Vyberte klienta…",
+    "issued_at": "Dátum vystavenia",
+    "valid_until": "Platnosť do",
+    "currency": "Mena",
+    "discount_percent": "Zľava (%)",
+    "note_above": "Poznámka (nad položkami)",
+    "note": "Poznámka",
+    "created": "Ponuka vytvorená.",
+    "updated": "Ponuka upravená.",
+    "not_editable": "Túto ponuku už nie je možné upravovať."
+  },
+  "validation": {
+    "client_required": "Vyberte klienta.",
+    "valid_until_after_issued_at": "Platnosť do musí byť po dátume vystavenia (alebo rovnaká).",
+    "description_required": "Popis je povinný.",
+    "quantity_positive": "Množstvo musí byť väčšie ako nula.",
+    "unit_price_non_negative": "Jednotková cena nemôže byť záporná.",
+    "email": "Zadajte platnú e-mailovú adresu."
+  },
+  "items": {
+    "description": "Popis",
+    "quantity": "Množstvo",
+    "unit": "Jednotka",
+    "unit_price": "Jednotková cena",
+    "vat_rate": "DPH",
+    "total_incl_vat": "Spolu",
+    "empty": "Zatiaľ žiadne položky.",
+    "add": "Pridať položku",
+    "delete": "Zmazať položku",
+    "preview_total": "Riadok spolu: {{total}}"
+  },
+  "actions": {
+    "change_status": "Zmeniť stav",
+    "status_updated": "Stav zmenený.",
+    "status_update_failed": "Stav sa nepodarilo zmeniť.",
+    "transition_to": {
+      "sent": "Označiť ako odoslanú",
+      "accepted": "Označiť ako prijatú",
+      "rejected": "Označiť ako odmietnutú",
+      "expired": "Označiť ako expirovanú"
+    },
+    "confirm_terminal": "Nastaviť stav ponuky na „{{status}}“? Túto akciu nie je možné vrátiť späť.",
+    "convert_to_invoice": "Previesť na faktúru",
+    "convert_to_order": "Previesť na zákazku",
+    "converted": "Ponuka prevedená.",
+    "convert_failed": "Ponuku sa nepodarilo previesť.",
+    "already_converted_invoice": "Táto ponuka už bola prevedená na faktúru.",
+    "already_converted_order": "Táto ponuka už bola prevedená na zákazku.",
+    "view_invoice": "Zobraziť faktúru",
+    "view_order": "Zobraziť zákazku"
+  },
+  "email": {
+    "title": "Odoslať ponuku e-mailom",
+    "to": "Komu (predvolene e-mail klienta)",
+    "cc": "Kópia",
+    "cc_placeholder": "e-maily oddelené čiarkou",
+    "cc_max": "Maximálne 5 adresátov v kópii.",
+    "message": "Správa",
+    "send": "Odoslať",
+    "sent": "E-mail s ponukou odoslaný.",
+    "throttled": "Príliš veľa odoslaných e-mailov — skúste to o minútu znova.",
+    "failed": "E-mail sa nepodarilo odoslať."
+  },
+  "public_link": {
+    "title": "Verejný odkaz",
+    "generate": "Vytvoriť verejný odkaz",
+    "regenerate": "Obnoviť",
+    "confirm_regenerate": "Obnoviť odkaz? Starý odkaz prestane fungovať.",
+    "revoke": "Zrušiť",
+    "copy": "Kopírovať odkaz",
+    "copied": "Odkaz skopírovaný.",
+    "view_count_one": "{{count}} zobrazenie",
+    "view_count_few": "{{count}} zobrazenia",
+    "view_count_other": "{{count}} zobrazení",
+    "first_viewed": "prvé zobrazenie",
+    "created": "Verejný odkaz vytvorený.",
+    "create_failed": "Verejný odkaz sa nepodarilo vytvoriť.",
+    "revoked": "Verejný odkaz zrušený."
+  },
+  "detail": {
+    "overview": "Prehľad",
+    "items": "Položky",
+    "total": "Spolu",
+    "subtotal": "Medzisúčet",
+    "vat": "DPH",
+    "pdf": "PDF",
+    "pdf_download": "Stiahnuť",
+    "pdf_download_failed": "PDF sa nepodarilo stiahnuť.",
+    "email": "E-mail",
+    "deleted": "Ponuka zmazaná."
+  },
+  "public": {
+    "not_found": "Tento odkaz na ponuku nie je platný.",
+    "rate_limited": "Príliš veľa požiadaviek. Chvíľu počkajte a skúste to znova.",
+    "supplier": "Dodávateľ",
+    "client": "Klient",
+    "vat_id": "IČ DPH",
+    "status": {
+      "draft": "Koncept",
+      "sent": "Odoslaná",
+      "accepted": "Prijatá",
+      "rejected": "Odmietnutá",
+      "expired": "Expirovaná"
+    },
+    "decision": {
+      "accept": "Prijať ponuku",
+      "reject": "Odmietnuť ponuku",
+      "note_label": "Správa (nepovinné)",
+      "confirm_accept": "Prijať túto ponuku? Túto akciu nie je možné vrátiť späť.",
+      "confirm_reject": "Odmietnuť túto ponuku? Túto akciu nie je možné vrátiť späť.",
+      "accepted": "Ponuka prijatá. Ďakujeme!",
+      "rejected": "Ponuka odmietnutá.",
+      "already_decided": "O tejto ponuke už bolo rozhodnuté.",
+      "expired": "Platnosť tejto ponuky vypršala a už o nej nie je možné rozhodnúť.",
+      "failed": "Vaše rozhodnutie sa nepodarilo zaznamenať. Skúste to znova."
+    }
+  }
+}

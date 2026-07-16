@@ -1,0 +1,78 @@
+{
+  "tabs": {
+    "overview": "Overview",
+    "tables": "Tables",
+    "receivables": "Receivables",
+    "partners": "Partners",
+    "health": "Health"
+  },
+  "title": "Statistics",
+  "kpi": {
+    "revenue": "Revenue",
+    "costs": "Costs",
+    "profit": "Profit",
+    "this_month": "This month",
+    "rolling_12m": "Last 12 months",
+    "ytd": "Year to date",
+    "vs_last_month": "vs. last month",
+    "yoy": "YoY",
+    "margin": "Margin"
+  },
+  "chart": {
+    "profit_trend_title": "Revenue, costs & profit — last 12 months",
+    "revenue": "Revenue",
+    "costs": "Costs",
+    "profit": "Profit"
+  },
+  "tables": {
+    "by_year": "By year",
+    "by_month": "By month",
+    "year": "Year",
+    "column_period": "Period",
+    "column_revenue": "Revenue",
+    "column_costs": "Costs",
+    "column_profit": "Profit",
+    "column_margin": "Margin"
+  },
+  "receivables": {
+    "title": "Receivables & payables aging",
+    "as_of": "As of",
+    "receivables": "Receivables (owed to you)",
+    "payables": "Payables (you owe)",
+    "bucket": {
+      "not_yet_due": "Not yet due",
+      "d1_30": "1–30 days",
+      "d31_60": "31–60 days",
+      "d61_90": "61–90 days",
+      "d90_plus": "90+ days"
+    }
+  },
+  "partners": {
+    "top_clients": "Top clients",
+    "top_suppliers": "Top suppliers",
+    "churn_risk": "Churn risk",
+    "churn_empty": "No clients flagged as at risk.",
+    "days_since_last_invoice": "{{days}} days since last invoice",
+    "lifetime_revenue": "Lifetime revenue"
+  },
+  "health": {
+    "dso": "Days sales outstanding (DSO)",
+    "dpo": "Days payable outstanding (DPO)",
+    "working_capital_cycle": "Working capital cycle",
+    "days": "days",
+    "payment_morale": "Payment morale",
+    "on_time": "On time",
+    "late": "Late",
+    "avg_days_late": "Avg. days late",
+    "client_concentration": "Client concentration",
+    "supplier_concentration": "Supplier concentration",
+    "top1_share": "Top partner share",
+    "risk_level": {
+      "low": "Low risk",
+      "medium": "Medium risk",
+      "high": "High risk"
+    },
+    "pareto_count": "Partners for 80% of revenue",
+    "insufficient_data": "Insufficient data for this period."
+  }
+}

@@ -17,15 +17,29 @@ import type {
   RequestHandlerOptions
 } from 'msw';
 
+import type {
+  GetPublicQuotesToken200,
+  PostPublicQuotesTokenAccept200,
+  PostPublicQuotesTokenReject200
+} from '../qASAAPIDocumentation.schemas';
+
+
+export const getGetPublicQuotesTokenResponseMock = (overrideResponse: Partial<Extract<GetPublicQuotesToken200, object>> = {}): GetPublicQuotesToken200 => ({quote_number: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), issued_at: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), valid_until: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), null]), undefined]), currency: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), supplier: faker.helpers.arrayElement([{name: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), ico: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), dic: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), vat_id: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), is_vat_payer: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), vat_status: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), address: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), city: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), postal_code: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), country: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), email: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), phone: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), website: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), logo_path: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), invoice_footer_text: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined])}, undefined]), client: faker.helpers.arrayElement([faker.helpers.arrayElement([{name: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), ico: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), dic: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), vat_id: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), is_vat_payer: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), address: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), city: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), postal_code: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), country: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), email: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), phone: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined])},null,]), undefined]), items: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), quantity: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), unit: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), unit_price: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), vat_rate: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), vat_amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), total_excl_vat: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), total_incl_vat: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined])})), undefined]), vat_recap: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({rate: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), base: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), vat: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), total: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined])})), undefined]), discount_percent: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), null]), undefined]), discount_amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), subtotal: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), vat_amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), total: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), effective_status: faker.helpers.arrayElement([faker.helpers.arrayElement(['draft','sent','accepted','rejected','expired'] as const), undefined]), can_decide: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), ...overrideResponse})
 
 export const getGetPublicQuotesTokenPdfResponseMock = (): ArrayBuffer => (new ArrayBuffer(faker.number.int({ min: 1, max: 64 })))
 
+export const getPostPublicQuotesTokenAcceptResponseMock = (overrideResponse: Partial<Extract<PostPublicQuotesTokenAccept200, object>> = {}): PostPublicQuotesTokenAccept200 => ({status: faker.helpers.arrayElement([faker.helpers.arrayElement(['draft','sent','accepted','rejected','expired'] as const), undefined]), accepted_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), rejected_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), ...overrideResponse})
 
-export const getGetPublicQuotesTokenMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getPostPublicQuotesTokenRejectResponseMock = (overrideResponse: Partial<Extract<PostPublicQuotesTokenReject200, object>> = {}): PostPublicQuotesTokenReject200 => ({status: faker.helpers.arrayElement([faker.helpers.arrayElement(['draft','sent','accepted','rejected','expired'] as const), undefined]), accepted_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), rejected_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), ...overrideResponse})
+
+
+export const getGetPublicQuotesTokenMockHandler = (overrideResponse?: GetPublicQuotesToken200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetPublicQuotesToken200> | GetPublicQuotesToken200), options?: RequestHandlerOptions) => {
   return http.get('*/api/v1/public/quotes/:token', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getGetPublicQuotesTokenResponseMock(),
       { status: 200
       })
   }, options)
@@ -47,21 +61,25 @@ export const getGetPublicQuotesTokenPdfMockHandler = (overrideResponse?: ArrayBu
   }, options)
 }
 
-export const getPostPublicQuotesTokenAcceptMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getPostPublicQuotesTokenAcceptMockHandler = (overrideResponse?: PostPublicQuotesTokenAccept200 | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostPublicQuotesTokenAccept200> | PostPublicQuotesTokenAccept200), options?: RequestHandlerOptions) => {
   return http.post('*/api/v1/public/quotes/:token/accept', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getPostPublicQuotesTokenAcceptResponseMock(),
       { status: 200
       })
   }, options)
 }
 
-export const getPostPublicQuotesTokenRejectMockHandler = (overrideResponse?: void | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<void> | void), options?: RequestHandlerOptions) => {
+export const getPostPublicQuotesTokenRejectMockHandler = (overrideResponse?: PostPublicQuotesTokenReject200 | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostPublicQuotesTokenReject200> | PostPublicQuotesTokenReject200), options?: RequestHandlerOptions) => {
   return http.post('*/api/v1/public/quotes/:token/reject', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
 
-    return new HttpResponse(null,
+
+    return HttpResponse.json(overrideResponse !== undefined
+    ? (typeof overrideResponse === "function" ? await overrideResponse(info) : overrideResponse)
+    : getPostPublicQuotesTokenRejectResponseMock(),
       { status: 200
       })
   }, options)

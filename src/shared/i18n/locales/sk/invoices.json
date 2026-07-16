@@ -175,6 +175,7 @@
   },
   "public": {
     "not_found": "Tento odkaz na faktúru nie je platný.",
+    "rate_limited": "Príliš veľa požiadaviek. Chvíľu počkajte a skúste to znova.",
     "supplier": "Dodávateľ",
     "client": "Klient",
     "vat_id": "IČ DPH",

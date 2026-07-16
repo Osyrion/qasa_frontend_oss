@@ -24,8 +24,16 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query';
 
+import type {
+  GetPublicQuotesToken200,
+  PostPublicQuotesTokenAccept200,
+  PostPublicQuotesTokenAcceptBody,
+  PostPublicQuotesTokenReject200,
+  PostPublicQuotesTokenRejectBody
+} from '../qASAAPIDocumentation.schemas';
+
 import { apiMutator } from '../../mutator';
-import type { ErrorType } from '../../mutator';
+import type { ErrorType , BodyType } from '../../mutator';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -56,7 +64,7 @@ export const getPublicQuotesToken = (
 ) => {
 
 
-      return apiMutator<void>(
+      return apiMutator<GetPublicQuotesToken200>(
       {url: `/api/v1/public/quotes/${token}`, method: 'GET', signal
     },
       options);
@@ -237,12 +245,15 @@ export function useGetPublicQuotesTokenPdf<TData = Awaited<ReturnType<typeof get
  */
 export const postPublicQuotesTokenAccept = (
     token: string,
+    postPublicQuotesTokenAcceptBody?: BodyType<PostPublicQuotesTokenAcceptBody>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/public/quotes/${token}/accept`, method: 'POST', signal
+      return apiMutator<PostPublicQuotesTokenAccept200>(
+      {url: `/api/v1/public/quotes/${token}/accept`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postPublicQuotesTokenAcceptBody, signal
     },
       options);
     }
@@ -251,8 +262,8 @@ export const postPublicQuotesTokenAccept = (
 
 
 export const getPostPublicQuotesTokenAcceptMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>, TError,{token: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>, TError,{token: string}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>, TError,{token: string;data?: BodyType<PostPublicQuotesTokenAcceptBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>, TError,{token: string;data?: BodyType<PostPublicQuotesTokenAcceptBody>}, TContext> => {
 
 const mutationKey = ['postPublicQuotesTokenAccept'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -264,10 +275,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>, {token: string}> = (props) => {
-          const {token} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>, {token: string;data?: BodyType<PostPublicQuotesTokenAcceptBody>}> = (props) => {
+          const {token,data} = props ?? {};
 
-          return  postPublicQuotesTokenAccept(token,requestOptions)
+          return  postPublicQuotesTokenAccept(token,data,requestOptions)
         }
 
 
@@ -278,18 +289,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PostPublicQuotesTokenAcceptMutationResult = NonNullable<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>>
-
+    export type PostPublicQuotesTokenAcceptMutationBody = BodyType<PostPublicQuotesTokenAcceptBody> | undefined
     export type PostPublicQuotesTokenAcceptMutationError = ErrorType<void>
 
     /**
  * @summary Client accepts the quote (no auth, one-shot)
  */
 export const usePostPublicQuotesTokenAccept = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>, TError,{token: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>, TError,{token: string;data?: BodyType<PostPublicQuotesTokenAcceptBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postPublicQuotesTokenAccept>>,
         TError,
-        {token: string},
+        {token: string;data?: BodyType<PostPublicQuotesTokenAcceptBody>},
         TContext
       > => {
       return useMutation(getPostPublicQuotesTokenAcceptMutationOptions(options), queryClient);
@@ -299,12 +310,15 @@ export const usePostPublicQuotesTokenAccept = <TError = ErrorType<void>,
  */
 export const postPublicQuotesTokenReject = (
     token: string,
+    postPublicQuotesTokenRejectBody?: BodyType<PostPublicQuotesTokenRejectBody>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<void>(
-      {url: `/api/v1/public/quotes/${token}/reject`, method: 'POST', signal
+      return apiMutator<PostPublicQuotesTokenReject200>(
+      {url: `/api/v1/public/quotes/${token}/reject`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postPublicQuotesTokenRejectBody, signal
     },
       options);
     }
@@ -313,8 +327,8 @@ export const postPublicQuotesTokenReject = (
 
 
 export const getPostPublicQuotesTokenRejectMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>, TError,{token: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>, TError,{token: string}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>, TError,{token: string;data?: BodyType<PostPublicQuotesTokenRejectBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>, TError,{token: string;data?: BodyType<PostPublicQuotesTokenRejectBody>}, TContext> => {
 
 const mutationKey = ['postPublicQuotesTokenReject'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -326,10 +340,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>, {token: string}> = (props) => {
-          const {token} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>, {token: string;data?: BodyType<PostPublicQuotesTokenRejectBody>}> = (props) => {
+          const {token,data} = props ?? {};
 
-          return  postPublicQuotesTokenReject(token,requestOptions)
+          return  postPublicQuotesTokenReject(token,data,requestOptions)
         }
 
 
@@ -340,18 +354,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PostPublicQuotesTokenRejectMutationResult = NonNullable<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>>
-
+    export type PostPublicQuotesTokenRejectMutationBody = BodyType<PostPublicQuotesTokenRejectBody> | undefined
     export type PostPublicQuotesTokenRejectMutationError = ErrorType<void>
 
     /**
  * @summary Client rejects the quote (no auth, one-shot)
  */
 export const usePostPublicQuotesTokenReject = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>, TError,{token: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postPublicQuotesTokenReject>>, TError,{token: string;data?: BodyType<PostPublicQuotesTokenRejectBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof postPublicQuotesTokenReject>>,
         TError,
-        {token: string},
+        {token: string;data?: BodyType<PostPublicQuotesTokenRejectBody>},
         TContext
       > => {
       return useMutation(getPostPublicQuotesTokenRejectMutationOptions(options), queryClient);

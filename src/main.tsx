@@ -9,12 +9,15 @@ import './index.css'
 import { router } from '@/app/router'
 import { queryClient } from '@/shared/lib/query-client'
 import { Toaster } from '@/shared/ui/sonner'
+import { TooltipProvider } from '@/shared/ui/tooltip'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <Toaster />
+      <TooltipProvider>
+        <RouterProvider router={router} />
+        <Toaster />
+      </TooltipProvider>
     </QueryClientProvider>
   </StrictMode>,
 )

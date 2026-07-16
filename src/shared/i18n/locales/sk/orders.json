@@ -1,0 +1,103 @@
+{
+  "status": {
+    "active": "Aktívna",
+    "paused": "Pozastavená",
+    "completed": "Dokončená",
+    "archived": "Archivovaná"
+  },
+  "billing_type": {
+    "hourly": "Hodinová sadzba",
+    "daily": "Denná sadzba",
+    "monthly": "Mesačná sadzba",
+    "fixed_per_item": "Úkonová sadzba",
+    "mixed": "Zmiešané (položky)"
+  },
+  "list": {
+    "title": "Zákazky",
+    "new_order": "Nová zákazka",
+    "personal_placeholder": "Osobná zákazka",
+    "filter_status": "Stav",
+    "filter_status_all": "Všetky stavy",
+    "filter_client": "Klient",
+    "column_name": "Názov",
+    "column_client": "Klient",
+    "column_status": "Stav",
+    "column_billing_type": "Fakturácia",
+    "empty": "Zatiaľ žiadne zákazky."
+  },
+  "form": {
+    "create_title": "Nová zákazka",
+    "edit_title": "Upraviť zákazku",
+    "name": "Názov",
+    "client": "Klient",
+    "client_placeholder": "Vyberte klienta…",
+    "client_none": "Bez klienta (osobná zákazka)",
+    "billing_type": "Typ fakturácie",
+    "color": "Farba",
+    "readme": "Popis",
+    "rate": "Sadzba",
+    "currency": "Mena",
+    "estimated_hours": "Odhadované hodiny",
+    "estimated_price": "Odhadovaná cena",
+    "deadline": "Termín",
+    "status": "Stav",
+    "created": "Zákazka vytvorená.",
+    "updated": "Zákazka upravená.",
+    "not_editable": "Túto zákazku už nie je možné upravovať.",
+    "rate_required": "Fakturovateľná zákazka s týmto typom fakturácie musí mať nastavenú sadzbu."
+  },
+  "validation": {
+    "name_required": "Názov je povinný.",
+    "description_required": "Popis je povinný.",
+    "quantity_positive": "Množstvo musí byť väčšie ako nula.",
+    "unit_price_non_negative": "Jednotková cena nemôže byť záporná."
+  },
+  "items": {
+    "type": "Typ",
+    "type_service": "Úkon / služba",
+    "type_product": "Tovar / materiál",
+    "type_time": "Čas",
+    "description": "Popis",
+    "quantity": "Množstvo",
+    "unit": "Jednotka",
+    "unit_price": "Jednotková cena",
+    "vat_rate": "DPH",
+    "total_incl_vat": "Spolu",
+    "empty": "Zatiaľ žiadne položky.",
+    "add": "Pridať položku",
+    "edit": "Upraviť položku",
+    "save": "Uložiť",
+    "cancel_edit": "Zrušiť",
+    "delete": "Zmazať položku",
+    "preview_total": "Riadok spolu: {{total}}"
+  },
+  "notes": {
+    "empty": "Zatiaľ žiadne poznámky.",
+    "placeholder": "Napíšte poznámku…",
+    "add": "Pridať poznámku",
+    "added": "Poznámka pridaná.",
+    "delete_forbidden": "Môžete mazať len vlastné poznámky."
+  },
+  "attachments": {
+    "upload_failed": "Prílohu sa nepodarilo nahrať."
+  },
+  "detail": {
+    "overview": "Prehľad",
+    "tab_items": "Položky",
+    "tab_notes": "Poznámky",
+    "tab_attachments": "Prílohy",
+    "generate_invoice": "Vygenerovať faktúru",
+    "deleted": "Zákazka zmazaná.",
+    "delete_failed_has_invoices": "Táto zákazka má faktúry a nedá sa zmazať."
+  },
+  "generate_invoice": {
+    "title": "Vygenerovať faktúru zo zákazky",
+    "issued_at": "Dátum vystavenia",
+    "due_at": "Dátum splatnosti",
+    "currency": "Mena",
+    "note": "Poznámka",
+    "submit": "Vygenerovať",
+    "no_client": "Pred generovaním faktúry priraďte k zákazke klienta.",
+    "created": "Draft faktúra vytvorená."
+  }
+}

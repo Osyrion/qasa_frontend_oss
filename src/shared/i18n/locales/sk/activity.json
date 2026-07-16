@@ -1,0 +1,31 @@
+{
+  "title": "Denník aktivít",
+  "system_actor": "Systém",
+  "column_when": "Kedy",
+  "column_actor": "Kto",
+  "column_event": "Udalosť",
+  "column_subject": "Predmet",
+  "empty": "Zatiaľ žiadna aktivita.",
+  "show_changes": "Zobraziť zmeny",
+  "hide_changes": "Skryť zmeny",
+  "change_from": "Z",
+  "change_to": "Na",
+  "forbidden_title": "Denník aktivít nedostupný",
+  "forbidden_body": "Nemáte oprávnenie zobraziť denník aktivít.",
+  "event": {
+    "client.created": "Klient vytvorený",
+    "client.updated": "Klient upravený",
+    "client.deleted": "Klient zmazaný",
+    "order.created": "Zákazka vytvorená",
+    "order.updated": "Zákazka upravená",
+    "order.deleted": "Zákazka zmazaná",
+    "invoice.created": "Faktúra vytvorená",
+    "invoice.sent": "Faktúra odoslaná",
+    "invoice.paid": "Faktúra uhradená",
+    "invoice.reminded": "Upomienka odoslaná",
+    "invoice.status_changed": "Stav faktúry zmenený",
+    "payment.recorded": "Platba zaznamenaná",
+    "quote.accepted": "Ponuka prijatá",
+    "quote.rejected": "Ponuka odmietnutá"
+  }
+}

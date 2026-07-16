@@ -1,0 +1,67 @@
+{
+  "title": "Reporty",
+  "tabs": {
+    "eu_sales_list": "Súhrnný výkaz",
+    "control_statement": "Kontrolný výkaz",
+    "exports": "Exporty"
+  },
+  "period": {
+    "year": "Rok",
+    "granularity": "Obdobie",
+    "whole_year": "Celý rok",
+    "quarter": "Štvrťrok",
+    "month": "Mesiac"
+  },
+  "eu_sales_list": {
+    "column_period": "Obdobie",
+    "column_vat_id": "IČ DPH",
+    "column_client": "Klient",
+    "column_amount": "Suma",
+    "column_code": "Kód",
+    "empty": "Žiadne faktúry s EU reverse charge za toto obdobie."
+  },
+  "control_statement": {
+    "country": "Krajina",
+    "not_a_payer_title": "Nie ste platca DPH",
+    "not_a_payer_body": "Tento report je dostupný len pre platcov DPH.",
+    "assumptions_title": "Predpoklady",
+    "download_xml": "Stiahnuť XML návrh",
+    "xml_period_required": "SK vyžaduje mesiac alebo štvrťrok — vyberte ho pre povolenie XML návrhu.",
+    "section": "Sekcia",
+    "summary_section": "Súhrn",
+    "column_document": "Doklad",
+    "column_date": "Dátum",
+    "column_partner": "Partner",
+    "column_tax_id": "DIČ",
+    "column_rate": "Sadzba",
+    "column_base": "Základ",
+    "column_vat": "DPH",
+    "column_related_document": "Súvisiaci doklad"
+  },
+  "export": {
+    "title_invoices": "Exportovať faktúry",
+    "title_supplier_invoices": "Exportovať došlé faktúry",
+    "invoices": "Faktúry",
+    "supplier_invoices": "Došlé faktúry",
+    "date_from": "Od",
+    "date_to": "Do",
+    "date_range_required": "Najprv vyberte rozsah dátumov.",
+    "period_basis": "Základ obdobia",
+    "period_basis_issue": "Dátum vystavenia",
+    "period_basis_tax": "Dátum zdaniteľného plnenia",
+    "document_types": "Typy dokladov",
+    "type_invoice": "Faktúry",
+    "type_credit_note": "Dobropisy",
+    "type_storno": "Stornová",
+    "download_pohoda": "Pohoda XML",
+    "download_csv": "CSV",
+    "download_omega": "Omega",
+    "downloading": "Sťahuje sa…",
+    "failed": "Export sa nepodarilo stiahnuť.",
+    "close": "Zavrieť"
+  },
+  "isdoc": {
+    "download": "ISDOC",
+    "failed": "ISDOC súbor sa nepodarilo stiahnuť."
+  }
+}

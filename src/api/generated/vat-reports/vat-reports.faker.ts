@@ -10,9 +10,12 @@ import {
 } from '@faker-js/faker';
 
 import type {
-  GetReportsEuSalesList200
+  GetReportsEuSalesList200,
+  GetReportsVatControlStatement200
 } from '../qASAAPIDocumentation.schemas';
 
 
 export const getGetReportsEuSalesListResponseMock = (overrideResponse: Partial<Extract<GetReportsEuSalesList200, object>> = {}): GetReportsEuSalesList200 => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({period: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), vat_id: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), client_name: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), code: faker.helpers.arrayElement([faker.number.int(), undefined])})), undefined]), ...overrideResponse})
+
+export const getGetReportsVatControlStatementResponseMock = (overrideResponse: Partial<Extract<GetReportsVatControlStatement200, object>> = {}): GetReportsVatControlStatement200 => ({country: faker.helpers.arrayElement([faker.helpers.arrayElement(['SK','CZ'] as const), undefined]), year: faker.helpers.arrayElement([faker.number.int(), undefined]), quarter: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined]), month: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined]), sections: faker.helpers.arrayElement([{}, undefined]), summary_sections: faker.helpers.arrayElement([{}, undefined]), assumptions: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => (faker.string.alpha({length: {min: 10, max: 20}}))), undefined]), ...overrideResponse})
 
