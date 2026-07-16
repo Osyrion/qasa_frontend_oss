@@ -61,7 +61,9 @@
     "quantity_positive": "Množstvo musí byť väčšie ako nula.",
     "unit_price_non_negative": "Jednotková cena nemôže byť záporná.",
     "amount_positive": "Suma musí byť väčšia ako nula.",
-    "email": "Zadajte platnú e-mailovú adresu."
+    "email": "Zadajte platnú e-mailovú adresu.",
+    "work_date_required": "Zadajte dátum.",
+    "hours_positive": "Hodiny musia byť väčšie ako nula."
   },
   "items": {
     "description": "Popis",
@@ -157,6 +159,19 @@
     "pdf_download_failed": "PDF sa nepodarilo stiahnuť.",
     "email": "E-mail",
     "deleted": "Faktúra zmazaná."
+  },
+  "work_report": {
+    "title": "Výkaz víceprací",
+    "work_date": "Dátum",
+    "description": "Popis",
+    "hours": "Hodiny",
+    "total_hours": "Spolu hodín",
+    "empty": "Zatiaľ žiadne riadky výkazu.",
+    "add_line": "Pridať riadok",
+    "delete_line": "Zmazať riadok",
+    "save": "Uložiť",
+    "saved": "Výkaz víceprací uložený.",
+    "save_failed": "Výkaz sa nepodarilo uložiť."
   },
   "public": {
     "not_found": "Tento odkaz na faktúru nie je platný.",

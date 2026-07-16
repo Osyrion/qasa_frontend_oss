@@ -10,6 +10,7 @@ import { InvoiceItemsEditor } from '@/features/invoicing/components/InvoiceItems
 import { PaymentsCard } from '@/features/invoicing/components/PaymentsCard'
 import { PublicLinkCard } from '@/features/invoicing/components/PublicLinkCard'
 import { StatusActions } from '@/features/invoicing/components/StatusActions'
+import { WorkReportCard } from '@/features/invoicing/components/WorkReportCard'
 import { isEditable } from '@/features/invoicing/lib/status-transitions'
 import { DateText } from '@/shared/components/DateText'
 import { MoneyText } from '@/shared/components/MoneyText'
@@ -145,6 +146,8 @@ export function InvoiceDetailPage() {
       />
 
       <PaymentsCard invoice={data} />
+
+      <WorkReportCard invoiceId={id} editable={editable} />
 
       <PublicLinkCard invoice={data} />
 
