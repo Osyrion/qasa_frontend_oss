@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet, useNavigate } from 'react-router'
 
 import { usePostAuthLogout } from '@/api/generated/authentication/authentication'
+import { EmailVerificationBanner } from '@/features/auth/components/EmailVerificationBanner'
 import { useAuthStore } from '@/features/auth/store'
 import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
@@ -79,6 +80,7 @@ export function AppShell() {
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">
         <main className="flex-1 p-6">
+          <EmailVerificationBanner />
           <Outlet />
         </main>
       </div>

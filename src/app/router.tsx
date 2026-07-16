@@ -7,6 +7,7 @@ import { LoginPage } from '@/features/auth/pages/LoginPage'
 import { RegisterPage } from '@/features/auth/pages/RegisterPage'
 import { ResetPasswordPage } from '@/features/auth/pages/ResetPasswordPage'
 import { TwoFactorPage } from '@/features/auth/pages/TwoFactorPage'
+import { VerifyEmailPage } from '@/features/auth/pages/VerifyEmailPage'
 import { ClientDetailPage } from '@/features/clients/pages/ClientDetailPage'
 import { ClientFormPage } from '@/features/clients/pages/ClientFormPage'
 import { ClientsListPage } from '@/features/clients/pages/ClientsListPage'
@@ -30,6 +31,11 @@ export const routes = [
       { path: '/reset-password', element: <ResetPasswordPage /> },
       { path: '/auth/google/callback', element: <GoogleCallbackPage /> },
     ],
+  },
+  {
+    // Reachable both signed-in and signed-out — no GuestOnly/RequireAuth wrapper.
+    path: '/verify-email',
+    element: <VerifyEmailPage />,
   },
   {
     // Public document pages — no auth. /q/:token is reserved for quotes (roadmap).
