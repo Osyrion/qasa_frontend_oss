@@ -4,5 +4,10 @@
   "save": "Save",
   "cancel": "Cancel",
   "delete": "Delete",
-  "error_generic": "Something went wrong. Please try again."
+  "error_generic": "Something went wrong. Please try again.",
+  "nav": {
+    "dashboard": "Dashboard"
+  },
+  "not_found": "This page does not exist.",
+  "back_home": "Back to dashboard"
 }
