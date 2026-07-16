@@ -17,6 +17,8 @@ import { InvoiceFormPage } from '@/features/invoicing/pages/InvoiceFormPage'
 import { InvoicePdfPage } from '@/features/invoicing/pages/InvoicePdfPage'
 import { InvoicesListPage } from '@/features/invoicing/pages/InvoicesListPage'
 import { PublicInvoicePage } from '@/features/public/pages/PublicInvoicePage'
+import { RecurringFormPage } from '@/features/recurring/pages/RecurringFormPage'
+import { RecurringListPage } from '@/features/recurring/pages/RecurringListPage'
 import { AppShell } from '@/shared/components/AppShell'
 import { NotFoundPage } from '@/shared/components/NotFoundPage'
 
@@ -58,6 +60,9 @@ export const routes = [
           { path: '/invoices/:id/edit', element: <InvoiceFormPage /> },
           { path: '/invoices/:id/pdf', element: <InvoicePdfPage /> },
           { path: '/invoices/:id', element: <InvoiceDetailPage /> },
+          { path: '/recurring', element: <RecurringListPage /> },
+          { path: '/recurring/new', element: <RecurringFormPage /> },
+          { path: '/recurring/:id/edit', element: <RecurringFormPage /> },
         ],
       },
     ],

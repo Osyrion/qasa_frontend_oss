@@ -1,0 +1,98 @@
+{
+  "status": {
+    "active": "Active",
+    "paused": "Paused",
+    "expired": "Expired"
+  },
+  "period": {
+    "monthly": "Monthly",
+    "quarterly": "Quarterly",
+    "semiannually": "Semiannually",
+    "yearly": "Yearly"
+  },
+  "type": {
+    "invoice": "Invoice",
+    "proforma": "Proforma"
+  },
+  "tax_date_mode": {
+    "issue_date": "Issue date",
+    "previous_month_end": "Previous month end"
+  },
+  "list": {
+    "title": "Recurring templates",
+    "new_template": "New template",
+    "filter_status": "Status",
+    "filter_status_all": "All statuses",
+    "filter_client": "Client",
+    "column_name": "Name",
+    "column_client": "Client",
+    "column_period": "Period",
+    "column_next_run": "Next run",
+    "column_last_generated": "Last generated",
+    "column_status": "Status",
+    "never": "Never",
+    "empty": "No recurring templates yet."
+  },
+  "form": {
+    "create_title": "New recurring template",
+    "edit_title": "Edit recurring template",
+    "section_schedule": "Schedule",
+    "section_invoice": "Invoice",
+    "section_items": "Items",
+    "name": "Name",
+    "client": "Client",
+    "client_placeholder": "Select a client…",
+    "period": "Period",
+    "day_of_month": "Day of month",
+    "last_day_of_month": "Last day of month",
+    "first_issue_date": "First issue date",
+    "end_date": "End date",
+    "type": "Type",
+    "currency": "Currency",
+    "due_days": "Due days",
+    "discount_percent": "Discount (%)",
+    "reverse_charge": "EU reverse charge (re-resolved from the client at each generation)",
+    "tax_date_mode": "Tax date mode",
+    "auto_send": "Automatically issue and e-mail generated invoices",
+    "note_above": "Note (above items)",
+    "note_below": "Note (below items)",
+    "created": "Template created.",
+    "updated": "Template updated.",
+    "next_run_readonly": "Next run and last generated are computed by the server — there is no manual \"run now\"."
+  },
+  "validation": {
+    "name_required": "Name is required.",
+    "client_required": "Select a client.",
+    "day_of_month_required": "Pick a day between 1 and 28, or use \"last day of month\".",
+    "first_issue_date_required": "First issue date is required.",
+    "end_date_after_first_issue": "End date must be on or after the first issue date.",
+    "description_required": "Description is required.",
+    "quantity_positive": "Quantity must be greater than zero.",
+    "unit_price_non_negative": "Unit price cannot be negative."
+  },
+  "items": {
+    "description": "Description",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "unit_price": "Unit price",
+    "vat_rate": "VAT",
+    "total": "Total",
+    "add": "Add item",
+    "delete": "Delete item"
+  },
+  "placeholders": {
+    "hint": "Supports {BOM}, {EOM}, {MONTH}, {YEAR} placeholders",
+    "preview": "Preview"
+  },
+  "pause_resume": {
+    "pause": "Pause",
+    "resume": "Resume",
+    "paused": "Template paused.",
+    "resumed": "Template resumed — skipped periods are not generated retroactively.",
+    "failed": "Could not change the template status."
+  },
+  "detail": {
+    "overview": "Overview",
+    "deleted": "Template deleted."
+  }
+}

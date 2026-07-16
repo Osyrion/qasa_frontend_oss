@@ -1,0 +1,98 @@
+{
+  "status": {
+    "active": "Aktívna",
+    "paused": "Pozastavená",
+    "expired": "Expirovaná"
+  },
+  "period": {
+    "monthly": "Mesačne",
+    "quarterly": "Štvrťročne",
+    "semiannually": "Polročne",
+    "yearly": "Ročne"
+  },
+  "type": {
+    "invoice": "Faktúra",
+    "proforma": "Proforma"
+  },
+  "tax_date_mode": {
+    "issue_date": "Dátum vystavenia",
+    "previous_month_end": "Koniec predchádzajúceho mesiaca"
+  },
+  "list": {
+    "title": "Opakované faktúry",
+    "new_template": "Nová šablóna",
+    "filter_status": "Stav",
+    "filter_status_all": "Všetky stavy",
+    "filter_client": "Klient",
+    "column_name": "Názov",
+    "column_client": "Klient",
+    "column_period": "Perióda",
+    "column_next_run": "Ďalšie generovanie",
+    "column_last_generated": "Naposledy vygenerované",
+    "column_status": "Stav",
+    "never": "Nikdy",
+    "empty": "Zatiaľ žiadne šablóny."
+  },
+  "form": {
+    "create_title": "Nová šablóna",
+    "edit_title": "Upraviť šablónu",
+    "section_schedule": "Rozvrh",
+    "section_invoice": "Faktúra",
+    "section_items": "Položky",
+    "name": "Názov",
+    "client": "Klient",
+    "client_placeholder": "Vyberte klienta…",
+    "period": "Perióda",
+    "day_of_month": "Deň v mesiaci",
+    "last_day_of_month": "Posledný deň v mesiaci",
+    "first_issue_date": "Prvý dátum vystavenia",
+    "end_date": "Dátum ukončenia",
+    "type": "Typ",
+    "currency": "Mena",
+    "due_days": "Splatnosť (dni)",
+    "discount_percent": "Zľava (%)",
+    "reverse_charge": "EU reverse charge (znovu sa vyhodnotí podľa klienta pri každom generovaní)",
+    "tax_date_mode": "Režim dátumu DUZP",
+    "auto_send": "Automaticky vystaviť a odoslať vygenerované faktúry e-mailom",
+    "note_above": "Poznámka (nad položkami)",
+    "note_below": "Poznámka (pod položkami)",
+    "created": "Šablóna vytvorená.",
+    "updated": "Šablóna upravená.",
+    "next_run_readonly": "Ďalšie generovanie a posledné generovanie počíta server — neexistuje manuálne \"spustiť teraz\"."
+  },
+  "validation": {
+    "name_required": "Názov je povinný.",
+    "client_required": "Vyberte klienta.",
+    "day_of_month_required": "Vyberte deň 1–28, alebo použite \"posledný deň v mesiaci\".",
+    "first_issue_date_required": "Prvý dátum vystavenia je povinný.",
+    "end_date_after_first_issue": "Dátum ukončenia musí byť po prvom dátume vystavenia (alebo rovnaký).",
+    "description_required": "Popis je povinný.",
+    "quantity_positive": "Množstvo musí byť väčšie ako nula.",
+    "unit_price_non_negative": "Jednotková cena nemôže byť záporná."
+  },
+  "items": {
+    "description": "Popis",
+    "quantity": "Množstvo",
+    "unit": "Jednotka",
+    "unit_price": "Jednotková cena",
+    "vat_rate": "DPH",
+    "total": "Spolu",
+    "add": "Pridať položku",
+    "delete": "Zmazať položku"
+  },
+  "placeholders": {
+    "hint": "Podporuje zástupné znaky {BOM}, {EOM}, {MONTH}, {YEAR}",
+    "preview": "Náhľad"
+  },
+  "pause_resume": {
+    "pause": "Pozastaviť",
+    "resume": "Obnoviť",
+    "paused": "Šablóna pozastavená.",
+    "resumed": "Šablóna obnovená — vynechané obdobia sa negenerujú spätne.",
+    "failed": "Stav šablóny sa nepodarilo zmeniť."
+  },
+  "detail": {
+    "overview": "Prehľad",
+    "deleted": "Šablóna zmazaná."
+  }
+}
