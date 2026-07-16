@@ -1,22 +1,15 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-export interface AuthUser {
-  id: number
-  name: string
-  email: string
-  locale?: string | null
-  two_factor_enabled?: boolean
-  [key: string]: unknown
-}
+import type { User } from '@/api/generated/qASAAPIDocumentation.schemas'
 
 interface AuthState {
   token: string | null
-  user: AuthUser | null
+  user: User | null
   /** 2FA login challenge — deliberately not persisted (memory only). */
   challengeToken: string | null
-  setSession: (token: string, user: AuthUser) => void
-  setUser: (user: AuthUser) => void
+  setSession: (token: string, user: User) => void
+  setUser: (user: User) => void
   setChallengeToken: (challengeToken: string | null) => void
   clear: () => void
 }

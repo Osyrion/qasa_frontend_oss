@@ -1,6 +1,28 @@
 export const DEFAULT_PER_PAGE = 20
 export const MAX_PER_PAGE = 100
 
+/** Laravel's default paginator meta shape — the OpenAPI spec only documents `meta: object`. */
+export interface PaginationMeta {
+  current_page: number
+  last_page: number
+  per_page: number
+  total: number
+}
+
+export function asPaginationMeta(meta: unknown): PaginationMeta | undefined {
+  if (
+    meta &&
+    typeof meta === 'object' &&
+    'current_page' in meta &&
+    'last_page' in meta &&
+    'per_page' in meta &&
+    'total' in meta
+  ) {
+    return meta as PaginationMeta
+  }
+  return undefined
+}
+
 export interface PaginationState {
   page: number
   perPage: number

@@ -1,0 +1,83 @@
+{
+  "client_type": {
+    "individual": "Individual",
+    "self_employed": "Self-employed",
+    "company": "Company"
+  },
+  "role": {
+    "customer": "Customer",
+    "vendor": "Vendor"
+  },
+  "list": {
+    "title": "Clients",
+    "new_client": "New client",
+    "search_placeholder": "Search by name, IČO or e-mail…",
+    "filter_role_all": "All roles",
+    "filter_type_all": "All types",
+    "filter_currency_all": "All currencies",
+    "column_name": "Name",
+    "column_type": "Type",
+    "column_email": "E-mail",
+    "column_role": "Role",
+    "column_created_at": "Created",
+    "empty": "No clients yet."
+  },
+  "form": {
+    "create_title": "New client",
+    "edit_title": "Edit client",
+    "client_type": "Client type",
+    "company_name": "Company name",
+    "name": "First name",
+    "surname": "Last name",
+    "title": "Title",
+    "ico": "IČO",
+    "dic": "DIČ",
+    "vat_id": "VAT ID (IČ DPH)",
+    "is_vat_payer": "VAT payer",
+    "email": "E-mail",
+    "phone": "Phone",
+    "address": "Address",
+    "city": "City",
+    "postal_code": "Postal code",
+    "country": "Country (ISO-2)",
+    "currency": "Currency",
+    "locale": "Language",
+    "note": "Note",
+    "created": "Client created.",
+    "updated": "Client updated."
+  },
+  "lookup": {
+    "action": "Look up",
+    "ico_placeholder": "IČO to look up",
+    "error": "Could not find this company."
+  },
+  "vies": {
+    "verify": "Verify VIES",
+    "valid": "VAT verified",
+    "invalid": "VAT invalid",
+    "previously_verified": "Previously verified",
+    "error": "VIES is currently unavailable."
+  },
+  "validation": {
+    "country_length": "Enter a 2-letter country code.",
+    "name_required": "First and last name are required for this client type.",
+    "company_name_required": "Company name is required for this client type.",
+    "role_required": "Select at least one role: customer or vendor.",
+    "email": "Enter a valid e-mail address."
+  },
+  "detail": {
+    "overview": "Overview",
+    "deleted": "Client deleted."
+  },
+  "contact_persons": {
+    "title": "Contact persons",
+    "empty": "No contact persons yet.",
+    "add_title": "Add contact person",
+    "edit_title": "Edit contact person",
+    "role": "Role",
+    "is_primary": "Primary contact",
+    "created": "Contact person added.",
+    "updated": "Contact person updated.",
+    "deleted": "Contact person removed."
+  }
+}

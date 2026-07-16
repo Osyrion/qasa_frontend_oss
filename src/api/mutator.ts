@@ -2,6 +2,7 @@ import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
 
 import { useAuthStore } from '@/features/auth/store'
 import i18n from '@/shared/i18n'
+import { hardRedirect } from '@/shared/lib/hard-redirect'
 
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:8000',
@@ -23,7 +24,7 @@ apiClient.interceptors.response.use(
     // 401 with a stored token = expired/revoked session; login failures are 422.
     if (error.response?.status === 401 && useAuthStore.getState().token) {
       useAuthStore.getState().clear()
-      window.location.assign('/login?expired=1')
+      hardRedirect('/login?expired=1')
     }
     return Promise.reject(error)
   },

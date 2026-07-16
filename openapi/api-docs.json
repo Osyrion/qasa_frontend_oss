@@ -1538,6 +1538,16 @@
                                         "nullable": true,
                                         "maxLength": 100
                                     },
+                                    "name": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 150
+                                    },
+                                    "surname": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 150
+                                    },
                                     "ico": {
                                         "type": "string",
                                         "nullable": true,

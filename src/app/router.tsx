@@ -7,6 +7,9 @@ import { LoginPage } from '@/features/auth/pages/LoginPage'
 import { RegisterPage } from '@/features/auth/pages/RegisterPage'
 import { ResetPasswordPage } from '@/features/auth/pages/ResetPasswordPage'
 import { TwoFactorPage } from '@/features/auth/pages/TwoFactorPage'
+import { ClientDetailPage } from '@/features/clients/pages/ClientDetailPage'
+import { ClientFormPage } from '@/features/clients/pages/ClientFormPage'
+import { ClientsListPage } from '@/features/clients/pages/ClientsListPage'
 import { DashboardPage } from '@/features/dashboard/pages/DashboardPage'
 import { PublicInvoicePage } from '@/features/public/pages/PublicInvoicePage'
 import { AppShell } from '@/shared/components/AppShell'
@@ -34,7 +37,13 @@ export const routes = [
     children: [
       {
         element: <AppShell />,
-        children: [{ path: '/dashboard', element: <DashboardPage /> }],
+        children: [
+          { path: '/dashboard', element: <DashboardPage /> },
+          { path: '/clients', element: <ClientsListPage /> },
+          { path: '/clients/new', element: <ClientFormPage /> },
+          { path: '/clients/:id/edit', element: <ClientFormPage /> },
+          { path: '/clients/:id', element: <ClientDetailPage /> },
+        ],
       },
     ],
   },

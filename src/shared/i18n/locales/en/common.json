@@ -6,8 +6,20 @@
   "delete": "Delete",
   "error_generic": "Something went wrong. Please try again.",
   "nav": {
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "logout": "Sign out"
   },
   "not_found": "This page does not exist.",
-  "back_home": "Back to dashboard"
+  "back_home": "Back to dashboard",
+  "data_table": {
+    "empty": "No records found.",
+    "previous": "Previous",
+    "next": "Next",
+    "page_info": "Page {{page}} of {{lastPage}} ({{total}} total)"
+  },
+  "confirm_delete": "Are you sure? This cannot be undone.",
+  "add": "Add",
+  "edit": "Edit",
+  "back": "Back"
 }

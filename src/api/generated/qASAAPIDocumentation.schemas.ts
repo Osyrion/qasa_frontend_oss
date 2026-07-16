@@ -1436,6 +1436,16 @@ export type PostClientsBody = {
      */
   title?: string | null;
   /**
+     * @maxLength 150
+     * @nullable
+     */
+  name?: string | null;
+  /**
+     * @maxLength 150
+     * @nullable
+     */
+  surname?: string | null;
+  /**
      * @maxLength 20
      * @nullable
      */

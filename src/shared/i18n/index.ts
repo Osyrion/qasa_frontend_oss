@@ -2,8 +2,10 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
 import enAuth from './locales/en/auth.json'
+import enClients from './locales/en/clients.json'
 import enCommon from './locales/en/common.json'
 import skAuth from './locales/sk/auth.json'
+import skClients from './locales/sk/clients.json'
 import skCommon from './locales/sk/common.json'
 
 export const AVAILABLE_LOCALES = ['en', 'sk'] as const
@@ -11,8 +13,8 @@ export type Locale = (typeof AVAILABLE_LOCALES)[number]
 
 void i18n.use(initReactI18next).init({
   resources: {
-    en: { common: enCommon, auth: enAuth },
-    sk: { common: skCommon, auth: skAuth },
+    en: { common: enCommon, auth: enAuth, clients: enClients },
+    sk: { common: skCommon, auth: skAuth, clients: skClients },
   },
   lng: navigator.language.startsWith('sk') ? 'sk' : 'en',
   fallbackLng: 'en',

@@ -6,8 +6,20 @@
   "delete": "Vymazať",
   "error_generic": "Niečo sa pokazilo. Skúste to znova.",
   "nav": {
-    "dashboard": "Prehľad"
+    "dashboard": "Prehľad",
+    "clients": "Klienti",
+    "logout": "Odhlásiť sa"
   },
   "not_found": "Táto stránka neexistuje.",
-  "back_home": "Späť na prehľad"
+  "back_home": "Späť na prehľad",
+  "data_table": {
+    "empty": "Nenašli sa žiadne záznamy.",
+    "previous": "Predchádzajúca",
+    "next": "Ďalšia",
+    "page_info": "Strana {{page}} z {{lastPage}} ({{total}} spolu)"
+  },
+  "confirm_delete": "Naozaj? Túto akciu nemožno vrátiť späť.",
+  "add": "Pridať",
+  "edit": "Upraviť",
+  "back": "Späť"
 }

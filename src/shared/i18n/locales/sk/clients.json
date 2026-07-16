@@ -1,0 +1,83 @@
+{
+  "client_type": {
+    "individual": "Fyzická osoba",
+    "self_employed": "Živnostník",
+    "company": "Firma"
+  },
+  "role": {
+    "customer": "Odberateľ",
+    "vendor": "Dodávateľ"
+  },
+  "list": {
+    "title": "Klienti",
+    "new_client": "Nový klient",
+    "search_placeholder": "Hľadať podľa mena, IČO alebo e-mailu…",
+    "filter_role_all": "Všetky role",
+    "filter_type_all": "Všetky typy",
+    "filter_currency_all": "Všetky meny",
+    "column_name": "Meno",
+    "column_type": "Typ",
+    "column_email": "E-mail",
+    "column_role": "Rola",
+    "column_created_at": "Vytvorené",
+    "empty": "Zatiaľ žiadni klienti."
+  },
+  "form": {
+    "create_title": "Nový klient",
+    "edit_title": "Upraviť klienta",
+    "client_type": "Typ klienta",
+    "company_name": "Názov firmy",
+    "name": "Meno",
+    "surname": "Priezvisko",
+    "title": "Titul",
+    "ico": "IČO",
+    "dic": "DIČ",
+    "vat_id": "IČ DPH",
+    "is_vat_payer": "Platca DPH",
+    "email": "E-mail",
+    "phone": "Telefón",
+    "address": "Adresa",
+    "city": "Mesto",
+    "postal_code": "PSČ",
+    "country": "Krajina (ISO-2)",
+    "currency": "Mena",
+    "locale": "Jazyk",
+    "note": "Poznámka",
+    "created": "Klient bol vytvorený.",
+    "updated": "Klient bol upravený."
+  },
+  "lookup": {
+    "action": "Vyhľadať",
+    "ico_placeholder": "IČO na vyhľadanie",
+    "error": "Firmu sa nepodarilo nájsť."
+  },
+  "vies": {
+    "verify": "Overiť VIES",
+    "valid": "IČ DPH overené",
+    "invalid": "IČ DPH neplatné",
+    "previously_verified": "Predtým overené",
+    "error": "VIES je momentálne nedostupný."
+  },
+  "validation": {
+    "country_length": "Zadajte 2-písmenový kód krajiny.",
+    "name_required": "Pre tento typ klienta je potrebné meno a priezvisko.",
+    "company_name_required": "Pre tento typ klienta je potrebný názov firmy.",
+    "role_required": "Vyberte aspoň jednu rolu: odberateľ alebo dodávateľ.",
+    "email": "Zadajte platnú e-mailovú adresu."
+  },
+  "detail": {
+    "overview": "Prehľad",
+    "deleted": "Klient bol vymazaný."
+  },
+  "contact_persons": {
+    "title": "Kontaktné osoby",
+    "empty": "Zatiaľ žiadne kontaktné osoby.",
+    "add_title": "Pridať kontaktnú osobu",
+    "edit_title": "Upraviť kontaktnú osobu",
+    "role": "Rola",
+    "is_primary": "Hlavný kontakt",
+    "created": "Kontaktná osoba bola pridaná.",
+    "updated": "Kontaktná osoba bola upravená.",
+    "deleted": "Kontaktná osoba bola odstránená."
+  }
+}
