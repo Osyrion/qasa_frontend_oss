@@ -4,7 +4,7 @@ import type {
 } from '@/api/generated/qASAAPIDocumentation.schemas'
 
 /**
- * Mirrors `QuoteStatus::canTransitionTo()` (qasa_core:
+ * Mirrors `QuoteStatus::canTransitionTo()` (qasa-backend-oss:
  * app/Modules/Invoicing/Domain/Enums/QuoteStatus.php). The server stays
  * authoritative; a stale map here just means a 422 surfaces as a toast
  * instead of a hidden menu item.
@@ -30,7 +30,7 @@ export function isQuoteTerminal(status: QuoteStatus): boolean {
 }
 
 /**
- * Mirrors `SupplierInvoiceStatus::canTransitionTo()` (qasa_core:
+ * Mirrors `SupplierInvoiceStatus::canTransitionTo()` (qasa-backend-oss:
  * app/Modules/Invoicing/Domain/Enums/SupplierInvoiceStatus.php).
  */
 const SUPPLIER_INVOICE_TRANSITIONS: Record<SupplierInvoiceStatus, SupplierInvoiceStatus[]> = {

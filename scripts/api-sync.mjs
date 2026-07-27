@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Syncs the OpenAPI spec from the qasa_core backend and regenerates the API client.
+ * Syncs the OpenAPI spec from the qasa-backend-oss backend and regenerates the API client.
  *
  * Source order:
- *   1. sibling checkout  ../qasa_core/storage/api-docs/api-docs.json
+ *   1. sibling checkout  ../qasa-backend-oss/storage/api-docs/api-docs.json
  *   2. running backend   ${QASA_API_URL:-http://localhost:8000}/docs/api-docs.json
  */
 import { copyFile, writeFile, readFile, access } from 'node:fs/promises'
@@ -13,7 +13,7 @@ import process from 'node:process'
 
 const root = path.resolve(import.meta.dirname, '..')
 const target = path.join(root, 'openapi', 'api-docs.json')
-const siblingSpec = path.resolve(root, '..', 'qasa_core', 'storage', 'api-docs', 'api-docs.json')
+const siblingSpec = path.resolve(root, '..', 'qasa-backend-oss', 'storage', 'api-docs', 'api-docs.json')
 const backendUrl = process.env.QASA_API_URL ?? 'http://localhost:8000'
 
 async function fetchSpec() {

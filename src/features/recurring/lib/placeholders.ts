@@ -1,5 +1,5 @@
 /**
- * Mirrors `PeriodPlaceholderResolver` (qasa_core:
+ * Mirrors `PeriodPlaceholderResolver` (qasa-backend-oss:
  * app/Modules/Invoicing/Domain/Services/PeriodPlaceholderResolver.php) — fixed
  * numeric date formats, locale-independent. The real value is resolved at
  * generation time against the tax period date; this is a preview only.

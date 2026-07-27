@@ -1,7 +1,7 @@
 import type { InvoiceStatus } from '@/api/generated/qASAAPIDocumentation.schemas'
 
 /**
- * Mirrors `InvoiceStatus::canTransitionTo()` (qasa_core:
+ * Mirrors `InvoiceStatus::canTransitionTo()` (qasa-backend-oss:
  * app/Modules/Invoicing/Domain/Enums/InvoiceStatus.php), restricted to the subset
  * `POST /invoices/{id}/status` actually accepts — `reminded` is only reachable via
  * the remind endpoint, `credited` only via the corrective endpoint. The server stays

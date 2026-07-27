@@ -1,6 +1,6 @@
 # qasa-web
 
-React SPA frontend for [qasa_core](../qasa_core) (Laravel invoicing API).
+React SPA frontend for [qasa-backend-oss](../qasa-backend-oss) (Laravel invoicing API).
 
 ## Stack
 
@@ -14,14 +14,14 @@ npm install
 npm run dev                # http://localhost:3000
 ```
 
-The backend runs from the `qasa_core` repo (`docker compose up`, http://localhost:8000). Its `FRONTEND_URL` already defaults to `http://localhost:3000`.
+The backend runs from the `qasa-backend-oss` repo (`docker compose up`, http://localhost:8000). Its `FRONTEND_URL` already defaults to `http://localhost:3000`.
 
 ## API client
 
 The typed client in `src/api/generated/` is **committed** — the repo builds without a backend checkout. After changing backend OpenAPI attributes:
 
 ```bash
-# in qasa_core
+# in qasa-backend-oss
 docker exec qasa_app php artisan l5-swagger:generate
 
 # in qasa-web — copies the spec (or curls a running backend) and regenerates
