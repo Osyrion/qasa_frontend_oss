@@ -52,13 +52,14 @@ interface ProfileFormValues {
   invoice_number_mask: string
   invoice_number_start: string
   locale: string
-  country: string
   address: string
   city: string
   postal_code: string
   website: string
   invoice_footer_text: string
-  overdue_reminder_days: string
+  auto_remind_enabled: boolean
+  auto_remind_after_days: string
+  auto_remind_max_count: string
 }
 
 function userToFormValues(user: User): ProfileFormValues {
@@ -80,13 +81,14 @@ function userToFormValues(user: User): ProfileFormValues {
     invoice_number_mask: user.invoice_number_mask ?? '',
     invoice_number_start: user.invoice_number_start?.toString() ?? '',
     locale: user.locale ?? 'sk',
-    country: user.country ?? '',
     address: user.address ?? '',
     city: user.city ?? '',
     postal_code: user.postal_code ?? '',
     website: user.website ?? '',
     invoice_footer_text: user.invoice_footer_text ?? '',
-    overdue_reminder_days: user.overdue_reminder_days?.toString() ?? '',
+    auto_remind_enabled: user.auto_remind_enabled ?? false,
+    auto_remind_after_days: user.auto_remind_after_days?.toString() ?? '',
+    auto_remind_max_count: user.auto_remind_max_count?.toString() ?? '',
   }
 }
 
@@ -111,13 +113,14 @@ function toRequestBody(values: ProfileFormValues): PutAuthProfileBody {
     invoice_number_mask: orNull(values.invoice_number_mask),
     invoice_number_start: numberOrNull(values.invoice_number_start),
     locale: orNull(values.locale),
-    country: orNull(values.country),
     address: orNull(values.address),
     city: orNull(values.city),
     postal_code: orNull(values.postal_code),
     website: orNull(values.website),
     invoice_footer_text: orNull(values.invoice_footer_text),
-    overdue_reminder_days: numberOrNull(values.overdue_reminder_days),
+    auto_remind_enabled: values.auto_remind_enabled,
+    auto_remind_after_days: numberOrNull(values.auto_remind_after_days),
+    auto_remind_max_count: numberOrNull(values.auto_remind_max_count),
   }
 }
 
@@ -130,6 +133,7 @@ export function ProfilePage() {
   const [isExporting, setIsExporting] = useState(false)
 
   const me = useGetAuthMe()
+  const user = me.data?.data
 
   const schema = useMemo(
     () =>
@@ -152,13 +156,14 @@ export function ProfilePage() {
         invoice_number_mask: z.string().max(40),
         invoice_number_start: z.string(),
         locale: z.string().max(5),
-        country: z.string().max(2),
         address: z.string(),
         city: z.string().max(100),
         postal_code: z.string().max(10),
         website: z.string().max(150),
         invoice_footer_text: z.string().max(1000),
-        overdue_reminder_days: z.string(),
+        auto_remind_enabled: z.boolean(),
+        auto_remind_after_days: z.string(),
+        auto_remind_max_count: z.string(),
       }),
     [t, tCommon],
   )
@@ -173,23 +178,24 @@ export function ProfilePage() {
     formState: { errors },
   } = useForm<ProfileFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: userToFormValues(me.data ?? {}),
+    defaultValues: userToFormValues(user ?? {}),
   })
 
   useEffect(() => {
-    if (me.data) {
-      reset(userToFormValues(me.data))
+    if (user) {
+      reset(userToFormValues(user))
     }
-  }, [me.data, reset])
+  }, [user, reset])
 
   const updateMutation = usePutAuthProfile({
     mutation: {
-      onSuccess: (user) => {
-        setUser(user)
-        syncLocale(user.locale)
+      onSuccess: (response) => {
+        if (!response.data) return
+        setUser(response.data)
+        syncLocale(response.data.locale)
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/auth/me'] })
         toast.success(t('profile.saved'))
-        reset(userToFormValues(user))
+        reset(userToFormValues(response.data))
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)
@@ -200,8 +206,9 @@ export function ProfilePage() {
 
   const logoMutation = usePostAuthProfileLogo({
     mutation: {
-      onSuccess: (user) => {
-        setUser(user)
+      onSuccess: (response) => {
+        if (!response.data) return
+        setUser(response.data)
         setLogoFile(null)
         toast.success(t('profile.logo_uploaded'))
       },
@@ -242,8 +249,6 @@ export function ProfilePage() {
       setIsExporting(false)
     }
   }
-
-  const user = me.data
 
   return (
     <div className="flex max-w-2xl flex-col gap-6">
@@ -368,9 +373,9 @@ export function ProfilePage() {
                 <TextField
                   id="country"
                   label={t('profile.country')}
-                  maxLength={2}
-                  error={errors.country}
-                  {...register('country')}
+                  value={user?.country ?? ''}
+                  disabled
+                  readOnly
                 />
                 <TextField
                   id="website"
@@ -450,13 +455,32 @@ export function ProfilePage() {
                 error={errors.invoice_number_mask}
                 {...register('invoice_number_mask')}
               />
-              <TextField
-                id="overdue_reminder_days"
-                type="number"
-                label={t('profile.overdue_reminder_days')}
-                error={errors.overdue_reminder_days}
-                {...register('overdue_reminder_days')}
-              />
+              <Field orientation="horizontal">
+                <Checkbox
+                  id="auto_remind_enabled"
+                  checked={watch('auto_remind_enabled')}
+                  onCheckedChange={(checked) => setValue('auto_remind_enabled', checked === true)}
+                />
+                <FieldLabel htmlFor="auto_remind_enabled">
+                  {t('profile.auto_remind_enabled')}
+                </FieldLabel>
+              </Field>
+              <div className="grid grid-cols-2 gap-3">
+                <TextField
+                  id="auto_remind_after_days"
+                  type="number"
+                  label={t('profile.auto_remind_after_days')}
+                  error={errors.auto_remind_after_days}
+                  {...register('auto_remind_after_days')}
+                />
+                <TextField
+                  id="auto_remind_max_count"
+                  type="number"
+                  label={t('profile.auto_remind_max_count')}
+                  error={errors.auto_remind_max_count}
+                  {...register('auto_remind_max_count')}
+                />
+              </div>
               <Field>
                 <FieldLabel htmlFor="invoice_footer_text">
                   {t('profile.invoice_footer_text')}

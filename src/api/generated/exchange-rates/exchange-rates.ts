@@ -25,9 +25,9 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  ExchangeRate,
   GetExchangeRates200,
   GetExchangeRatesParams,
+  PostExchangeRates201,
   PostExchangeRatesBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -55,8 +55,7 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
 };
 
 /**
- * Returns Laravel's default paginator shape (not the app's usual {data, meta} Resource wrapper) — rows are top-level under `data`, pagination fields (current_page, last_page, per_page, total, ...) sit alongside it, not nested under `meta`.
- * @summary List exchange rates, newest first
+ * @summary List exchange rates
  */
 export const getExchangeRates = (
     params?: GetExchangeRatesParams,
@@ -128,7 +127,7 @@ export function useGetExchangeRates<TData = Awaited<ReturnType<typeof getExchang
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
- * @summary List exchange rates, newest first
+ * @summary List exchange rates
  */
 
 export function useGetExchangeRates<TData = Awaited<ReturnType<typeof getExchangeRates>>, TError = ErrorType<void>>(
@@ -149,8 +148,7 @@ export function useGetExchangeRates<TData = Awaited<ReturnType<typeof getExchang
 
 
 /**
- * Upserts on (base_currency, target_currency, date) — a second call for the same day replaces the existing manual rate.
- * @summary Create or overwrite a manual rate for a currency pair and date
+ * @summary Create or update an exchange rate
  */
 export const postExchangeRates = (
     postExchangeRatesBody: BodyType<PostExchangeRatesBody>,
@@ -158,7 +156,7 @@ export const postExchangeRates = (
 ) => {
 
 
-      return apiMutator<ExchangeRate>(
+      return apiMutator<PostExchangeRates201>(
       {url: `/api/v1/exchange-rates`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postExchangeRatesBody, signal
@@ -201,7 +199,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type PostExchangeRatesMutationError = ErrorType<void>
 
     /**
- * @summary Create or overwrite a manual rate for a currency pair and date
+ * @summary Create or update an exchange rate
  */
 export const usePostExchangeRates = <TError = ErrorType<void>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postExchangeRates>>, TError,{data: BodyType<PostExchangeRatesBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
@@ -214,8 +212,7 @@ export const usePostExchangeRates = <TError = ErrorType<void>,
       return useMutation(getPostExchangeRatesMutationOptions(options), queryClient);
     }
     /**
- * Only rows with source=manual can be deleted — system-sourced rates (ecb, fixer, cnb) are read-only.
- * @summary Delete a manual exchange rate
+ * @summary Delete an exchange rate
  */
 export const deleteExchangeRatesExchangeRate = (
     exchangeRate: string,
@@ -264,7 +261,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeleteExchangeRatesExchangeRateMutationError = ErrorType<void>
 
     /**
- * @summary Delete a manual exchange rate
+ * @summary Delete an exchange rate
  */
 export const useDeleteExchangeRatesExchangeRate = <TError = ErrorType<void>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteExchangeRatesExchangeRate>>, TError,{exchangeRate: string}, TContext>, request?: SecondParameter<typeof apiMutator>}

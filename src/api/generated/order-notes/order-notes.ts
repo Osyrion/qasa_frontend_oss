@@ -26,6 +26,7 @@ import type {
 
 import type {
   OrderNote,
+  PostOrdersOrderNotes201,
   PostOrdersOrderNotesBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -154,7 +155,7 @@ export const postOrdersOrderNotes = (
 ) => {
 
 
-      return apiMutator<OrderNote>(
+      return apiMutator<PostOrdersOrderNotes201>(
       {url: `/api/v1/orders/${order}/notes`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postOrdersOrderNotesBody, signal

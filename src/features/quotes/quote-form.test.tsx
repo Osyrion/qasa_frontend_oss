@@ -32,9 +32,11 @@ describe('quote form', () => {
   it('creates a draft quote and navigates to its detail page', async () => {
     server.use(
       getPostQuotesMockHandler({
-        id: 'new-quote-id',
-        status: 'draft',
-        client: { id: 'c1', display_name: 'Acme s.r.o.' },
+        data: {
+          id: 'new-quote-id',
+          status: 'draft',
+          client: { id: 'c1', display_name: 'Acme s.r.o.' },
+        },
       }),
     )
 

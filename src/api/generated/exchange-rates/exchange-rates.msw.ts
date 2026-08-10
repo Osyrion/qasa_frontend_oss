@@ -18,14 +18,14 @@ import type {
 } from 'msw';
 
 import type {
-  ExchangeRate,
-  GetExchangeRates200
+  GetExchangeRates200,
+  PostExchangeRates201
 } from '../qASAAPIDocumentation.schemas';
 
 
-export const getGetExchangeRatesResponseMock = (overrideResponse: Partial<Extract<GetExchangeRates200, object>> = {}): GetExchangeRates200 => ({current_page: faker.helpers.arrayElement([faker.number.int(), undefined]), data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), base_currency: faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), undefined]), target_currency: faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), undefined]), rate: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), date: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), source: faker.helpers.arrayElement([faker.helpers.arrayElement(['manual','ecb','fixer','cnb'] as const), undefined])})), undefined]), first_page_url: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), from: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined]), last_page: faker.helpers.arrayElement([faker.number.int(), undefined]), last_page_url: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), next_page_url: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), path: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), per_page: faker.helpers.arrayElement([faker.number.int(), undefined]), prev_page_url: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), to: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined]), total: faker.helpers.arrayElement([faker.number.int(), undefined]), ...overrideResponse})
+export const getGetExchangeRatesResponseMock = (overrideResponse: Partial<Extract<GetExchangeRates200, object>> = {}): GetExchangeRates200 => ({data: faker.helpers.arrayElement([Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), base_currency: faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), undefined]), target_currency: faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), undefined]), rate: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), date: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), source: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined])})), undefined]), ...overrideResponse})
 
-export const getPostExchangeRatesResponseMock = (overrideResponse: Partial<Extract<ExchangeRate, object>> = {}): ExchangeRate => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), base_currency: faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), undefined]), target_currency: faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), undefined]), rate: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), date: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), source: faker.helpers.arrayElement([faker.helpers.arrayElement(['manual','ecb','fixer','cnb'] as const), undefined]), ...overrideResponse})
+export const getPostExchangeRatesResponseMock = (overrideResponse: Partial<Extract<PostExchangeRates201, object>> = {}): PostExchangeRates201 => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), base_currency: faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), undefined]), target_currency: faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), undefined]), rate: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), date: faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), undefined]), source: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), ...overrideResponse})
 
 
 export const getGetExchangeRatesMockHandler = (overrideResponse?: GetExchangeRates200 | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<GetExchangeRates200> | GetExchangeRates200), options?: RequestHandlerOptions) => {
@@ -40,7 +40,7 @@ export const getGetExchangeRatesMockHandler = (overrideResponse?: GetExchangeRat
   }, options)
 }
 
-export const getPostExchangeRatesMockHandler = (overrideResponse?: ExchangeRate | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ExchangeRate> | ExchangeRate), options?: RequestHandlerOptions) => {
+export const getPostExchangeRatesMockHandler = (overrideResponse?: PostExchangeRates201 | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostExchangeRates201> | PostExchangeRates201), options?: RequestHandlerOptions) => {
   return http.post('*/api/v1/exchange-rates', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 
 

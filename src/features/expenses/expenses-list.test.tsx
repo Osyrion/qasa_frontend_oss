@@ -59,12 +59,14 @@ describe('expenses list', () => {
       getPostExpensesMockHandler(() => {
         created = true
         return {
-          id: 'new-e-id',
-          description: 'Conference ticket',
-          category: 'education',
-          amount: 100,
-          currency: 'EUR',
-          date: '2026-07-01',
+          data: {
+            id: 'new-e-id',
+            description: 'Conference ticket',
+            category: 'education',
+            amount: 100,
+            currency: 'EUR',
+            date: '2026-07-01',
+          },
         }
       }),
     )

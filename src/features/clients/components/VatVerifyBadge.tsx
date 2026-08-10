@@ -25,13 +25,7 @@ interface VatVerifyBadgeProps {
   onVerified?: () => void
 }
 
-export function VatVerifyBadge({
-  country,
-  vatId,
-  clientId,
-  wasVerified,
-  onVerified,
-}: VatVerifyBadgeProps) {
+export function VatVerifyBadge({ country, vatId, wasVerified, onVerified }: VatVerifyBadgeProps) {
   const { t } = useTranslation('clients')
   const [state, setState] = useState<'idle' | 'loading' | 'valid' | 'invalid' | 'error'>('idle')
   const [message, setMessage] = useState<string | null>(null)
@@ -40,7 +34,7 @@ export function VatVerifyBadge({
     setState('loading')
     setMessage(null)
     try {
-      const response = await getClientsVerifyVat({ country, vat_id: vatId, client_id: clientId })
+      const response = await getClientsVerifyVat({ country, vat_id: vatId })
       const result = response as unknown as VatValidationResult
       setState(result.valid ? 'valid' : 'invalid')
       if (result.valid) {

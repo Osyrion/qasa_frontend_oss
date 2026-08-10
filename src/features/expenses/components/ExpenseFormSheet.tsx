@@ -93,14 +93,15 @@ export function ExpenseFormSheet({ expenseId, open, onOpenChange }: ExpenseFormS
 
   useEffect(() => {
     if (!open) return
-    if (existing.data) {
+    const expense = existing.data?.data
+    if (expense) {
       reset({
-        description: existing.data.description ?? '',
-        category: (existing.data.category ?? 'office') as PostExpensesBodyCategory,
-        amount: existing.data.amount != null ? String(existing.data.amount) : '',
-        currency: (existing.data.currency ?? 'EUR') as PostExpensesBodyCurrency,
-        date: existing.data.date ?? todayIso(),
-        note: existing.data.note ?? '',
+        description: expense.description ?? '',
+        category: (expense.category ?? 'office') as PostExpensesBodyCategory,
+        amount: expense.amount != null ? String(expense.amount) : '',
+        currency: (expense.currency ?? 'EUR') as PostExpensesBodyCurrency,
+        date: expense.date ?? todayIso(),
+        note: expense.note ?? '',
       })
     } else if (!isEdit) {
       reset(defaultValues())
@@ -249,7 +250,7 @@ export function ExpenseFormSheet({ expenseId, open, onOpenChange }: ExpenseFormS
                 <h3 className="text-sm font-medium">{t('attachment.title')}</h3>
                 <ExpenseAttachmentSection
                   expenseId={expenseId}
-                  attachment={existing.data?.attachment}
+                  attachment={existing.data?.data?.attachment}
                 />
               </FieldGroup>
             )}

@@ -26,6 +26,7 @@ import type {
 
 import type {
   OrderAttachment,
+  PostOrdersOrderAttachments201,
   PostOrdersOrderAttachmentsBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -159,7 +160,7 @@ if(postOrdersOrderAttachmentsBody.label !== undefined) {
  formData.append(`label`, postOrdersOrderAttachmentsBody.label);
  }
 
-      return apiMutator<OrderAttachment>(
+      return apiMutator<PostOrdersOrderAttachments201>(
       {url: `/api/v1/orders/${order}/attachments`, method: 'POST',
       headers: {'Content-Type': 'multipart/form-data', },
        data: formData, signal

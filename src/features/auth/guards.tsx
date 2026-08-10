@@ -17,13 +17,14 @@ export function RequireAuth() {
   const location = useLocation()
 
   const me = useGetAuthMe({ query: { enabled: Boolean(token) } })
+  const user = me.data?.data
 
   useEffect(() => {
-    if (me.data) {
-      setUser(me.data)
-      syncLocale(me.data.locale)
+    if (user) {
+      setUser(user)
+      syncLocale(user.locale)
     }
-  }, [me.data, setUser])
+  }, [user, setUser])
 
   if (!token) {
     return <Navigate to="/login" state={{ from: location }} replace />

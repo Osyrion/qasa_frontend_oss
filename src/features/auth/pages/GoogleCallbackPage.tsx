@@ -21,14 +21,17 @@ export function GoogleCallbackPage() {
   const submitted = useRef(false)
 
   const code = searchParams.get('code')
+  // CSRF nonce Google echoes back — the backend issued it in /redirect and
+  // requires it on /callback, so a callback without it is rejected.
+  const state = searchParams.get('state')
 
   useEffect(() => {
-    if (!code || submitted.current) {
+    if (!code || !state || submitted.current) {
       return
     }
     submitted.current = true
 
-    postAuthGoogleCallback({ code, device_name: deviceName() })
+    postAuthGoogleCallback({ code, state, device_name: deviceName() })
       .then(handleAuthResponse)
       .catch((requestError: unknown) => {
         const payload = isAxiosError(requestError)
@@ -36,9 +39,9 @@ export function GoogleCallbackPage() {
           : null
         setError(payload?.message ?? t('google.error'))
       })
-  }, [code, handleAuthResponse, t])
+  }, [code, state, handleAuthResponse, t])
 
-  if (!code || error) {
+  if (!code || !state || error) {
     return (
       <AuthCard title={t('google.error_title')}>
         <div className="flex flex-col gap-4">

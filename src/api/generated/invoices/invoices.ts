@@ -26,20 +26,31 @@ import type {
 
 import type {
   GetInvoices200,
+  GetInvoicesInvoicePayments200,
   GetInvoicesParams,
   Invoice,
-  InvoiceItem,
-  InvoicePayment,
+  PatchInvoicesId200,
   PatchInvoicesIdBody,
+  PostInvoices201,
   PostInvoicesBody,
+  PostInvoicesGenerateFromOrder201,
   PostInvoicesGenerateFromOrderBody,
+  PostInvoicesInvoiceCorrective201,
   PostInvoicesInvoiceCorrectiveBody,
+  PostInvoicesInvoiceEmail200,
   PostInvoicesInvoiceEmailBody,
+  PostInvoicesInvoiceItems201,
   PostInvoicesInvoiceItemsBody,
+  PostInvoicesInvoicePayments201,
   PostInvoicesInvoicePaymentsBody,
   PostInvoicesInvoicePublicLink200,
   PostInvoicesInvoicePublicLinkBody,
+  PostInvoicesInvoiceRemind200,
+  PostInvoicesInvoiceSettle201,
+  PostInvoicesInvoiceStatus200,
   PostInvoicesInvoiceStatusBody,
+  PostInvoicesInvoiceWorkReportGenerate200,
+  PutInvoicesInvoiceWorkReport200,
   PutInvoicesInvoiceWorkReportBody,
   WorkReportLine
 } from '../qASAAPIDocumentation.schemas';
@@ -68,6 +79,1020 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
 };
 
 /**
+ * @summary List invoices
+ */
+export const getInvoices = (
+    params?: GetInvoicesParams,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<GetInvoices200>(
+      {url: `/api/v1/invoices`, method: 'GET',
+        params, signal
+    },
+      options);
+    }
+
+
+
+
+export const getGetInvoicesQueryKey = (params?: GetInvoicesParams,) => {
+    return [
+    `/api/v1/invoices`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetInvoicesQueryOptions = <TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(params?: GetInvoicesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetInvoicesQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInvoices>>> = ({ signal }) => getInvoices(params, requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetInvoicesQueryResult = NonNullable<Awaited<ReturnType<typeof getInvoices>>>
+export type GetInvoicesQueryError = ErrorType<void>
+
+
+export function useGetInvoices<TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(
+ params: undefined |  GetInvoicesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getInvoices>>,
+          TError,
+          Awaited<ReturnType<typeof getInvoices>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetInvoices<TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(
+ params?: GetInvoicesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getInvoices>>,
+          TError,
+          Awaited<ReturnType<typeof getInvoices>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetInvoices<TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(
+ params?: GetInvoicesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary List invoices
+ */
+
+export function useGetInvoices<TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(
+ params?: GetInvoicesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetInvoicesQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+/**
+ * @summary Create invoice
+ */
+export const postInvoices = (
+    postInvoicesBody: BodyType<PostInvoicesBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoices201>(
+      {url: `/api/v1/invoices`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postInvoicesBody, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoices>>, TError,{data: BodyType<PostInvoicesBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoices>>, TError,{data: BodyType<PostInvoicesBody>}, TContext> => {
+
+const mutationKey = ['postInvoices'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoices>>, {data: BodyType<PostInvoicesBody>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postInvoices(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoices>>>
+    export type PostInvoicesMutationBody = BodyType<PostInvoicesBody>
+    export type PostInvoicesMutationError = ErrorType<void>
+
+    /**
+ * @summary Create invoice
+ */
+export const usePostInvoices = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoices>>, TError,{data: BodyType<PostInvoicesBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoices>>,
+        TError,
+        {data: BodyType<PostInvoicesBody>},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Get invoice details
+ */
+export const getInvoicesId = (
+    id: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<Invoice>(
+      {url: `/api/v1/invoices/${id}`, method: 'GET', signal
+    },
+      options);
+    }
+
+
+
+
+export const getGetInvoicesIdQueryKey = (id: string,) => {
+    return [
+    `/api/v1/invoices/${id}`
+    ] as const;
+    }
+
+
+export const getGetInvoicesIdQueryOptions = <TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetInvoicesIdQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInvoicesId>>> = ({ signal }) => getInvoicesId(id, requestOptions, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetInvoicesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getInvoicesId>>>
+export type GetInvoicesIdQueryError = ErrorType<void>
+
+
+export function useGetInvoicesId<TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getInvoicesId>>,
+          TError,
+          Awaited<ReturnType<typeof getInvoicesId>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetInvoicesId<TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getInvoicesId>>,
+          TError,
+          Awaited<ReturnType<typeof getInvoicesId>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetInvoicesId<TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Get invoice details
+ */
+
+export function useGetInvoicesId<TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetInvoicesIdQueryOptions(id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+/**
+ * @summary Delete invoice
+ */
+export const deleteInvoicesId = (
+    id: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<void>(
+      {url: `/api/v1/invoices/${id}`, method: 'DELETE', signal
+    },
+      options);
+    }
+
+
+
+
+export const getDeleteInvoicesIdMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesId>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesId>>, TError,{id: string}, TContext> => {
+
+const mutationKey = ['deleteInvoicesId'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteInvoicesId>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteInvoicesId(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteInvoicesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteInvoicesId>>>
+
+    export type DeleteInvoicesIdMutationError = ErrorType<void>
+
+    /**
+ * @summary Delete invoice
+ */
+export const useDeleteInvoicesId = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesId>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteInvoicesId>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+      return useMutation(getDeleteInvoicesIdMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Update draft invoice header
+ */
+export const patchInvoicesId = (
+    id: string,
+    patchInvoicesIdBody: BodyType<PatchInvoicesIdBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PatchInvoicesId200>(
+      {url: `/api/v1/invoices/${id}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: patchInvoicesIdBody, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPatchInvoicesIdMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchInvoicesId>>, TError,{id: string;data: BodyType<PatchInvoicesIdBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof patchInvoicesId>>, TError,{id: string;data: BodyType<PatchInvoicesIdBody>}, TContext> => {
+
+const mutationKey = ['patchInvoicesId'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchInvoicesId>>, {id: string;data: BodyType<PatchInvoicesIdBody>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  patchInvoicesId(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PatchInvoicesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchInvoicesId>>>
+    export type PatchInvoicesIdMutationBody = BodyType<PatchInvoicesIdBody>
+    export type PatchInvoicesIdMutationError = ErrorType<void>
+
+    /**
+ * @summary Update draft invoice header
+ */
+export const usePatchInvoicesId = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchInvoicesId>>, TError,{id: string;data: BodyType<PatchInvoicesIdBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof patchInvoicesId>>,
+        TError,
+        {id: string;data: BodyType<PatchInvoicesIdBody>},
+        TContext
+      > => {
+      return useMutation(getPatchInvoicesIdMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Add manual item to invoice
+ */
+export const postInvoicesInvoiceItems = (
+    invoice: string,
+    postInvoicesInvoiceItemsBody: BodyType<PostInvoicesInvoiceItemsBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoicesInvoiceItems201>(
+      {url: `/api/v1/invoices/${invoice}/items`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postInvoicesInvoiceItemsBody, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesInvoiceItemsMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>}, TContext> => {
+
+const mutationKey = ['postInvoicesInvoiceItems'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>, {invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>}> = (props) => {
+          const {invoice,data} = props ?? {};
+
+          return  postInvoicesInvoiceItems(invoice,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesInvoiceItemsMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>>
+    export type PostInvoicesInvoiceItemsMutationBody = BodyType<PostInvoicesInvoiceItemsBody>
+    export type PostInvoicesInvoiceItemsMutationError = ErrorType<void>
+
+    /**
+ * @summary Add manual item to invoice
+ */
+export const usePostInvoicesInvoiceItems = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoicesInvoiceItems>>,
+        TError,
+        {invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesInvoiceItemsMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Remove item from invoice
+ */
+export const deleteInvoicesInvoiceItemsItem = (
+    invoice: string,
+    item: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<void>(
+      {url: `/api/v1/invoices/${invoice}/items/${item}`, method: 'DELETE', signal
+    },
+      options);
+    }
+
+
+
+
+export const getDeleteInvoicesInvoiceItemsItemMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>, TError,{invoice: string;item: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>, TError,{invoice: string;item: string}, TContext> => {
+
+const mutationKey = ['deleteInvoicesInvoiceItemsItem'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>, {invoice: string;item: string}> = (props) => {
+          const {invoice,item} = props ?? {};
+
+          return  deleteInvoicesInvoiceItemsItem(invoice,item,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteInvoicesInvoiceItemsItemMutationResult = NonNullable<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>>
+
+    export type DeleteInvoicesInvoiceItemsItemMutationError = ErrorType<void>
+
+    /**
+ * @summary Remove item from invoice
+ */
+export const useDeleteInvoicesInvoiceItemsItem = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>, TError,{invoice: string;item: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>,
+        TError,
+        {invoice: string;item: string},
+        TContext
+      > => {
+      return useMutation(getDeleteInvoicesInvoiceItemsItemMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Generate invoice from order
+ */
+export const postInvoicesGenerateFromOrder = (
+    postInvoicesGenerateFromOrderBody: BodyType<PostInvoicesGenerateFromOrderBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoicesGenerateFromOrder201>(
+      {url: `/api/v1/invoices/generate-from-order`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postInvoicesGenerateFromOrderBody, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesGenerateFromOrderMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>, TError,{data: BodyType<PostInvoicesGenerateFromOrderBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>, TError,{data: BodyType<PostInvoicesGenerateFromOrderBody>}, TContext> => {
+
+const mutationKey = ['postInvoicesGenerateFromOrder'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>, {data: BodyType<PostInvoicesGenerateFromOrderBody>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postInvoicesGenerateFromOrder(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesGenerateFromOrderMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>>
+    export type PostInvoicesGenerateFromOrderMutationBody = BodyType<PostInvoicesGenerateFromOrderBody>
+    export type PostInvoicesGenerateFromOrderMutationError = ErrorType<void>
+
+    /**
+ * @summary Generate invoice from order
+ */
+export const usePostInvoicesGenerateFromOrder = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>, TError,{data: BodyType<PostInvoicesGenerateFromOrderBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>,
+        TError,
+        {data: BodyType<PostInvoicesGenerateFromOrderBody>},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesGenerateFromOrderMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Update invoice status
+ */
+export const postInvoicesInvoiceStatus = (
+    invoice: string,
+    postInvoicesInvoiceStatusBody: BodyType<PostInvoicesInvoiceStatusBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoicesInvoiceStatus200>(
+      {url: `/api/v1/invoices/${invoice}/status`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postInvoicesInvoiceStatusBody, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesInvoiceStatusMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>}, TContext> => {
+
+const mutationKey = ['postInvoicesInvoiceStatus'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>, {invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>}> = (props) => {
+          const {invoice,data} = props ?? {};
+
+          return  postInvoicesInvoiceStatus(invoice,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesInvoiceStatusMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>>
+    export type PostInvoicesInvoiceStatusMutationBody = BodyType<PostInvoicesInvoiceStatusBody>
+    export type PostInvoicesInvoiceStatusMutationError = ErrorType<void>
+
+    /**
+ * @summary Update invoice status
+ */
+export const usePostInvoicesInvoiceStatus = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>,
+        TError,
+        {invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesInvoiceStatusMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Email the invoice PDF to the client (issues the invoice first when still a draft)
+ */
+export const postInvoicesInvoiceEmail = (
+    invoice: string,
+    postInvoicesInvoiceEmailBody?: BodyType<PostInvoicesInvoiceEmailBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoicesInvoiceEmail200>(
+      {url: `/api/v1/invoices/${invoice}/email`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postInvoicesInvoiceEmailBody, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesInvoiceEmailMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>}, TContext> => {
+
+const mutationKey = ['postInvoicesInvoiceEmail'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>, {invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>}> = (props) => {
+          const {invoice,data} = props ?? {};
+
+          return  postInvoicesInvoiceEmail(invoice,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesInvoiceEmailMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>>
+    export type PostInvoicesInvoiceEmailMutationBody = BodyType<PostInvoicesInvoiceEmailBody> | undefined
+    export type PostInvoicesInvoiceEmailMutationError = ErrorType<void>
+
+    /**
+ * @summary Email the invoice PDF to the client (issues the invoice first when still a draft)
+ */
+export const usePostInvoicesInvoiceEmail = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>,
+        TError,
+        {invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesInvoiceEmailMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Send a payment reminder e-mail for an overdue invoice (throttled by cooldown)
+ */
+export const postInvoicesInvoiceRemind = (
+    invoice: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoicesInvoiceRemind200>(
+      {url: `/api/v1/invoices/${invoice}/remind`, method: 'POST', signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesInvoiceRemindMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>, TError,{invoice: string}, TContext> => {
+
+const mutationKey = ['postInvoicesInvoiceRemind'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>, {invoice: string}> = (props) => {
+          const {invoice} = props ?? {};
+
+          return  postInvoicesInvoiceRemind(invoice,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesInvoiceRemindMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>>
+
+    export type PostInvoicesInvoiceRemindMutationError = ErrorType<void>
+
+    /**
+ * @summary Send a payment reminder e-mail for an overdue invoice (throttled by cooldown)
+ */
+export const usePostInvoicesInvoiceRemind = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>,
+        TError,
+        {invoice: string},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesInvoiceRemindMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Create a credit note (dobropis) or storno for an issued invoice
+ */
+export const postInvoicesInvoiceCorrective = (
+    invoice: string,
+    postInvoicesInvoiceCorrectiveBody: BodyType<PostInvoicesInvoiceCorrectiveBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoicesInvoiceCorrective201>(
+      {url: `/api/v1/invoices/${invoice}/corrective`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postInvoicesInvoiceCorrectiveBody, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesInvoiceCorrectiveMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>}, TContext> => {
+
+const mutationKey = ['postInvoicesInvoiceCorrective'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>, {invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>}> = (props) => {
+          const {invoice,data} = props ?? {};
+
+          return  postInvoicesInvoiceCorrective(invoice,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesInvoiceCorrectiveMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>>
+    export type PostInvoicesInvoiceCorrectiveMutationBody = BodyType<PostInvoicesInvoiceCorrectiveBody>
+    export type PostInvoicesInvoiceCorrectiveMutationError = ErrorType<void>
+
+    /**
+ * @summary Create a credit note (dobropis) or storno for an issued invoice
+ */
+export const usePostInvoicesInvoiceCorrective = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>,
+        TError,
+        {invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesInvoiceCorrectiveMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Settle a fully paid proforma into an ordinary invoice
+ */
+export const postInvoicesInvoiceSettle = (
+    invoice: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoicesInvoiceSettle201>(
+      {url: `/api/v1/invoices/${invoice}/settle`, method: 'POST', signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesInvoiceSettleMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>, TError,{invoice: string}, TContext> => {
+
+const mutationKey = ['postInvoicesInvoiceSettle'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>, {invoice: string}> = (props) => {
+          const {invoice} = props ?? {};
+
+          return  postInvoicesInvoiceSettle(invoice,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesInvoiceSettleMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>>
+
+    export type PostInvoicesInvoiceSettleMutationError = ErrorType<void>
+
+    /**
+ * @summary Settle a fully paid proforma into an ordinary invoice
+ */
+export const usePostInvoicesInvoiceSettle = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>,
+        TError,
+        {invoice: string},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesInvoiceSettleMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Create (or return the existing) public link for the invoice; pass regenerate=true for a fresh token
+ */
+export const postInvoicesInvoicePublicLink = (
+    invoice: string,
+    postInvoicesInvoicePublicLinkBody?: BodyType<PostInvoicesInvoicePublicLinkBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostInvoicesInvoicePublicLink200>(
+      {url: `/api/v1/invoices/${invoice}/public-link`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: postInvoicesInvoicePublicLinkBody, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoicesInvoicePublicLinkMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>}, TContext> => {
+
+const mutationKey = ['postInvoicesInvoicePublicLink'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>, {invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>}> = (props) => {
+          const {invoice,data} = props ?? {};
+
+          return  postInvoicesInvoicePublicLink(invoice,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoicesInvoicePublicLinkMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>>
+    export type PostInvoicesInvoicePublicLinkMutationBody = BodyType<PostInvoicesInvoicePublicLinkBody> | undefined
+    export type PostInvoicesInvoicePublicLinkMutationError = ErrorType<void>
+
+    /**
+ * @summary Create (or return the existing) public link for the invoice; pass regenerate=true for a fresh token
+ */
+export const usePostInvoicesInvoicePublicLink = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>,
+        TError,
+        {invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>},
+        TContext
+      > => {
+      return useMutation(getPostInvoicesInvoicePublicLinkMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Revoke the invoice public link
+ */
+export const deleteInvoicesInvoicePublicLink = (
+    invoice: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<void>(
+      {url: `/api/v1/invoices/${invoice}/public-link`, method: 'DELETE', signal
+    },
+      options);
+    }
+
+
+
+
+export const getDeleteInvoicesInvoicePublicLinkMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>, TError,{invoice: string}, TContext> => {
+
+const mutationKey = ['deleteInvoicesInvoicePublicLink'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>, {invoice: string}> = (props) => {
+          const {invoice} = props ?? {};
+
+          return  deleteInvoicesInvoicePublicLink(invoice,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteInvoicesInvoicePublicLinkMutationResult = NonNullable<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>>
+
+    export type DeleteInvoicesInvoicePublicLinkMutationError = ErrorType<void>
+
+    /**
+ * @summary Revoke the invoice public link
+ */
+export const useDeleteInvoicesInvoicePublicLink = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>,
+        TError,
+        {invoice: string},
+        TContext
+      > => {
+      return useMutation(getDeleteInvoicesInvoicePublicLinkMutationOptions(options), queryClient);
+    }
+    /**
  * @summary List payments recorded against an invoice
  */
 export const getInvoicesInvoicePayments = (
@@ -76,7 +1101,7 @@ export const getInvoicesInvoicePayments = (
 ) => {
 
 
-      return apiMutator<InvoicePayment[]>(
+      return apiMutator<GetInvoicesInvoicePayments200>(
       {url: `/api/v1/invoices/${invoice}/payments`, method: 'GET', signal
     },
       options);
@@ -169,7 +1194,7 @@ export const postInvoicesInvoicePayments = (
 ) => {
 
 
-      return apiMutator<InvoicePayment>(
+      return apiMutator<PostInvoicesInvoicePayments201>(
       {url: `/api/v1/invoices/${invoice}/payments`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postInvoicesInvoicePaymentsBody, signal
@@ -389,7 +1414,7 @@ export const putInvoicesInvoiceWorkReport = (
 ) => {
 
 
-      return apiMutator<WorkReportLine[]>(
+      return apiMutator<PutInvoicesInvoiceWorkReport200>(
       {url: `/api/v1/invoices/${invoice}/work-report`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putInvoicesInvoiceWorkReportBody, signal
@@ -445,714 +1470,16 @@ export const usePutInvoicesInvoiceWorkReport = <TError = ErrorType<void>,
       return useMutation(getPutInvoicesInvoiceWorkReportMutationOptions(options), queryClient);
     }
     /**
- * @summary List invoices
+ * @summary Prefill work report from the time entries behind invoice items
  */
-export const getInvoices = (
-    params?: GetInvoicesParams,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<GetInvoices200>(
-      {url: `/api/v1/invoices`, method: 'GET',
-        params, signal
-    },
-      options);
-    }
-
-
-
-
-export const getGetInvoicesQueryKey = (params?: GetInvoicesParams,) => {
-    return [
-    `/api/v1/invoices`, ...(params ? [params] : [])
-    ] as const;
-    }
-
-
-export const getGetInvoicesQueryOptions = <TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(params?: GetInvoicesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetInvoicesQueryKey(params);
-
-
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInvoices>>> = ({ signal }) => getInvoices(params, requestOptions, signal);
-
-
-
-
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetInvoicesQueryResult = NonNullable<Awaited<ReturnType<typeof getInvoices>>>
-export type GetInvoicesQueryError = ErrorType<void>
-
-
-export function useGetInvoices<TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(
- params: undefined |  GetInvoicesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getInvoices>>,
-          TError,
-          Awaited<ReturnType<typeof getInvoices>>
-        > , 'initialData'
-      >, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInvoices<TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(
- params?: GetInvoicesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>> & Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getInvoices>>,
-          TError,
-          Awaited<ReturnType<typeof getInvoices>>
-        > , 'initialData'
-      >, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInvoices<TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(
- params?: GetInvoicesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary List invoices
- */
-
-export function useGetInvoices<TData = Awaited<ReturnType<typeof getInvoices>>, TError = ErrorType<void>>(
- params?: GetInvoicesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoices>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-
-  const queryOptions = getGetInvoicesQueryOptions(params,options)
-
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  return withQueryKey(query, queryOptions.queryKey);
-}
-
-
-
-
-
-
-/**
- * @summary Create invoice
- */
-export const postInvoices = (
-    postInvoicesBody: BodyType<PostInvoicesBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postInvoicesBody, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoicesMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoices>>, TError,{data: BodyType<PostInvoicesBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoices>>, TError,{data: BodyType<PostInvoicesBody>}, TContext> => {
-
-const mutationKey = ['postInvoices'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoices>>, {data: BodyType<PostInvoicesBody>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  postInvoices(data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoicesMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoices>>>
-    export type PostInvoicesMutationBody = BodyType<PostInvoicesBody>
-    export type PostInvoicesMutationError = ErrorType<void>
-
-    /**
- * @summary Create invoice
- */
-export const usePostInvoices = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoices>>, TError,{data: BodyType<PostInvoicesBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoices>>,
-        TError,
-        {data: BodyType<PostInvoicesBody>},
-        TContext
-      > => {
-      return useMutation(getPostInvoicesMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Get invoice details
- */
-export const getInvoicesId = (
-    id: string,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices/${id}`, method: 'GET', signal
-    },
-      options);
-    }
-
-
-
-
-export const getGetInvoicesIdQueryKey = (id: string,) => {
-    return [
-    `/api/v1/invoices/${id}`
-    ] as const;
-    }
-
-
-export const getGetInvoicesIdQueryOptions = <TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetInvoicesIdQueryKey(id);
-
-
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getInvoicesId>>> = ({ signal }) => getInvoicesId(id, requestOptions, signal);
-
-
-
-
-
-   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetInvoicesIdQueryResult = NonNullable<Awaited<ReturnType<typeof getInvoicesId>>>
-export type GetInvoicesIdQueryError = ErrorType<void>
-
-
-export function useGetInvoicesId<TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getInvoicesId>>,
-          TError,
-          Awaited<ReturnType<typeof getInvoicesId>>
-        > , 'initialData'
-      >, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInvoicesId<TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>> & Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getInvoicesId>>,
-          TError,
-          Awaited<ReturnType<typeof getInvoicesId>>
-        > , 'initialData'
-      >, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetInvoicesId<TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary Get invoice details
- */
-
-export function useGetInvoicesId<TData = Awaited<ReturnType<typeof getInvoicesId>>, TError = ErrorType<void>>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getInvoicesId>>, TError, TData>>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-
-  const queryOptions = getGetInvoicesIdQueryOptions(id,options)
-
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  return withQueryKey(query, queryOptions.queryKey);
-}
-
-
-
-
-
-
-/**
- * @summary Delete invoice
- */
-export const deleteInvoicesId = (
-    id: string,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<void>(
-      {url: `/api/v1/invoices/${id}`, method: 'DELETE', signal
-    },
-      options);
-    }
-
-
-
-
-export const getDeleteInvoicesIdMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesId>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesId>>, TError,{id: string}, TContext> => {
-
-const mutationKey = ['deleteInvoicesId'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteInvoicesId>>, {id: string}> = (props) => {
-          const {id} = props ?? {};
-
-          return  deleteInvoicesId(id,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteInvoicesIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteInvoicesId>>>
-
-    export type DeleteInvoicesIdMutationError = ErrorType<void>
-
-    /**
- * @summary Delete invoice
- */
-export const useDeleteInvoicesId = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesId>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteInvoicesId>>,
-        TError,
-        {id: string},
-        TContext
-      > => {
-      return useMutation(getDeleteInvoicesIdMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Update draft invoice header
- */
-export const patchInvoicesId = (
-    id: string,
-    patchInvoicesIdBody: BodyType<PatchInvoicesIdBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices/${id}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: patchInvoicesIdBody, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPatchInvoicesIdMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchInvoicesId>>, TError,{id: string;data: BodyType<PatchInvoicesIdBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof patchInvoicesId>>, TError,{id: string;data: BodyType<PatchInvoicesIdBody>}, TContext> => {
-
-const mutationKey = ['patchInvoicesId'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchInvoicesId>>, {id: string;data: BodyType<PatchInvoicesIdBody>}> = (props) => {
-          const {id,data} = props ?? {};
-
-          return  patchInvoicesId(id,data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PatchInvoicesIdMutationResult = NonNullable<Awaited<ReturnType<typeof patchInvoicesId>>>
-    export type PatchInvoicesIdMutationBody = BodyType<PatchInvoicesIdBody>
-    export type PatchInvoicesIdMutationError = ErrorType<void>
-
-    /**
- * @summary Update draft invoice header
- */
-export const usePatchInvoicesId = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchInvoicesId>>, TError,{id: string;data: BodyType<PatchInvoicesIdBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchInvoicesId>>,
-        TError,
-        {id: string;data: BodyType<PatchInvoicesIdBody>},
-        TContext
-      > => {
-      return useMutation(getPatchInvoicesIdMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Add manual item to invoice
- */
-export const postInvoicesInvoiceItems = (
-    invoice: string,
-    postInvoicesInvoiceItemsBody: BodyType<PostInvoicesInvoiceItemsBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<InvoiceItem>(
-      {url: `/api/v1/invoices/${invoice}/items`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postInvoicesInvoiceItemsBody, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoicesInvoiceItemsMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>}, TContext> => {
-
-const mutationKey = ['postInvoicesInvoiceItems'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>, {invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>}> = (props) => {
-          const {invoice,data} = props ?? {};
-
-          return  postInvoicesInvoiceItems(invoice,data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoicesInvoiceItemsMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>>
-    export type PostInvoicesInvoiceItemsMutationBody = BodyType<PostInvoicesInvoiceItemsBody>
-    export type PostInvoicesInvoiceItemsMutationError = ErrorType<void>
-
-    /**
- * @summary Add manual item to invoice
- */
-export const usePostInvoicesInvoiceItems = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceItems>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoicesInvoiceItems>>,
-        TError,
-        {invoice: string;data: BodyType<PostInvoicesInvoiceItemsBody>},
-        TContext
-      > => {
-      return useMutation(getPostInvoicesInvoiceItemsMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Remove item from invoice
- */
-export const deleteInvoicesInvoiceItemsItem = (
-    invoice: string,
-    item: string,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<void>(
-      {url: `/api/v1/invoices/${invoice}/items/${item}`, method: 'DELETE', signal
-    },
-      options);
-    }
-
-
-
-
-export const getDeleteInvoicesInvoiceItemsItemMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>, TError,{invoice: string;item: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>, TError,{invoice: string;item: string}, TContext> => {
-
-const mutationKey = ['deleteInvoicesInvoiceItemsItem'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>, {invoice: string;item: string}> = (props) => {
-          const {invoice,item} = props ?? {};
-
-          return  deleteInvoicesInvoiceItemsItem(invoice,item,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteInvoicesInvoiceItemsItemMutationResult = NonNullable<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>>
-
-    export type DeleteInvoicesInvoiceItemsItemMutationError = ErrorType<void>
-
-    /**
- * @summary Remove item from invoice
- */
-export const useDeleteInvoicesInvoiceItemsItem = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>, TError,{invoice: string;item: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteInvoicesInvoiceItemsItem>>,
-        TError,
-        {invoice: string;item: string},
-        TContext
-      > => {
-      return useMutation(getDeleteInvoicesInvoiceItemsItemMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Generate invoice from order
- */
-export const postInvoicesGenerateFromOrder = (
-    postInvoicesGenerateFromOrderBody: BodyType<PostInvoicesGenerateFromOrderBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices/generate-from-order`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postInvoicesGenerateFromOrderBody, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoicesGenerateFromOrderMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>, TError,{data: BodyType<PostInvoicesGenerateFromOrderBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>, TError,{data: BodyType<PostInvoicesGenerateFromOrderBody>}, TContext> => {
-
-const mutationKey = ['postInvoicesGenerateFromOrder'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>, {data: BodyType<PostInvoicesGenerateFromOrderBody>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  postInvoicesGenerateFromOrder(data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoicesGenerateFromOrderMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>>
-    export type PostInvoicesGenerateFromOrderMutationBody = BodyType<PostInvoicesGenerateFromOrderBody>
-    export type PostInvoicesGenerateFromOrderMutationError = ErrorType<void>
-
-    /**
- * @summary Generate invoice from order
- */
-export const usePostInvoicesGenerateFromOrder = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>, TError,{data: BodyType<PostInvoicesGenerateFromOrderBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoicesGenerateFromOrder>>,
-        TError,
-        {data: BodyType<PostInvoicesGenerateFromOrderBody>},
-        TContext
-      > => {
-      return useMutation(getPostInvoicesGenerateFromOrderMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Update invoice status
- */
-export const postInvoicesInvoiceStatus = (
-    invoice: string,
-    postInvoicesInvoiceStatusBody: BodyType<PostInvoicesInvoiceStatusBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices/${invoice}/status`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postInvoicesInvoiceStatusBody, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoicesInvoiceStatusMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>}, TContext> => {
-
-const mutationKey = ['postInvoicesInvoiceStatus'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>, {invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>}> = (props) => {
-          const {invoice,data} = props ?? {};
-
-          return  postInvoicesInvoiceStatus(invoice,data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoicesInvoiceStatusMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>>
-    export type PostInvoicesInvoiceStatusMutationBody = BodyType<PostInvoicesInvoiceStatusBody>
-    export type PostInvoicesInvoiceStatusMutationError = ErrorType<void>
-
-    /**
- * @summary Update invoice status
- */
-export const usePostInvoicesInvoiceStatus = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoicesInvoiceStatus>>,
-        TError,
-        {invoice: string;data: BodyType<PostInvoicesInvoiceStatusBody>},
-        TContext
-      > => {
-      return useMutation(getPostInvoicesInvoiceStatusMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Email the invoice PDF to the client (issues the invoice first when still a draft)
- */
-export const postInvoicesInvoiceEmail = (
-    invoice: string,
-    postInvoicesInvoiceEmailBody?: BodyType<PostInvoicesInvoiceEmailBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices/${invoice}/email`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postInvoicesInvoiceEmailBody, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoicesInvoiceEmailMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>}, TContext> => {
-
-const mutationKey = ['postInvoicesInvoiceEmail'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>, {invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>}> = (props) => {
-          const {invoice,data} = props ?? {};
-
-          return  postInvoicesInvoiceEmail(invoice,data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoicesInvoiceEmailMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>>
-    export type PostInvoicesInvoiceEmailMutationBody = BodyType<PostInvoicesInvoiceEmailBody> | undefined
-    export type PostInvoicesInvoiceEmailMutationError = ErrorType<void>
-
-    /**
- * @summary Email the invoice PDF to the client (issues the invoice first when still a draft)
- */
-export const usePostInvoicesInvoiceEmail = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoicesInvoiceEmail>>,
-        TError,
-        {invoice: string;data?: BodyType<PostInvoicesInvoiceEmailBody>},
-        TContext
-      > => {
-      return useMutation(getPostInvoicesInvoiceEmailMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Send a payment reminder e-mail for an overdue invoice (throttled by cooldown)
- */
-export const postInvoicesInvoiceRemind = (
+export const postInvoicesInvoiceWorkReportGenerate = (
     invoice: string,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices/${invoice}/remind`, method: 'POST', signal
+      return apiMutator<PostInvoicesInvoiceWorkReportGenerate200>(
+      {url: `/api/v1/invoices/${invoice}/work-report/generate`, method: 'POST', signal
     },
       options);
     }
@@ -1160,11 +1487,11 @@ export const postInvoicesInvoiceRemind = (
 
 
 
-export const getPostInvoicesInvoiceRemindMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>, TError,{invoice: string}, TContext> => {
+export const getPostInvoicesInvoiceWorkReportGenerateMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceWorkReportGenerate>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceWorkReportGenerate>>, TError,{invoice: string}, TContext> => {
 
-const mutationKey = ['postInvoicesInvoiceRemind'];
+const mutationKey = ['postInvoicesInvoiceWorkReportGenerate'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -1174,10 +1501,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>, {invoice: string}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceWorkReportGenerate>>, {invoice: string}> = (props) => {
           const {invoice} = props ?? {};
 
-          return  postInvoicesInvoiceRemind(invoice,requestOptions)
+          return  postInvoicesInvoiceWorkReportGenerate(invoice,requestOptions)
         }
 
 
@@ -1187,274 +1514,20 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
   return  { mutationFn, ...mutationOptions }}
 
-    export type PostInvoicesInvoiceRemindMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>>
+    export type PostInvoicesInvoiceWorkReportGenerateMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceWorkReportGenerate>>>
 
-    export type PostInvoicesInvoiceRemindMutationError = ErrorType<void>
+    export type PostInvoicesInvoiceWorkReportGenerateMutationError = ErrorType<void>
 
     /**
- * @summary Send a payment reminder e-mail for an overdue invoice (throttled by cooldown)
+ * @summary Prefill work report from the time entries behind invoice items
  */
-export const usePostInvoicesInvoiceRemind = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+export const usePostInvoicesInvoiceWorkReportGenerate = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceWorkReportGenerate>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoicesInvoiceRemind>>,
+        Awaited<ReturnType<typeof postInvoicesInvoiceWorkReportGenerate>>,
         TError,
         {invoice: string},
         TContext
       > => {
-      return useMutation(getPostInvoicesInvoiceRemindMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Create a credit note (dobropis) or storno for an issued invoice
- */
-export const postInvoicesInvoiceCorrective = (
-    invoice: string,
-    postInvoicesInvoiceCorrectiveBody: BodyType<PostInvoicesInvoiceCorrectiveBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices/${invoice}/corrective`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postInvoicesInvoiceCorrectiveBody, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoicesInvoiceCorrectiveMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>}, TContext> => {
-
-const mutationKey = ['postInvoicesInvoiceCorrective'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>, {invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>}> = (props) => {
-          const {invoice,data} = props ?? {};
-
-          return  postInvoicesInvoiceCorrective(invoice,data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoicesInvoiceCorrectiveMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>>
-    export type PostInvoicesInvoiceCorrectiveMutationBody = BodyType<PostInvoicesInvoiceCorrectiveBody>
-    export type PostInvoicesInvoiceCorrectiveMutationError = ErrorType<void>
-
-    /**
- * @summary Create a credit note (dobropis) or storno for an issued invoice
- */
-export const usePostInvoicesInvoiceCorrective = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>, TError,{invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoicesInvoiceCorrective>>,
-        TError,
-        {invoice: string;data: BodyType<PostInvoicesInvoiceCorrectiveBody>},
-        TContext
-      > => {
-      return useMutation(getPostInvoicesInvoiceCorrectiveMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Settle a fully paid proforma into an ordinary tax invoice
- */
-export const postInvoicesInvoiceSettle = (
-    invoice: string,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<Invoice>(
-      {url: `/api/v1/invoices/${invoice}/settle`, method: 'POST', signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoicesInvoiceSettleMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>, TError,{invoice: string}, TContext> => {
-
-const mutationKey = ['postInvoicesInvoiceSettle'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>, {invoice: string}> = (props) => {
-          const {invoice} = props ?? {};
-
-          return  postInvoicesInvoiceSettle(invoice,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoicesInvoiceSettleMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>>
-
-    export type PostInvoicesInvoiceSettleMutationError = ErrorType<void>
-
-    /**
- * @summary Settle a fully paid proforma into an ordinary tax invoice
- */
-export const usePostInvoicesInvoiceSettle = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoicesInvoiceSettle>>,
-        TError,
-        {invoice: string},
-        TContext
-      > => {
-      return useMutation(getPostInvoicesInvoiceSettleMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Create (or return the existing) public link for the invoice; pass regenerate=true for a fresh token
- */
-export const postInvoicesInvoicePublicLink = (
-    invoice: string,
-    postInvoicesInvoicePublicLinkBody?: BodyType<PostInvoicesInvoicePublicLinkBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<PostInvoicesInvoicePublicLink200>(
-      {url: `/api/v1/invoices/${invoice}/public-link`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postInvoicesInvoicePublicLinkBody, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoicesInvoicePublicLinkMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>}, TContext> => {
-
-const mutationKey = ['postInvoicesInvoicePublicLink'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>, {invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>}> = (props) => {
-          const {invoice,data} = props ?? {};
-
-          return  postInvoicesInvoicePublicLink(invoice,data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoicesInvoicePublicLinkMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>>
-    export type PostInvoicesInvoicePublicLinkMutationBody = BodyType<PostInvoicesInvoicePublicLinkBody> | undefined
-    export type PostInvoicesInvoicePublicLinkMutationError = ErrorType<void>
-
-    /**
- * @summary Create (or return the existing) public link for the invoice; pass regenerate=true for a fresh token
- */
-export const usePostInvoicesInvoicePublicLink = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>, TError,{invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoicesInvoicePublicLink>>,
-        TError,
-        {invoice: string;data?: BodyType<PostInvoicesInvoicePublicLinkBody>},
-        TContext
-      > => {
-      return useMutation(getPostInvoicesInvoicePublicLinkMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Revoke the invoice public link
- */
-export const deleteInvoicesInvoicePublicLink = (
-    invoice: string,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<void>(
-      {url: `/api/v1/invoices/${invoice}/public-link`, method: 'DELETE', signal
-    },
-      options);
-    }
-
-
-
-
-export const getDeleteInvoicesInvoicePublicLinkMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>, TError,{invoice: string}, TContext> => {
-
-const mutationKey = ['deleteInvoicesInvoicePublicLink'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>, {invoice: string}> = (props) => {
-          const {invoice} = props ?? {};
-
-          return  deleteInvoicesInvoicePublicLink(invoice,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type DeleteInvoicesInvoicePublicLinkMutationResult = NonNullable<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>>
-
-    export type DeleteInvoicesInvoicePublicLinkMutationError = ErrorType<void>
-
-    /**
- * @summary Revoke the invoice public link
- */
-export const useDeleteInvoicesInvoicePublicLink = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>, TError,{invoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof deleteInvoicesInvoicePublicLink>>,
-        TError,
-        {invoice: string},
-        TContext
-      > => {
-      return useMutation(getDeleteInvoicesInvoicePublicLinkMutationOptions(options), queryClient);
+      return useMutation(getPostInvoicesInvoiceWorkReportGenerateMutationOptions(options), queryClient);
     }

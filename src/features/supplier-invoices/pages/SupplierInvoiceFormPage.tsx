@@ -34,6 +34,20 @@ import { Textarea } from '@/shared/ui/textarea'
 const CURRENCIES = Object.values(PostSupplierInvoicesBodyCurrency)
 const VAT_REGIMES = Object.values(PostSupplierInvoicesBodyVatRegime)
 
+/**
+ * The backend's OpenAPI annotation for POST/PUT /supplier-invoices omits the
+ * vendor_* bank-detail properties, even though SupplierInvoiceData accepts and
+ * validates them (see SupplierInvoiceData.php). Extend the generated body type
+ * locally until the backend annotation is fixed — do not hand-edit the
+ * generated client.
+ */
+type SupplierInvoiceVendorFields = {
+  vendor_account_number?: string | null
+  vendor_bank_code?: string | null
+  vendor_iban?: string | null
+  vendor_bic?: string | null
+}
+
 const ACCOUNT_NUMBER_RE = /^(\d{1,6}-)?\d{2,10}$/
 const BANK_CODE_RE = /^\d{4}$/
 const IBAN_RE = /^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/
@@ -126,16 +140,12 @@ export function SupplierInvoiceFormPage() {
           variable_symbol: z.string().regex(/^\d{0,10}$/, t('validation.variable_symbol')),
           note: z.string(),
           vat_regime: z.enum(VAT_REGIMES),
-          vendor_account_number: z
-            .string()
-            .refine((v) => !v || ACCOUNT_NUMBER_RE.test(v), {
-              message: t('validation.vendor_account_number'),
-            }),
-          vendor_bank_code: z
-            .string()
-            .refine((v) => !v || BANK_CODE_RE.test(v), {
-              message: t('validation.vendor_bank_code'),
-            }),
+          vendor_account_number: z.string().refine((v) => !v || ACCOUNT_NUMBER_RE.test(v), {
+            message: t('validation.vendor_account_number'),
+          }),
+          vendor_bank_code: z.string().refine((v) => !v || BANK_CODE_RE.test(v), {
+            message: t('validation.vendor_bank_code'),
+          }),
           vendor_iban: z
             .string()
             .refine((v) => !v || IBAN_RE.test(v), { message: t('validation.vendor_iban') }),
@@ -186,7 +196,9 @@ export function SupplierInvoiceFormPage() {
     }
   }, [existing.data, reset])
 
-  const toBody = (values: SupplierInvoiceFormValues): PostSupplierInvoicesBody => ({
+  const toBody = (
+    values: SupplierInvoiceFormValues,
+  ): PostSupplierInvoicesBody & SupplierInvoiceVendorFields => ({
     client_id: values.client_id,
     supplier_invoice_number: values.supplier_invoice_number,
     issued_at: values.issued_at,
@@ -211,10 +223,10 @@ export function SupplierInvoiceFormPage() {
 
   const createMutation = usePostSupplierInvoices({
     mutation: {
-      onSuccess: (invoice) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/supplier-invoices'] })
         toast.success(t('form.created'))
-        void navigate(`/supplier-invoices/${invoice.id}`)
+        if (response.data?.id) void navigate(`/supplier-invoices/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)
@@ -225,10 +237,10 @@ export function SupplierInvoiceFormPage() {
 
   const updateMutation = usePutSupplierInvoicesId({
     mutation: {
-      onSuccess: (invoice) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/supplier-invoices'] })
         toast.success(t('form.updated'))
-        void navigate(`/supplier-invoices/${invoice.id}`)
+        if (response.data?.id) void navigate(`/supplier-invoices/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)

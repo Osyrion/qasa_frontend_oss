@@ -99,7 +99,7 @@ describe('reports page', () => {
   it('does not request a download when no date range is set (dialog stays open, no request fires)', async () => {
     let requested = false
     server.use(
-      http.get('*/api/v1/invoices/export/pohoda', () => {
+      http.get('*/api/v1/invoices/export/csv', () => {
         requested = true
         return new HttpResponse(null, { status: 200 })
       }),
@@ -112,21 +112,24 @@ describe('reports page', () => {
     await user.click(screen.getByRole('button', { name: 'Invoices' }))
 
     await screen.findByRole('dialog')
-    await user.click(screen.getByRole('button', { name: 'Pohoda XML' }))
+    await user.click(screen.getByRole('button', { name: 'CSV' }))
 
     // No dates entered — the dialog stays open and the download never fires.
     expect(screen.getByRole('dialog')).toBeInTheDocument()
     expect(requested).toBe(false)
   })
 
-  it('downloads a Pohoda export once a date range is entered', async () => {
+  it('downloads a CSV export once a date range is entered', async () => {
     let requested = false
     server.use(
-      http.get('*/api/v1/invoices/export/pohoda', () => {
+      http.get('*/api/v1/invoices/export/csv', () => {
         requested = true
-        return HttpResponse.arrayBuffer(new TextEncoder().encode('<xml/>').buffer as ArrayBuffer, {
-          headers: { 'Content-Type': 'application/xml' },
-        })
+        return HttpResponse.arrayBuffer(
+          new TextEncoder().encode('a,b\n1,2').buffer as ArrayBuffer,
+          {
+            headers: { 'Content-Type': 'text/csv' },
+          },
+        )
       }),
     )
 
@@ -141,7 +144,7 @@ describe('reports page', () => {
     await user.type(dateInputs[0], '2026-01-01')
     await user.type(dateInputs[1], '2026-01-31')
 
-    await user.click(screen.getByRole('button', { name: 'Pohoda XML' }))
+    await user.click(screen.getByRole('button', { name: 'CSV' }))
 
     await waitFor(() => expect(requested).toBe(true))
   })

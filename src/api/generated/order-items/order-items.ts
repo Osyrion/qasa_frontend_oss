@@ -26,7 +26,9 @@ import type {
 
 import type {
   OrderItem,
+  PostOrdersOrderItems201,
   PostOrdersOrderItemsBody,
+  PutOrdersOrderItemsItem200,
   PutOrdersOrderItemsItemBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -155,7 +157,7 @@ export const postOrdersOrderItems = (
 ) => {
 
 
-      return apiMutator<OrderItem>(
+      return apiMutator<PostOrdersOrderItems201>(
       {url: `/api/v1/orders/${order}/items`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postOrdersOrderItemsBody, signal
@@ -221,7 +223,7 @@ export const putOrdersOrderItemsItem = (
 ) => {
 
 
-      return apiMutator<OrderItem>(
+      return apiMutator<PutOrdersOrderItemsItem200>(
       {url: `/api/v1/orders/${order}/items/${item}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putOrdersOrderItemsItemBody, signal

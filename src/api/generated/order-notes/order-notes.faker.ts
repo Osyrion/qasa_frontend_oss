@@ -10,11 +10,12 @@ import {
 } from '@faker-js/faker';
 
 import type {
-  OrderNote
+  OrderNote,
+  PostOrdersOrderNotes201
 } from '../qASAAPIDocumentation.schemas';
 
 
 export const getGetOrdersOrderNotesResponseMock = (): OrderNote[] => (Array.from({ length: faker.number.int({min: 1, max: 10}) }, (_, i) => i + 1).map(() => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), content: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), created_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), updated_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined])})))
 
-export const getPostOrdersOrderNotesResponseMock = (overrideResponse: Partial<Extract<OrderNote, object>> = {}): OrderNote => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), content: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), created_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), updated_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), ...overrideResponse})
+export const getPostOrdersOrderNotesResponseMock = (overrideResponse: Partial<Extract<PostOrdersOrderNotes201, object>> = {}): PostOrdersOrderNotes201 => ({data: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), content: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), created_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), updated_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined])}, undefined]), ...overrideResponse})
 

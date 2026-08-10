@@ -27,10 +27,6 @@ describe('exchange rates', () => {
   it('shows a delete button only for manual rates, not system rates', async () => {
     server.use(
       getGetExchangeRatesMockHandler({
-        current_page: 1,
-        last_page: 1,
-        per_page: 20,
-        total: 2,
         data: [
           {
             id: 'r-1',
@@ -62,10 +58,6 @@ describe('exchange rates', () => {
   it('creates a new manual exchange rate', async () => {
     server.use(
       getGetExchangeRatesMockHandler({
-        current_page: 1,
-        last_page: 1,
-        per_page: 20,
-        total: 0,
         data: [],
       }),
     )

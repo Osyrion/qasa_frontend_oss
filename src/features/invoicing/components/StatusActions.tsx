@@ -71,7 +71,7 @@ export function StatusActions({ invoice }: StatusActionsProps) {
       onSuccess: (created) => {
         invalidate()
         toast.success(t('actions.corrective_created'))
-        if (created.id) void navigate(`/invoices/${created.id}`)
+        if (created.data?.id) void navigate(`/invoices/${created.data.id}`)
       },
       onError: (error) => {
         toast.error(extractErrorMessage(error) ?? t('actions.corrective_failed'))
@@ -84,7 +84,7 @@ export function StatusActions({ invoice }: StatusActionsProps) {
       onSuccess: (created) => {
         invalidate()
         toast.success(t('actions.settled'))
-        if (created.id) void navigate(`/invoices/${created.id}`)
+        if (created.data?.id) void navigate(`/invoices/${created.data.id}`)
       },
       onError: (error) => {
         toast.error(extractErrorMessage(error) ?? t('actions.settle_failed'))

@@ -28,6 +28,7 @@ import type {
   DeleteProfileBody,
   GetAuthEmailVerifyIdHash200,
   GetAuthGoogleRedirect200,
+  GetAuthMe200,
   PostAuthEmailVerificationNotification200,
   PostAuthForgotPassword200,
   PostAuthForgotPasswordBody,
@@ -38,14 +39,15 @@ import type {
   PostAuthLogin422,
   PostAuthLoginBody,
   PostAuthLogout200,
+  PostAuthProfileLogo200,
   PostAuthProfileLogoBody,
   PostAuthRegister201,
   PostAuthRegister422,
   PostAuthRegisterBody,
   PostAuthResetPassword200,
   PostAuthResetPasswordBody,
-  PutAuthProfileBody,
-  User
+  PutAuthProfile200,
+  PutAuthProfileBody
 } from '../qASAAPIDocumentation.schemas';
 
 import { apiMutator } from '../../mutator';
@@ -270,7 +272,7 @@ export const getAuthMe = (
 ) => {
 
 
-      return apiMutator<User>(
+      return apiMutator<GetAuthMe200>(
       {url: `/api/v1/auth/me`, method: 'GET', signal
     },
       options);
@@ -362,7 +364,7 @@ export const putAuthProfile = (
 ) => {
 
 
-      return apiMutator<User>(
+      return apiMutator<PutAuthProfile200>(
       {url: `/api/v1/auth/profile`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putAuthProfileBody, signal
@@ -428,7 +430,7 @@ export const postAuthProfileLogo = (
       const formData = new FormData();
 formData.append(`logo`, postAuthProfileLogoBody.logo);
 
-      return apiMutator<User>(
+      return apiMutator<PostAuthProfileLogo200>(
       {url: `/api/v1/auth/profile/logo`, method: 'POST',
       headers: {'Content-Type': 'multipart/form-data', },
        data: formData, signal

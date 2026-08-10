@@ -65,10 +65,10 @@ export function PaymentsCard({ invoice }: PaymentsCardProps) {
 
         {payments.isPending ? (
           <Skeleton className="h-16 w-full" />
-        ) : !payments.data?.length ? (
+        ) : !payments.data?.data?.length ? (
           <p className="text-sm text-muted-foreground">{t('payments.empty')}</p>
         ) : (
-          payments.data.map((payment) => (
+          payments.data.data.map((payment) => (
             <div
               key={payment.id}
               className="flex items-center justify-between rounded-lg border p-3"

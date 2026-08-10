@@ -72,11 +72,13 @@ describe('recurring templates list', () => {
       getPostRecurringInvoiceTemplatesTemplatePauseMockHandler(() => {
         pauseRequested = true
         return {
-          id: 't-1',
-          name: 'Monthly retainer',
-          status: 'paused',
-          period: 'monthly',
-          next_run_date: '2026-08-01',
+          data: {
+            id: 't-1',
+            name: 'Monthly retainer',
+            status: 'paused',
+            period: 'monthly',
+            next_run_date: '2026-08-01',
+          },
         }
       }),
     )

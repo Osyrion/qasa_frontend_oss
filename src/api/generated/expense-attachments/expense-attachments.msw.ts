@@ -18,13 +18,13 @@ import type {
 } from 'msw';
 
 import type {
-  Expense
+  PostExpensesExpenseAttachment200
 } from '../qASAAPIDocumentation.schemas';
 
 
 export const getGetExpensesExpenseAttachmentResponseMock = (): ArrayBuffer => (new ArrayBuffer(faker.number.int({ min: 1, max: 64 })))
 
-export const getPostExpensesExpenseAttachmentResponseMock = (overrideResponse: Partial<Extract<Expense, object>> = {}): Expense => ({id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), category: faker.helpers.arrayElement([faker.helpers.arrayElement(['office','travel','software','hardware','marketing','education','services','other'] as const), undefined]), amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), currency: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), null]), undefined]), date: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), null]), undefined]), note: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), attachment: faker.helpers.arrayElement([faker.helpers.arrayElement([{filename: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), mime_type: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), size_bytes: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined])},null,]), undefined]), created_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), updated_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), ...overrideResponse})
+export const getPostExpensesExpenseAttachmentResponseMock = (overrideResponse: Partial<Extract<PostExpensesExpenseAttachment200, object>> = {}): PostExpensesExpenseAttachment200 => ({data: faker.helpers.arrayElement([{id: faker.helpers.arrayElement([faker.string.uuid(), undefined]), description: faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), undefined]), category: faker.helpers.arrayElement([faker.helpers.arrayElement(['office','travel','software','hardware','marketing','education','services','other'] as const), undefined]), amount: faker.helpers.arrayElement([faker.number.float({fractionDigits: 2}), undefined]), currency: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.helpers.arrayElement(['CZK','EUR','USD'] as const), null]), undefined]), date: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 10), null]), undefined]), note: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), attachment: faker.helpers.arrayElement([faker.helpers.arrayElement([{filename: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), mime_type: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.string.alpha({length: {min: 10, max: 20}}), null]), undefined]), size_bytes: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.number.int(), null]), undefined])},null,]), undefined]), created_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined]), updated_at: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.date.past().toISOString().slice(0, 19) + 'Z', null]), undefined])}, undefined]), ...overrideResponse})
 
 
 export const getGetExpensesExpenseAttachmentMockHandler = (overrideResponse?: ArrayBuffer | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ArrayBuffer> | ArrayBuffer), options?: RequestHandlerOptions) => {
@@ -43,7 +43,7 @@ export const getGetExpensesExpenseAttachmentMockHandler = (overrideResponse?: Ar
   }, options)
 }
 
-export const getPostExpensesExpenseAttachmentMockHandler = (overrideResponse?: Expense | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<Expense> | Expense), options?: RequestHandlerOptions) => {
+export const getPostExpensesExpenseAttachmentMockHandler = (overrideResponse?: PostExpensesExpenseAttachment200 | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<PostExpensesExpenseAttachment200> | PostExpensesExpenseAttachment200), options?: RequestHandlerOptions) => {
   return http.post('*/api/v1/expenses/:expense/attachment', async (info: Parameters<Parameters<typeof http.post>[1]>[0]) => {
 
 

@@ -25,7 +25,7 @@ const CURRENCIES = Object.values(PostInvoicesGenerateFromOrderBodyCurrency)
 interface FormValues {
   issued_at: string
   due_at: string
-  currency: PostInvoicesGenerateFromOrderBodyCurrency
+  currency: Exclude<PostInvoicesGenerateFromOrderBodyCurrency, null>
   note: string
 }
 
@@ -64,7 +64,10 @@ export function GenerateInvoiceDialog({ order, open, onOpenChange }: GenerateInv
     defaultValues: {
       issued_at: todayIso(),
       due_at: todayIso(),
-      currency: (order.currency ?? 'EUR') as PostInvoicesGenerateFromOrderBodyCurrency,
+      currency: (order.currency ?? 'EUR') as Exclude<
+        PostInvoicesGenerateFromOrderBodyCurrency,
+        null
+      >,
       note: '',
     },
   })
@@ -74,7 +77,10 @@ export function GenerateInvoiceDialog({ order, open, onOpenChange }: GenerateInv
       reset({
         issued_at: todayIso(),
         due_at: todayIso(),
-        currency: (order.currency ?? 'EUR') as PostInvoicesGenerateFromOrderBodyCurrency,
+        currency: (order.currency ?? 'EUR') as Exclude<
+          PostInvoicesGenerateFromOrderBodyCurrency,
+          null
+        >,
         note: '',
       })
     }
@@ -82,11 +88,11 @@ export function GenerateInvoiceDialog({ order, open, onOpenChange }: GenerateInv
 
   const generate = usePostInvoicesGenerateFromOrder({
     mutation: {
-      onSuccess: (invoice) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/invoices'] })
         toast.success(t('generate_invoice.created'))
         onOpenChange(false)
-        void navigate(`/invoices/${invoice.id}`)
+        if (response.data?.id) void navigate(`/invoices/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)
@@ -137,7 +143,10 @@ export function GenerateInvoiceDialog({ order, open, onOpenChange }: GenerateInv
               <Select
                 value={watch('currency')}
                 onValueChange={(value) =>
-                  setValue('currency', value as PostInvoicesGenerateFromOrderBodyCurrency)
+                  setValue(
+                    'currency',
+                    value as Exclude<PostInvoicesGenerateFromOrderBodyCurrency, null>,
+                  )
                 }
               >
                 <SelectTrigger id="gen-currency">

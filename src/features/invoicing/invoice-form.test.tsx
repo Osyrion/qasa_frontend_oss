@@ -34,9 +34,11 @@ describe('invoice form', () => {
   it('creates a draft invoice (no items yet) and navigates to its detail page', async () => {
     server.use(
       getPostInvoicesMockHandler({
-        id: 'new-invoice-id',
-        status: 'draft',
-        client: { id: 'c1', display_name: 'Acme s.r.o.' },
+        data: {
+          id: 'new-invoice-id',
+          status: 'draft',
+          client: { id: 'c1', display_name: 'Acme s.r.o.' },
+        },
       }),
     )
 

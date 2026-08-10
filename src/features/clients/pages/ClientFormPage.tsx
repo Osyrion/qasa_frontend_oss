@@ -212,10 +212,10 @@ export function ClientFormPage() {
 
   const createMutation = usePostClients({
     mutation: {
-      onSuccess: (client) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/clients'] })
         toast.success(t('form.created'))
-        void navigate(`/clients/${client.id}`)
+        if (response.data?.id) void navigate(`/clients/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)
@@ -226,10 +226,10 @@ export function ClientFormPage() {
 
   const updateMutation = usePutClientsId({
     mutation: {
-      onSuccess: (client) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/clients'] })
         toast.success(t('form.updated'))
-        void navigate(`/clients/${client.id}`)
+        if (response.data?.id) void navigate(`/clients/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)

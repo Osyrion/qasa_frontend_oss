@@ -26,7 +26,9 @@ import type {
 
 import type {
   ContactPerson,
+  PostClientsClientIdContactPersons201,
   PostClientsClientIdContactPersonsBody,
+  PutClientsClientIdContactPersonsId200,
   PutClientsClientIdContactPersonsIdBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -155,7 +157,7 @@ export const postClientsClientIdContactPersons = (
 ) => {
 
 
-      return apiMutator<ContactPerson>(
+      return apiMutator<PostClientsClientIdContactPersons201>(
       {url: `/api/v1/clients/${clientId}/contact-persons`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postClientsClientIdContactPersonsBody, signal
@@ -221,7 +223,7 @@ export const putClientsClientIdContactPersonsId = (
 ) => {
 
 
-      return apiMutator<ContactPerson>(
+      return apiMutator<PutClientsClientIdContactPersonsId200>(
       {url: `/api/v1/clients/${clientId}/contact-persons/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putClientsClientIdContactPersonsIdBody, signal

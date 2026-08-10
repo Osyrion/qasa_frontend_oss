@@ -28,7 +28,9 @@ import type {
   GetOrders200,
   GetOrdersParams,
   Order,
+  PostOrders201,
   PostOrdersBody,
+  PutOrdersId200,
   PutOrdersIdBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -157,7 +159,7 @@ export const postOrders = (
 ) => {
 
 
-      return apiMutator<Order>(
+      return apiMutator<PostOrders201>(
       {url: `/api/v1/orders`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postOrdersBody, signal
@@ -314,7 +316,7 @@ export const putOrdersId = (
 ) => {
 
 
-      return apiMutator<Order>(
+      return apiMutator<PutOrdersId200>(
       {url: `/api/v1/orders/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putOrdersIdBody, signal

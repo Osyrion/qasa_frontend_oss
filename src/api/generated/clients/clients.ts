@@ -30,7 +30,11 @@ import type {
   GetClientsLookupParams,
   GetClientsParams,
   GetClientsVerifyVatParams,
+  PostClients201,
   PostClientsBody,
+  PostClientsIdArchive200,
+  PostClientsIdRestore200,
+  PutClientsId200,
   PutClientsIdBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -159,7 +163,7 @@ export const postClients = (
 ) => {
 
 
-      return apiMutator<Client>(
+      return apiMutator<PostClients201>(
       {url: `/api/v1/clients`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postClientsBody, signal
@@ -316,7 +320,7 @@ export const putClientsId = (
 ) => {
 
 
-      return apiMutator<Client>(
+      return apiMutator<PutClientsId200>(
       {url: `/api/v1/clients/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putClientsIdBody, signal
@@ -432,6 +436,132 @@ export const useDeleteClientsId = <TError = ErrorType<void>,
         TContext
       > => {
       return useMutation(getDeleteClientsIdMutationOptions(options), queryClient);
+    }
+    /**
+ * The client stays visible (filterable) and its existing documents are untouched, but it no longer counts toward plan limits and cannot be used on new invoices/quotes/orders until restored.
+ * @summary Archive a client
+ */
+export const postClientsIdArchive = (
+    id: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostClientsIdArchive200>(
+      {url: `/api/v1/clients/${id}/archive`, method: 'POST', signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostClientsIdArchiveMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postClientsIdArchive>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postClientsIdArchive>>, TError,{id: string}, TContext> => {
+
+const mutationKey = ['postClientsIdArchive'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postClientsIdArchive>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
+
+          return  postClientsIdArchive(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostClientsIdArchiveMutationResult = NonNullable<Awaited<ReturnType<typeof postClientsIdArchive>>>
+
+    export type PostClientsIdArchiveMutationError = ErrorType<void>
+
+    /**
+ * @summary Archive a client
+ */
+export const usePostClientsIdArchive = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postClientsIdArchive>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postClientsIdArchive>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+      return useMutation(getPostClientsIdArchiveMutationOptions(options), queryClient);
+    }
+    /**
+ * Rejected with 422 if restoring would push the account over its plan's client/customer/vendor limit.
+ * @summary Restore an archived client
+ */
+export const postClientsIdRestore = (
+    id: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostClientsIdRestore200>(
+      {url: `/api/v1/clients/${id}/restore`, method: 'POST', signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostClientsIdRestoreMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postClientsIdRestore>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postClientsIdRestore>>, TError,{id: string}, TContext> => {
+
+const mutationKey = ['postClientsIdRestore'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postClientsIdRestore>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
+
+          return  postClientsIdRestore(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostClientsIdRestoreMutationResult = NonNullable<Awaited<ReturnType<typeof postClientsIdRestore>>>
+
+    export type PostClientsIdRestoreMutationError = ErrorType<void>
+
+    /**
+ * @summary Restore an archived client
+ */
+export const usePostClientsIdRestore = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postClientsIdRestore>>, TError,{id: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postClientsIdRestore>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+      return useMutation(getPostClientsIdRestoreMutationOptions(options), queryClient);
     }
     /**
  * @summary Fetch company data from a public register (ARES/RPO) by IČO

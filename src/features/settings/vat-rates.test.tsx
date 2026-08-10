@@ -29,11 +29,13 @@ describe('VAT rates settings', () => {
     server.use(
       getGetVatRatesMockHandler([]),
       getPostVatRatesMockHandler({
-        id: 'vr1',
-        code: 'standard',
-        country: 'SK',
-        rate: 20,
-        is_default: true,
+        data: {
+          id: 'vr1',
+          code: 'standard',
+          country: 'SK',
+          rate: 20,
+          is_default: true,
+        },
       }),
     )
 

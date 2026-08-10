@@ -33,10 +33,12 @@ describe('recurring template form', () => {
   it('creates a monthly template with one item and navigates to edit', async () => {
     server.use(
       getPostRecurringInvoiceTemplatesMockHandler({
-        id: 'new-template-id',
-        name: 'Monthly retainer',
-        status: 'active',
-        period: 'monthly',
+        data: {
+          id: 'new-template-id',
+          name: 'Monthly retainer',
+          status: 'active',
+          period: 'monthly',
+        },
       }),
     )
 

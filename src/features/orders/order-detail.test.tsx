@@ -65,12 +65,14 @@ describe('order detail', () => {
     server.use(getGetOrdersIdMockHandler(baseOrder()))
     server.use(
       getPostOrdersOrderItemsMockHandler({
-        id: 'item-1',
-        type: 'service',
-        description: 'Consulting',
-        quantity: 1,
-        unit_price: 100,
-        total_incl_vat: 120,
+        data: {
+          id: 'item-1',
+          type: 'service',
+          description: 'Consulting',
+          quantity: 1,
+          unit_price: 100,
+          total_incl_vat: 120,
+        },
       }),
     )
 

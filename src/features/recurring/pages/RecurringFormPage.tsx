@@ -203,10 +203,10 @@ export function RecurringFormPage() {
 
   const createMutation = usePostRecurringInvoiceTemplates({
     mutation: {
-      onSuccess: (template) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/recurring-invoice-templates'] })
         toast.success(t('form.created'))
-        void navigate(`/recurring/${template.id}/edit`)
+        if (response.data?.id) void navigate(`/recurring/${response.data.id}/edit`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)

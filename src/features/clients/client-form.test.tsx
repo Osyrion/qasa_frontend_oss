@@ -25,9 +25,11 @@ describe('client form', () => {
   it('creates an individual client and navigates to its detail page', async () => {
     server.use(
       getPostClientsMockHandler({
-        id: 'new-client-id',
-        display_name: 'Jane Smith',
-        client_type: 'individual',
+        data: {
+          id: 'new-client-id',
+          display_name: 'Jane Smith',
+          client_type: 'individual',
+        },
       }),
     )
 

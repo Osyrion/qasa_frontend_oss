@@ -27,7 +27,7 @@ const testUser: User = {
 
 beforeEach(() => {
   useAuthStore.getState().setSession('tok-1', testUser)
-  server.use(getGetAuthMeMockHandler(testUser))
+  server.use(getGetAuthMeMockHandler({ data: testUser }))
 })
 
 describe('profile settings', () => {
@@ -35,7 +35,7 @@ describe('profile settings', () => {
     server.use(
       getPutAuthProfileMockHandler(async (info) => {
         const body = (await info.request.json()) as Partial<User>
-        return { ...testUser, ...body }
+        return { data: { ...testUser, ...body } }
       }),
     )
 

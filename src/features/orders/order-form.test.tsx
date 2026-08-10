@@ -32,10 +32,12 @@ describe('order form', () => {
   it('creates a personal order without a client', async () => {
     server.use(
       getPostOrdersMockHandler({
-        id: 'new-order-id',
-        name: 'Personal project',
-        status: 'active',
-        billing_type: 'hourly',
+        data: {
+          id: 'new-order-id',
+          name: 'Personal project',
+          status: 'active',
+          billing_type: 'hourly',
+        },
       }),
     )
 

@@ -25,7 +25,9 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  PostVatRates201,
   PostVatRatesBody,
+  PutVatRatesId200,
   PutVatRatesIdBody,
   VatRate
 } from '../qASAAPIDocumentation.schemas';
@@ -154,7 +156,7 @@ export const postVatRates = (
 ) => {
 
 
-      return apiMutator<VatRate>(
+      return apiMutator<PostVatRates201>(
       {url: `/api/v1/vat-rates`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postVatRatesBody, signal
@@ -311,7 +313,7 @@ export const putVatRatesId = (
 ) => {
 
 
-      return apiMutator<VatRate>(
+      return apiMutator<PutVatRatesId200>(
       {url: `/api/v1/vat-rates/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putVatRatesIdBody, signal

@@ -45,7 +45,7 @@ beforeEach(() => {
   useAuthStore.getState().setSession('tok-1', testUser)
   server.use(
     getGetVatRatesMockHandler([{ id: 'vat1', rate: 20, is_default: true, code: 'SK-20' }]),
-    getGetInvoicesInvoicePaymentsMockHandler([]),
+    getGetInvoicesInvoicePaymentsMockHandler({ data: [] }),
     getGetInvoicesIdMockHandler(baseInvoice()),
   )
 })

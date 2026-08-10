@@ -133,10 +133,10 @@ export function QuoteFormPage() {
 
   const createMutation = usePostQuotes({
     mutation: {
-      onSuccess: (quote) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/quotes'] })
         toast.success(t('form.created'))
-        void navigate(`/quotes/${quote.id}`)
+        if (response.data?.id) void navigate(`/quotes/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)
@@ -147,10 +147,10 @@ export function QuoteFormPage() {
 
   const updateMutation = usePutQuotesId({
     mutation: {
-      onSuccess: (quote) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/quotes'] })
         toast.success(t('form.updated'))
-        void navigate(`/quotes/${quote.id}`)
+        if (response.data?.id) void navigate(`/quotes/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)

@@ -26,7 +26,9 @@ import type {
 
 import type {
   BankAccount,
+  PostBankAccounts201,
   PostBankAccountsBody,
+  PutBankAccountsId200,
   PutBankAccountsIdBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -154,7 +156,7 @@ export const postBankAccounts = (
 ) => {
 
 
-      return apiMutator<BankAccount>(
+      return apiMutator<PostBankAccounts201>(
       {url: `/api/v1/bank-accounts`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postBankAccountsBody, signal
@@ -311,7 +313,7 @@ export const putBankAccountsId = (
 ) => {
 
 
-      return apiMutator<BankAccount>(
+      return apiMutator<PutBankAccountsId200>(
       {url: `/api/v1/bank-accounts/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putBankAccountsIdBody, signal

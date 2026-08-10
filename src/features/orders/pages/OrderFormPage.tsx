@@ -153,10 +153,10 @@ export function OrderFormPage() {
 
   const createMutation = usePostOrders({
     mutation: {
-      onSuccess: (order) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/orders'] })
         toast.success(t('form.created'))
-        void navigate(`/orders/${order.id}`)
+        if (response.data?.id) void navigate(`/orders/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)
@@ -167,10 +167,10 @@ export function OrderFormPage() {
 
   const updateMutation = usePutOrdersId({
     mutation: {
-      onSuccess: (order) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/orders'] })
         toast.success(t('form.updated'))
-        void navigate(`/orders/${order.id}`)
+        if (response.data?.id) void navigate(`/orders/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)

@@ -25,10 +25,12 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  Expense,
   GetExpenses200,
+  GetExpensesExpense200,
   GetExpensesParams,
+  PostExpenses201,
   PostExpensesBody,
+  PutExpensesExpense200,
   PutExpensesExpenseBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -149,7 +151,7 @@ export function useGetExpenses<TData = Awaited<ReturnType<typeof getExpenses>>, 
 
 
 /**
- * @summary Create expense
+ * @summary Create an expense
  */
 export const postExpenses = (
     postExpensesBody: BodyType<PostExpensesBody>,
@@ -157,7 +159,7 @@ export const postExpenses = (
 ) => {
 
 
-      return apiMutator<Expense>(
+      return apiMutator<PostExpenses201>(
       {url: `/api/v1/expenses`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postExpensesBody, signal
@@ -200,7 +202,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type PostExpensesMutationError = ErrorType<void>
 
     /**
- * @summary Create expense
+ * @summary Create an expense
  */
 export const usePostExpenses = <TError = ErrorType<void>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postExpenses>>, TError,{data: BodyType<PostExpensesBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
@@ -213,7 +215,7 @@ export const usePostExpenses = <TError = ErrorType<void>,
       return useMutation(getPostExpensesMutationOptions(options), queryClient);
     }
     /**
- * @summary Get expense details
+ * @summary Show an expense
  */
 export const getExpensesExpense = (
     expense: string,
@@ -221,7 +223,7 @@ export const getExpensesExpense = (
 ) => {
 
 
-      return apiMutator<Expense>(
+      return apiMutator<GetExpensesExpense200>(
       {url: `/api/v1/expenses/${expense}`, method: 'GET', signal
     },
       options);
@@ -284,7 +286,7 @@ export function useGetExpensesExpense<TData = Awaited<ReturnType<typeof getExpen
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
- * @summary Get expense details
+ * @summary Show an expense
  */
 
 export function useGetExpensesExpense<TData = Awaited<ReturnType<typeof getExpensesExpense>>, TError = ErrorType<void>>(
@@ -305,7 +307,7 @@ export function useGetExpensesExpense<TData = Awaited<ReturnType<typeof getExpen
 
 
 /**
- * @summary Update expense
+ * @summary Update an expense
  */
 export const putExpensesExpense = (
     expense: string,
@@ -314,7 +316,7 @@ export const putExpensesExpense = (
 ) => {
 
 
-      return apiMutator<Expense>(
+      return apiMutator<PutExpensesExpense200>(
       {url: `/api/v1/expenses/${expense}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putExpensesExpenseBody, signal
@@ -357,7 +359,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type PutExpensesExpenseMutationError = ErrorType<void>
 
     /**
- * @summary Update expense
+ * @summary Update an expense
  */
 export const usePutExpensesExpense = <TError = ErrorType<void>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putExpensesExpense>>, TError,{expense: string;data: BodyType<PutExpensesExpenseBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
@@ -370,7 +372,7 @@ export const usePutExpensesExpense = <TError = ErrorType<void>,
       return useMutation(getPutExpensesExpenseMutationOptions(options), queryClient);
     }
     /**
- * @summary Delete expense
+ * @summary Delete an expense
  */
 export const deleteExpensesExpense = (
     expense: string,
@@ -419,7 +421,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type DeleteExpensesExpenseMutationError = ErrorType<void>
 
     /**
- * @summary Delete expense
+ * @summary Delete an expense
  */
 export const useDeleteExpensesExpense = <TError = ErrorType<void>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteExpensesExpense>>, TError,{expense: string}, TContext>, request?: SecondParameter<typeof apiMutator>}

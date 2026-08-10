@@ -9,7 +9,10 @@ import {
   useGetInvoiceInboxInboxItemDownload,
   usePostInvoiceInboxInboxItemConvert,
 } from '@/api/generated/invoice-inbox/invoice-inbox'
-import type { InvoiceInboxItem } from '@/api/generated/qASAAPIDocumentation.schemas'
+import type {
+  InvoiceInboxItem,
+  PostInvoiceInboxInboxItemConvertBody,
+} from '@/api/generated/qASAAPIDocumentation.schemas'
 import { VatLinesEditor } from '@/features/supplier-invoices/components/VatLinesEditor'
 import { VendorSelect } from '@/features/supplier-invoices/components/VendorSelect'
 import type { SupplierInvoiceFormValues } from '@/features/supplier-invoices/lib/form-values'
@@ -24,6 +27,22 @@ import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle } from '@/sha
 import { Spinner } from '@/shared/ui/spinner'
 
 const CURRENCIES = ['CZK', 'EUR', 'USD'] as const
+
+/**
+ * The backend's OpenAPI annotation for POST /invoice-inbox/{id}/convert omits
+ * vat_regime and the vendor_* bank-detail properties, even though the
+ * endpoint validates and forwards them via SupplierInvoiceData (see
+ * SupplierInvoiceData.php / InvoiceInboxController::convert). Extend the
+ * generated body type locally until the backend annotation is fixed — do not
+ * hand-edit the generated client.
+ */
+type InboxConvertBody = PostInvoiceInboxInboxItemConvertBody & {
+  vat_regime?: 'domestic' | 'eu_reverse_charge' | 'import'
+  vendor_account_number?: string | null
+  vendor_bank_code?: string | null
+  vendor_iban?: string | null
+  vendor_bic?: string | null
+}
 
 function todayIso(): string {
   return new Date().toISOString().slice(0, 10)
@@ -70,8 +89,9 @@ export function ConvertInboxItemSheet({ item, onOpenChange }: ConvertInboxItemSh
   const { t: tSupplierInvoices } = useTranslation('supplierInvoices')
   const [objectUrl, setObjectUrl] = useState<string | null>(null)
 
-  const preview = useGetInvoiceInboxInboxItemDownload(item?.id ?? '', {
+  const preview = useGetInvoiceInboxInboxItemDownload<Blob>(item?.id ?? '', {
     query: { enabled: Boolean(item?.id) },
+    request: { responseType: 'blob' },
   })
 
   useEffect(() => {
@@ -140,33 +160,31 @@ export function ConvertInboxItemSheet({ item, onOpenChange }: ConvertInboxItemSh
 
   const onSubmit: SubmitHandler<SupplierInvoiceFormValues> = (values) => {
     if (!item?.id) return
-    convert.mutate({
-      inboxItem: item.id,
-      data: {
-        client_id: values.client_id,
-        supplier_invoice_number: values.supplier_invoice_number,
-        issued_at: values.issued_at,
-        currency: values.currency,
-        taxable_supply_at: values.taxable_supply_at || null,
-        due_at: values.due_at || null,
-        received_at: values.received_at || null,
-        exchange_rate: values.exchange_rate
-          ? Number(normalizeMoneyInput(values.exchange_rate))
-          : null,
-        variable_symbol: values.variable_symbol || null,
-        note: values.note || null,
-        vat_regime: values.vat_regime,
-        vendor_account_number: values.vendor_account_number || null,
-        vendor_bank_code: values.vendor_bank_code || null,
-        vendor_iban: values.vendor_iban || null,
-        vendor_bic: values.vendor_bic || null,
-        vat_lines: values.vat_lines.map((line) => ({
-          vat_rate: Number(line.vat_rate),
-          base: Number(normalizeMoneyInput(line.base)),
-          vat_amount: Number(normalizeMoneyInput(line.vat_amount)),
-        })),
-      },
-    })
+    const data: InboxConvertBody = {
+      client_id: values.client_id,
+      supplier_invoice_number: values.supplier_invoice_number,
+      issued_at: values.issued_at,
+      currency: values.currency,
+      taxable_supply_at: values.taxable_supply_at || null,
+      due_at: values.due_at || null,
+      received_at: values.received_at || null,
+      exchange_rate: values.exchange_rate
+        ? Number(normalizeMoneyInput(values.exchange_rate))
+        : null,
+      variable_symbol: values.variable_symbol || null,
+      note: values.note || null,
+      vat_regime: values.vat_regime,
+      vendor_account_number: values.vendor_account_number || null,
+      vendor_bank_code: values.vendor_bank_code || null,
+      vendor_iban: values.vendor_iban || null,
+      vendor_bic: values.vendor_bic || null,
+      vat_lines: values.vat_lines.map((line) => ({
+        vat_rate: Number(line.vat_rate),
+        base: Number(normalizeMoneyInput(line.base)),
+        vat_amount: Number(normalizeMoneyInput(line.vat_amount)),
+      })),
+    }
+    convert.mutate({ inboxItem: item.id, data })
   }
 
   return (

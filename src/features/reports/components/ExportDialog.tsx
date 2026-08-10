@@ -2,12 +2,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
-import {
-  getInvoicesExportCsv,
-  getInvoicesExportOmega,
-  getInvoicesExportPohoda,
-  getSupplierInvoicesExportOmega,
-} from '@/api/generated/invoice-export/invoice-export'
+import { getInvoicesExportCsv } from '@/api/generated/invoice-export/invoice-export'
 import type { GetInvoicesExportCsvTypesItem } from '@/api/generated/qASAAPIDocumentation.schemas'
 
 type PeriodBasis = 'issue' | 'tax'
@@ -24,10 +19,9 @@ const DOCUMENT_TYPES: GetInvoicesExportCsvTypesItem[] = ['invoice', 'credit_note
 interface ExportDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  kind: 'invoices' | 'supplier-invoices'
 }
 
-export function ExportDialog({ open, onOpenChange, kind }: ExportDialogProps) {
+export function ExportDialog({ open, onOpenChange }: ExportDialogProps) {
   const { t } = useTranslation('reports')
   const [dateFrom, setDateFrom] = useState('')
   const [dateTo, setDateTo] = useState('')
@@ -61,7 +55,6 @@ export function ExportDialog({ open, onOpenChange, kind }: ExportDialogProps) {
     period_basis: periodBasis,
     'types[]': types,
   }
-  const supplierParams = { date_from: dateFrom, date_to: dateTo, period_basis: periodBasis }
   const filename = (prefix: string, extension: string) =>
     `${prefix}_${dateFrom}_${dateTo}.${extension}`
 
@@ -69,9 +62,7 @@ export function ExportDialog({ open, onOpenChange, kind }: ExportDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            {kind === 'invoices' ? t('export.title_invoices') : t('export.title_supplier_invoices')}
-          </DialogTitle>
+          <DialogTitle>{t('export.title_invoices')}</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-2 gap-3">
@@ -111,88 +102,39 @@ export function ExportDialog({ open, onOpenChange, kind }: ExportDialogProps) {
             </Select>
           </Field>
 
-          {kind === 'invoices' && (
-            <Field>
-              <FieldLabel>{t('export.document_types')}</FieldLabel>
-              <div className="flex flex-col gap-2">
-                {DOCUMENT_TYPES.map((type) => (
-                  <div key={type} className="flex items-center gap-2">
-                    <Checkbox
-                      id={`export-type-${type}`}
-                      checked={types.includes(type)}
-                      onCheckedChange={() => toggleType(type)}
-                    />
-                    <label htmlFor={`export-type-${type}`} className="text-sm">
-                      {t(`export.type_${type}`)}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </Field>
-          )}
+          <Field>
+            <FieldLabel>{t('export.document_types')}</FieldLabel>
+            <div className="flex flex-col gap-2">
+              {DOCUMENT_TYPES.map((type) => (
+                <div key={type} className="flex items-center gap-2">
+                  <Checkbox
+                    id={`export-type-${type}`}
+                    checked={types.includes(type)}
+                    onCheckedChange={() => toggleType(type)}
+                  />
+                  <label htmlFor={`export-type-${type}`} className="text-sm">
+                    {t(`export.type_${type}`)}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </Field>
 
           <div className="flex flex-col gap-2 border-t pt-4">
-            {kind === 'invoices' ? (
-              <>
-                <Button
-                  type="button"
-                  variant="outline"
-                  disabled={downloading !== null}
-                  onClick={() =>
-                    void download(
-                      'pohoda',
-                      () => getInvoicesExportPohoda(invoiceParams, { responseType: 'blob' }),
-                      filename('pohoda', 'xml'),
-                    )
-                  }
-                >
-                  {downloading === 'pohoda' ? t('export.downloading') : t('export.download_pohoda')}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  disabled={downloading !== null}
-                  onClick={() =>
-                    void download(
-                      'csv',
-                      () => getInvoicesExportCsv(invoiceParams, { responseType: 'blob' }),
-                      filename('faktury', 'csv'),
-                    )
-                  }
-                >
-                  {downloading === 'csv' ? t('export.downloading') : t('export.download_csv')}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  disabled={downloading !== null}
-                  onClick={() =>
-                    void download(
-                      'omega',
-                      () => getInvoicesExportOmega(invoiceParams, { responseType: 'blob' }),
-                      filename('omega_vydane', 'txt'),
-                    )
-                  }
-                >
-                  {downloading === 'omega' ? t('export.downloading') : t('export.download_omega')}
-                </Button>
-              </>
-            ) : (
-              <Button
-                type="button"
-                variant="outline"
-                disabled={downloading !== null}
-                onClick={() =>
-                  void download(
-                    'omega',
-                    () => getSupplierInvoicesExportOmega(supplierParams, { responseType: 'blob' }),
-                    filename('omega_prijate', 'txt'),
-                  )
-                }
-              >
-                {downloading === 'omega' ? t('export.downloading') : t('export.download_omega')}
-              </Button>
-            )}
+            <Button
+              type="button"
+              variant="outline"
+              disabled={downloading !== null}
+              onClick={() =>
+                void download(
+                  'csv',
+                  () => getInvoicesExportCsv(invoiceParams, { responseType: 'blob' }),
+                  filename('faktury', 'csv'),
+                )
+              }
+            >
+              {downloading === 'csv' ? t('export.downloading') : t('export.download_csv')}
+            </Button>
           </div>
         </div>
         <DialogFooter>

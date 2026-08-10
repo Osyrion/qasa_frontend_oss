@@ -306,7 +306,7 @@ function ControlStatementSections({
 
 function ExportsTab() {
   const { t } = useTranslation('reports')
-  const [openKind, setOpenKind] = useState<'invoices' | 'supplier-invoices' | null>(null)
+  const [open, setOpen] = useState(false)
 
   return (
     <Card>
@@ -314,21 +314,12 @@ function ExportsTab() {
         <CardTitle>{t('tabs.exports')}</CardTitle>
       </CardHeader>
       <CardContent className="flex gap-3">
-        <Button type="button" variant="outline" onClick={() => setOpenKind('invoices')}>
+        <Button type="button" variant="outline" onClick={() => setOpen(true)}>
           {t('export.invoices')}
-        </Button>
-        <Button type="button" variant="outline" onClick={() => setOpenKind('supplier-invoices')}>
-          {t('export.supplier_invoices')}
         </Button>
       </CardContent>
 
-      {openKind && (
-        <ExportDialog
-          open={Boolean(openKind)}
-          onOpenChange={() => setOpenKind(null)}
-          kind={openKind}
-        />
-      )}
+      {open && <ExportDialog open={open} onOpenChange={() => setOpen(false)} />}
     </Card>
   )
 }

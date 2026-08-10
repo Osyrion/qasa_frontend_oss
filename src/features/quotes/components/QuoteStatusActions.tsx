@@ -51,7 +51,7 @@ export function QuoteStatusActions({ quote }: QuoteStatusActionsProps) {
       onSuccess: (invoice) => {
         invalidate()
         toast.success(t('actions.converted'))
-        if (invoice.id) void navigate(`/invoices/${invoice.id}`)
+        if (invoice.data?.id) void navigate(`/invoices/${invoice.data.id}`)
       },
       onError: (error) => {
         toast.error(extractErrorMessage(error) ?? t('actions.convert_failed'))
@@ -64,7 +64,7 @@ export function QuoteStatusActions({ quote }: QuoteStatusActionsProps) {
       onSuccess: (order) => {
         invalidate()
         toast.success(t('actions.converted'))
-        if (order.id) void navigate(`/orders/${order.id}`)
+        if (order.data?.id) void navigate(`/orders/${order.data.id}`)
       },
       onError: (error) => {
         toast.error(extractErrorMessage(error) ?? t('actions.convert_failed'))

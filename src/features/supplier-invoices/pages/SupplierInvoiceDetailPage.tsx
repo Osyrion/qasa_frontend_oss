@@ -12,7 +12,6 @@ import {
 import type { SupplierInvoiceVatLine } from '@/api/generated/qASAAPIDocumentation.schemas'
 import { PaymentQrCard } from '@/features/supplier-invoices/components/PaymentQrCard'
 import { SupplierInvoiceStatusActions } from '@/features/supplier-invoices/components/SupplierInvoiceStatusActions'
-import { VerifyAccountCard } from '@/features/supplier-invoices/components/VerifyAccountCard'
 import { isSupplierInvoiceEditable } from '@/shared/lib/transitions'
 import { DateText } from '@/shared/components/DateText'
 import { MoneyText } from '@/shared/components/MoneyText'
@@ -164,8 +163,6 @@ export function SupplierInvoiceDetailPage() {
           <VatLinesEditorReadOnly currency={currency} lines={data.vat_lines ?? []} />
         </CardContent>
       </Card>
-
-      <VerifyAccountCard supplierInvoice={data} />
 
       {(data.vendor_iban || (data.vendor_account_number && data.vendor_bank_code)) && (
         <PaymentQrCard supplierInvoiceId={id} />

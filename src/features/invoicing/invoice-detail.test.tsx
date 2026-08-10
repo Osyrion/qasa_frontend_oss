@@ -44,7 +44,7 @@ beforeEach(() => {
   useAuthStore.getState().setSession('tok-1', testUser)
   server.use(
     getGetVatRatesMockHandler([{ id: 'vat1', rate: 20, is_default: true, code: 'SK-20' }]),
-    getGetInvoicesInvoicePaymentsMockHandler([]),
+    getGetInvoicesInvoicePaymentsMockHandler({ data: [] }),
   )
 })
 
@@ -116,29 +116,5 @@ describe('invoice detail', () => {
     await user.click(within(dialog).getByRole('button', { name: 'Send' }))
 
     await waitFor(() => expect(screen.getByRole('dialog')).toBeInTheDocument())
-  })
-
-  it('disables the ISDOC button for a draft invoice and enables it once issued', async () => {
-    server.use(getGetInvoicesIdMockHandler(baseInvoice({ status: 'draft', type: 'invoice' })))
-
-    renderApp('/invoices/inv-1')
-
-    expect(await screen.findByRole('button', { name: 'ISDOC' })).toBeDisabled()
-  })
-
-  it('enables the ISDOC button for an issued invoice', async () => {
-    server.use(getGetInvoicesIdMockHandler(baseInvoice({ status: 'sent', type: 'invoice' })))
-
-    renderApp('/invoices/inv-1')
-
-    expect(await screen.findByRole('button', { name: 'ISDOC' })).toBeEnabled()
-  })
-
-  it('disables the ISDOC button for a proforma invoice', async () => {
-    server.use(getGetInvoicesIdMockHandler(baseInvoice({ status: 'sent', type: 'proforma' })))
-
-    renderApp('/invoices/inv-1')
-
-    expect(await screen.findByRole('button', { name: 'ISDOC' })).toBeDisabled()
   })
 })

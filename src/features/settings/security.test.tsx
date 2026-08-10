@@ -32,7 +32,7 @@ describe('security settings — two-factor authentication', () => {
     const user1 = baseUser()
     useAuthStore.getState().setSession('tok-1', user1)
     server.use(
-      getGetAuthMeMockHandler(user1),
+      getGetAuthMeMockHandler({ data: user1 }),
       getPostAuth2faEnableMockHandler({
         secret: 'ABCD1234',
         otpauth_uri: 'otpauth://totp/Qasa:jan@qasa.local',
@@ -57,7 +57,7 @@ describe('security settings — two-factor authentication', () => {
   it('disables 2FA with password and code', async () => {
     const user1 = baseUser({ two_factor_enabled: true })
     useAuthStore.getState().setSession('tok-1', user1)
-    server.use(getGetAuthMeMockHandler(user1), getDeleteAuth2faMockHandler())
+    server.use(getGetAuthMeMockHandler({ data: user1 }), getDeleteAuth2faMockHandler())
 
     renderApp('/settings/security')
     const user = userEvent.setup()

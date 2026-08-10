@@ -15,16 +15,6 @@ import type {
 
 
 
-export const getGetInvoicesExportPohodaMockHandler = (overrideResponse?: unknown | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<unknown> | unknown), options?: RequestHandlerOptions) => {
-  return http.get('*/api/v1/invoices/export/pohoda', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
-
-    return new HttpResponse(null,
-      { status: 200
-      })
-  }, options)
-}
-
 export const getGetInvoicesExportCsvMockHandler = (overrideResponse?: unknown | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<unknown> | unknown), options?: RequestHandlerOptions) => {
   return http.get('*/api/v1/invoices/export/csv', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
   if (typeof overrideResponse === 'function') {await overrideResponse(info); }
@@ -34,40 +24,6 @@ export const getGetInvoicesExportCsvMockHandler = (overrideResponse?: unknown | 
       })
   }, options)
 }
-
-export const getGetInvoicesExportOmegaMockHandler = (overrideResponse?: unknown | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<unknown> | unknown), options?: RequestHandlerOptions) => {
-  return http.get('*/api/v1/invoices/export/omega', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
-
-    return new HttpResponse(null,
-      { status: 200
-      })
-  }, options)
-}
-
-export const getGetSupplierInvoicesExportOmegaMockHandler = (overrideResponse?: unknown | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<unknown> | unknown), options?: RequestHandlerOptions) => {
-  return http.get('*/api/v1/supplier-invoices/export/omega', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
-
-    return new HttpResponse(null,
-      { status: 200
-      })
-  }, options)
-}
-
-export const getGetInvoicesInvoiceExportIsdocMockHandler = (overrideResponse?: unknown | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<unknown> | unknown), options?: RequestHandlerOptions) => {
-  return http.get('*/api/v1/invoices/:invoice/export/isdoc', async (info: Parameters<Parameters<typeof http.get>[1]>[0]) => {
-  if (typeof overrideResponse === 'function') {await overrideResponse(info); }
-
-    return new HttpResponse(null,
-      { status: 200
-      })
-  }, options)
-}
 export const getInvoiceExportMock = () => [
-  getGetInvoicesExportPohodaMockHandler(),
-  getGetInvoicesExportCsvMockHandler(),
-  getGetInvoicesExportOmegaMockHandler(),
-  getGetSupplierInvoicesExportOmegaMockHandler(),
-  getGetInvoicesInvoiceExportIsdocMockHandler()
+  getGetInvoicesExportCsvMockHandler()
 ]

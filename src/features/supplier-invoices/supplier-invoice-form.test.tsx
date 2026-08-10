@@ -33,9 +33,11 @@ describe('supplier invoice form', () => {
   it('creates a draft supplier invoice with one VAT line', async () => {
     server.use(
       getPostSupplierInvoicesMockHandler({
-        id: 'new-si-id',
-        status: 'draft',
-        client: { id: 'c1', display_name: 'Vendor s.r.o.' },
+        data: {
+          id: 'new-si-id',
+          status: 'draft',
+          client: { id: 'c1', display_name: 'Vendor s.r.o.' },
+        },
       }),
     )
 

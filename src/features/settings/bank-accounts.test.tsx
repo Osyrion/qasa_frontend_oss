@@ -29,11 +29,13 @@ describe('bank accounts settings', () => {
     server.use(
       getGetBankAccountsMockHandler([]),
       getPostBankAccountsMockHandler({
-        id: 'ba1',
-        label: 'Main account',
-        iban: 'SK1234567890123456789012',
-        currency: 'EUR',
-        is_default: true,
+        data: {
+          id: 'ba1',
+          label: 'Main account',
+          iban: 'SK1234567890123456789012',
+          currency: 'EUR',
+          is_default: true,
+        },
       }),
     )
 

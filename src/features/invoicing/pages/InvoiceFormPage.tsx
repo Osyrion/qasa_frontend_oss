@@ -170,17 +170,16 @@ export function InvoiceFormPage() {
   const toUpdateBody = (values: InvoiceFormValues): PatchInvoicesIdBody => ({
     ...sharedFields(values),
     currency: values.currency as PatchInvoicesIdBodyCurrency,
-    expected_updated_at: existing.data?.updated_at ?? null,
   })
 
   const createMutation = usePostInvoices({
     request: { headers: { 'Idempotency-Key': idempotency.get() } },
     mutation: {
-      onSuccess: (invoice) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/invoices'] })
         idempotency.reset()
         toast.success(t('form.created'))
-        void navigate(`/invoices/${invoice.id}`)
+        if (response.data?.id) void navigate(`/invoices/${response.data.id}`)
       },
       onError: (error) => {
         const message = applyLaravelErrors(error, setError)
@@ -191,10 +190,10 @@ export function InvoiceFormPage() {
 
   const updateMutation = usePatchInvoicesId({
     mutation: {
-      onSuccess: (invoice) => {
+      onSuccess: (response) => {
         void queryClient.invalidateQueries({ queryKey: ['/api/v1/invoices'] })
         toast.success(t('form.updated'))
-        void navigate(`/invoices/${invoice.id}`)
+        if (response.data?.id) void navigate(`/invoices/${response.data.id}`)
       },
       onError: (error) => {
         if (isAxiosError(error) && error.response?.status === 409) {

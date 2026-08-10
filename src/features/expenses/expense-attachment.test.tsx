@@ -38,13 +38,15 @@ beforeEach(() => {
       meta: { current_page: 1, last_page: 1, per_page: 20, total: 1 },
     }),
     getGetExpensesExpenseMockHandler({
-      id: 'e-1',
-      description: 'Laptop stand',
-      category: 'hardware',
-      amount: 49.9,
-      currency: 'EUR',
-      date: '2026-07-01',
-      attachment: { filename: 'receipt.pdf', mime_type: 'application/pdf', size_bytes: 1200 },
+      data: {
+        id: 'e-1',
+        description: 'Laptop stand',
+        category: 'hardware',
+        amount: 49.9,
+        currency: 'EUR',
+        date: '2026-07-01',
+        attachment: { filename: 'receipt.pdf', mime_type: 'application/pdf', size_bytes: 1200 },
+      },
     }),
   )
 })
@@ -57,16 +59,18 @@ describe('expense attachment', () => {
       getPostExpensesExpenseAttachmentMockHandler(() => {
         uploadRequested = true
         return {
-          id: 'e-1',
-          description: 'Laptop stand',
-          category: 'hardware',
-          amount: 49.9,
-          currency: 'EUR',
-          date: '2026-07-01',
-          attachment: {
-            filename: 'new-receipt.pdf',
-            mime_type: 'application/pdf',
-            size_bytes: 900,
+          data: {
+            id: 'e-1',
+            description: 'Laptop stand',
+            category: 'hardware',
+            amount: 49.9,
+            currency: 'EUR',
+            date: '2026-07-01',
+            attachment: {
+              filename: 'new-receipt.pdf',
+              mime_type: 'application/pdf',
+              size_bytes: 900,
+            },
           },
         }
       }),

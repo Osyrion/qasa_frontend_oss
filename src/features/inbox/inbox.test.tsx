@@ -1,8 +1,8 @@
 import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { http, HttpResponse } from 'msw'
 
 import {
-  getGetInvoiceInboxInboxItemDownloadMockHandler,
   getGetInvoiceInboxMockHandler,
   getPostInvoiceInboxInboxItemConvertMockHandler,
   getPostInvoiceInboxInboxItemIgnoreMockHandler,
@@ -31,8 +31,10 @@ beforeEach(() => {
       meta: { current_page: 1, last_page: 1, per_page: 100, total: 1 },
     }),
     getGetVatRatesMockHandler([{ id: 'vat1', rate: 20, is_default: true, code: 'SK-20' }]),
-    getGetInvoiceInboxInboxItemDownloadMockHandler(
-      new TextEncoder().encode('%PDF').buffer as ArrayBuffer,
+    http.get('*/api/v1/invoice-inbox/*/download', () =>
+      HttpResponse.arrayBuffer(new TextEncoder().encode('%PDF').buffer as ArrayBuffer, {
+        headers: { 'Content-Type': 'application/pdf' },
+      }),
     ),
   )
 })
@@ -73,7 +75,7 @@ describe('invoice inbox', () => {
     server.use(
       getPostInvoiceInboxInboxItemIgnoreMockHandler(() => {
         ignoreRequested = true
-        return { id: 'item-1', status: 'ignored', original_filename: 'scan.pdf' }
+        return { data: { id: 'item-1', status: 'ignored', original_filename: 'scan.pdf' } }
       }),
     )
 
@@ -107,8 +109,10 @@ describe('invoice inbox', () => {
     )
     server.use(
       getPostInvoiceInboxInboxItemConvertMockHandler({
-        id: 'new-si-id',
-        status: 'draft',
+        data: {
+          id: 'new-si-id',
+          status: 'draft',
+        },
       }),
     )
 

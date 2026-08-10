@@ -25,7 +25,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  Expense,
+  PostExpensesExpenseAttachment200,
   PostExpensesExpenseAttachmentBody
 } from '../qASAAPIDocumentation.schemas';
 
@@ -157,7 +157,7 @@ export const postExpensesExpenseAttachment = (
       const formData = new FormData();
 formData.append(`file`, postExpensesExpenseAttachmentBody.file);
 
-      return apiMutator<Expense>(
+      return apiMutator<PostExpensesExpenseAttachment200>(
       {url: `/api/v1/expenses/${expense}/attachment`, method: 'POST',
       headers: {'Content-Type': 'multipart/form-data', },
        data: formData, signal

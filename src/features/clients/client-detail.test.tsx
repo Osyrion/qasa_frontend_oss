@@ -63,8 +63,10 @@ describe('client detail', () => {
       getGetClientsIdMockHandler({ id: 'c1', display_name: 'Acme s.r.o.', client_type: 'company' }),
       getGetClientsClientIdContactPersonsMockHandler([]),
       getPostClientsClientIdContactPersonsMockHandler({
-        id: 'p1',
-        full_name: 'Jane Roe',
+        data: {
+          id: 'p1',
+          full_name: 'Jane Roe',
+        },
       }),
     )
 

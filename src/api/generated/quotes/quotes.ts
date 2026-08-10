@@ -27,17 +27,21 @@ import type {
 import type {
   GetQuotes200,
   GetQuotesParams,
-  Invoice,
-  Order,
+  PostQuotes201,
   PostQuotesBody,
+  PostQuotesQuoteConvertToInvoice201,
+  PostQuotesQuoteConvertToOrder201,
+  PostQuotesQuoteEmail200,
   PostQuotesQuoteEmailBody,
+  PostQuotesQuoteItems201,
   PostQuotesQuoteItemsBody,
   PostQuotesQuotePublicLink200,
   PostQuotesQuotePublicLinkBody,
+  PostQuotesQuoteStatus200,
   PostQuotesQuoteStatusBody,
+  PutQuotesId200,
   PutQuotesIdBody,
-  Quote,
-  QuoteItem
+  Quote
 } from '../qASAAPIDocumentation.schemas';
 
 import { apiMutator } from '../../mutator';
@@ -165,7 +169,7 @@ export const postQuotes = (
 ) => {
 
 
-      return apiMutator<Quote>(
+      return apiMutator<PostQuotes201>(
       {url: `/api/v1/quotes`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postQuotesBody, signal
@@ -322,7 +326,7 @@ export const putQuotesId = (
 ) => {
 
 
-      return apiMutator<Quote>(
+      return apiMutator<PutQuotesId200>(
       {url: `/api/v1/quotes/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putQuotesIdBody, signal
@@ -449,7 +453,7 @@ export const postQuotesQuoteItems = (
 ) => {
 
 
-      return apiMutator<QuoteItem>(
+      return apiMutator<PostQuotesQuoteItems201>(
       {url: `/api/v1/quotes/${quote}/items`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postQuotesQuoteItemsBody, signal
@@ -577,7 +581,7 @@ export const postQuotesQuoteStatus = (
 ) => {
 
 
-      return apiMutator<Quote>(
+      return apiMutator<PostQuotesQuoteStatus200>(
       {url: `/api/v1/quotes/${quote}/status`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postQuotesQuoteStatusBody, signal
@@ -642,7 +646,7 @@ export const postQuotesQuoteEmail = (
 ) => {
 
 
-      return apiMutator<Quote>(
+      return apiMutator<PostQuotesQuoteEmail200>(
       {url: `/api/v1/quotes/${quote}/email`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postQuotesQuoteEmailBody, signal
@@ -1019,7 +1023,7 @@ export const postQuotesQuoteConvertToInvoice = (
 ) => {
 
 
-      return apiMutator<Invoice>(
+      return apiMutator<PostQuotesQuoteConvertToInvoice201>(
       {url: `/api/v1/quotes/${quote}/convert-to-invoice`, method: 'POST', signal
     },
       options);
@@ -1081,7 +1085,7 @@ export const postQuotesQuoteConvertToOrder = (
 ) => {
 
 
-      return apiMutator<Order>(
+      return apiMutator<PostQuotesQuoteConvertToOrder201>(
       {url: `/api/v1/quotes/${quote}/convert-to-order`, method: 'POST', signal
     },
       options);

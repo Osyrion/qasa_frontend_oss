@@ -28,9 +28,11 @@ import type {
   GetSupplierInvoices200,
   GetSupplierInvoicesParams,
   GetSupplierInvoicesSupplierInvoicePaymentQr200,
+  PostSupplierInvoices201,
   PostSupplierInvoicesBody,
+  PostSupplierInvoicesSupplierInvoiceStatus200,
   PostSupplierInvoicesSupplierInvoiceStatusBody,
-  PostSupplierInvoicesSupplierInvoiceVerifyAccount200,
+  PutSupplierInvoicesId200,
   PutSupplierInvoicesIdBody,
   SupplierInvoice
 } from '../qASAAPIDocumentation.schemas';
@@ -160,7 +162,7 @@ export const postSupplierInvoices = (
 ) => {
 
 
-      return apiMutator<SupplierInvoice>(
+      return apiMutator<PostSupplierInvoices201>(
       {url: `/api/v1/supplier-invoices`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postSupplierInvoicesBody, signal
@@ -317,7 +319,7 @@ export const putSupplierInvoicesId = (
 ) => {
 
 
-      return apiMutator<SupplierInvoice>(
+      return apiMutator<PutSupplierInvoicesId200>(
       {url: `/api/v1/supplier-invoices/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: putSupplierInvoicesIdBody, signal
@@ -444,7 +446,7 @@ export const postSupplierInvoicesSupplierInvoiceStatus = (
 ) => {
 
 
-      return apiMutator<SupplierInvoice>(
+      return apiMutator<PostSupplierInvoicesSupplierInvoiceStatus200>(
       {url: `/api/v1/supplier-invoices/${supplierInvoice}/status`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postSupplierInvoicesSupplierInvoiceStatusBody, signal
@@ -500,69 +502,7 @@ export const usePostSupplierInvoicesSupplierInvoiceStatus = <TError = ErrorType<
       return useMutation(getPostSupplierInvoicesSupplierInvoiceStatusMutationOptions(options), queryClient);
     }
     /**
- * @summary Verify the stored vendor account against the CZ VAT payer register (CRPDPH)
- */
-export const postSupplierInvoicesSupplierInvoiceVerifyAccount = (
-    supplierInvoice: string,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-
-      return apiMutator<PostSupplierInvoicesSupplierInvoiceVerifyAccount200>(
-      {url: `/api/v1/supplier-invoices/${supplierInvoice}/verify-account`, method: 'POST', signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostSupplierInvoicesSupplierInvoiceVerifyAccountMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postSupplierInvoicesSupplierInvoiceVerifyAccount>>, TError,{supplierInvoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postSupplierInvoicesSupplierInvoiceVerifyAccount>>, TError,{supplierInvoice: string}, TContext> => {
-
-const mutationKey = ['postSupplierInvoicesSupplierInvoiceVerifyAccount'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postSupplierInvoicesSupplierInvoiceVerifyAccount>>, {supplierInvoice: string}> = (props) => {
-          const {supplierInvoice} = props ?? {};
-
-          return  postSupplierInvoicesSupplierInvoiceVerifyAccount(supplierInvoice,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostSupplierInvoicesSupplierInvoiceVerifyAccountMutationResult = NonNullable<Awaited<ReturnType<typeof postSupplierInvoicesSupplierInvoiceVerifyAccount>>>
-
-    export type PostSupplierInvoicesSupplierInvoiceVerifyAccountMutationError = ErrorType<void>
-
-    /**
- * @summary Verify the stored vendor account against the CZ VAT payer register (CRPDPH)
- */
-export const usePostSupplierInvoicesSupplierInvoiceVerifyAccount = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postSupplierInvoicesSupplierInvoiceVerifyAccount>>, TError,{supplierInvoice: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postSupplierInvoicesSupplierInvoiceVerifyAccount>>,
-        TError,
-        {supplierInvoice: string},
-        TContext
-      > => {
-      return useMutation(getPostSupplierInvoicesSupplierInvoiceVerifyAccountMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Payment QR for the received invoice (CZK → SPAYD, EUR → SEPA EPC)
+ * @summary Payment QR for the received invoice (CZK -> SPAYD, EUR -> SEPA EPC)
  */
 export const getSupplierInvoicesSupplierInvoicePaymentQr = (
     supplierInvoice: string,
@@ -633,7 +573,7 @@ export function useGetSupplierInvoicesSupplierInvoicePaymentQr<TData = Awaited<R
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
- * @summary Payment QR for the received invoice (CZK → SPAYD, EUR → SEPA EPC)
+ * @summary Payment QR for the received invoice (CZK -> SPAYD, EUR -> SEPA EPC)
  */
 
 export function useGetSupplierInvoicesSupplierInvoicePaymentQr<TData = Awaited<ReturnType<typeof getSupplierInvoicesSupplierInvoicePaymentQr>>, TError = ErrorType<void>>(

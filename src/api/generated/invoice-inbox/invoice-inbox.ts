@@ -28,9 +28,11 @@ import type {
   GetInvoiceInbox200,
   GetInvoiceInboxParams,
   InvoiceInboxItem,
+  PostInvoiceInboxInboxItemConvert201,
   PostInvoiceInboxInboxItemConvertBody,
-  PostInvoiceInboxUploadBody,
-  SupplierInvoice
+  PostInvoiceInboxInboxItemIgnore200,
+  PostInvoiceInboxUpload202,
+  PostInvoiceInboxUploadBody
 } from '../qASAAPIDocumentation.schemas';
 
 import { apiMutator } from '../../mutator';
@@ -312,9 +314,8 @@ export const getInvoiceInboxInboxItemDownload = (
 ) => {
 
 
-      return apiMutator<Blob>(
-      {url: `/api/v1/invoice-inbox/${inboxItem}/download`, method: 'GET',
-        responseType: 'blob', signal
+      return apiMutator<void>(
+      {url: `/api/v1/invoice-inbox/${inboxItem}/download`, method: 'GET', signal
     },
       options);
     }
@@ -397,72 +398,6 @@ export function useGetInvoiceInboxInboxItemDownload<TData = Awaited<ReturnType<t
 
 
 /**
- * @summary Upload a document directly into the invoice inbox
- */
-export const postInvoiceInboxUpload = (
-    postInvoiceInboxUploadBody: BodyType<PostInvoiceInboxUploadBody>,
- options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
-) => {
-
-      const formData = new FormData();
-formData.append(`file`, postInvoiceInboxUploadBody.file);
-
-      return apiMutator<InvoiceInboxItem>(
-      {url: `/api/v1/invoice-inbox/upload`, method: 'POST',
-      headers: {'Content-Type': 'multipart/form-data', },
-       data: formData, signal
-    },
-      options);
-    }
-
-
-
-
-export const getPostInvoiceInboxUploadMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoiceInboxUpload>>, TError,{data: BodyType<PostInvoiceInboxUploadBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof postInvoiceInboxUpload>>, TError,{data: BodyType<PostInvoiceInboxUploadBody>}, TContext> => {
-
-const mutationKey = ['postInvoiceInboxUpload'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoiceInboxUpload>>, {data: BodyType<PostInvoiceInboxUploadBody>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  postInvoiceInboxUpload(data,requestOptions)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostInvoiceInboxUploadMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoiceInboxUpload>>>
-    export type PostInvoiceInboxUploadMutationBody = BodyType<PostInvoiceInboxUploadBody>
-    export type PostInvoiceInboxUploadMutationError = ErrorType<void>
-
-    /**
- * @summary Upload a document directly into the invoice inbox
- */
-export const usePostInvoiceInboxUpload = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoiceInboxUpload>>, TError,{data: BodyType<PostInvoiceInboxUploadBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postInvoiceInboxUpload>>,
-        TError,
-        {data: BodyType<PostInvoiceInboxUploadBody>},
-        TContext
-      > => {
-      return useMutation(getPostInvoiceInboxUploadMutationOptions(options), queryClient);
-    }
-    /**
  * @summary Convert a reviewed inbox item into a supplier invoice
  */
 export const postInvoiceInboxInboxItemConvert = (
@@ -472,7 +407,7 @@ export const postInvoiceInboxInboxItemConvert = (
 ) => {
 
 
-      return apiMutator<SupplierInvoice>(
+      return apiMutator<PostInvoiceInboxInboxItemConvert201>(
       {url: `/api/v1/invoice-inbox/${inboxItem}/convert`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postInvoiceInboxInboxItemConvertBody, signal
@@ -536,7 +471,7 @@ export const postInvoiceInboxInboxItemIgnore = (
 ) => {
 
 
-      return apiMutator<InvoiceInboxItem>(
+      return apiMutator<PostInvoiceInboxInboxItemIgnore200>(
       {url: `/api/v1/invoice-inbox/${inboxItem}/ignore`, method: 'POST', signal
     },
       options);
@@ -588,4 +523,70 @@ export const usePostInvoiceInboxInboxItemIgnore = <TError = ErrorType<void>,
         TContext
       > => {
       return useMutation(getPostInvoiceInboxInboxItemIgnoreMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Upload a document directly into the invoice inbox
+ */
+export const postInvoiceInboxUpload = (
+    postInvoiceInboxUploadBody: BodyType<PostInvoiceInboxUploadBody>,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+      const formData = new FormData();
+formData.append(`file`, postInvoiceInboxUploadBody.file);
+
+      return apiMutator<PostInvoiceInboxUpload202>(
+      {url: `/api/v1/invoice-inbox/upload`, method: 'POST',
+      headers: {'Content-Type': 'multipart/form-data', },
+       data: formData, signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostInvoiceInboxUploadMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoiceInboxUpload>>, TError,{data: BodyType<PostInvoiceInboxUploadBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postInvoiceInboxUpload>>, TError,{data: BodyType<PostInvoiceInboxUploadBody>}, TContext> => {
+
+const mutationKey = ['postInvoiceInboxUpload'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postInvoiceInboxUpload>>, {data: BodyType<PostInvoiceInboxUploadBody>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postInvoiceInboxUpload(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostInvoiceInboxUploadMutationResult = NonNullable<Awaited<ReturnType<typeof postInvoiceInboxUpload>>>
+    export type PostInvoiceInboxUploadMutationBody = BodyType<PostInvoiceInboxUploadBody>
+    export type PostInvoiceInboxUploadMutationError = ErrorType<void>
+
+    /**
+ * @summary Upload a document directly into the invoice inbox
+ */
+export const usePostInvoiceInboxUpload = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postInvoiceInboxUpload>>, TError,{data: BodyType<PostInvoiceInboxUploadBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postInvoiceInboxUpload>>,
+        TError,
+        {data: BodyType<PostInvoiceInboxUploadBody>},
+        TContext
+      > => {
+      return useMutation(getPostInvoiceInboxUploadMutationOptions(options), queryClient);
     }

@@ -27,8 +27,12 @@ import type {
 import type {
   GetRecurringInvoiceTemplates200,
   GetRecurringInvoiceTemplatesParams,
+  PostRecurringInvoiceTemplates201,
   PostRecurringInvoiceTemplatesBody,
-  PutRecurringInvoiceTemplatesIdBody,
+  PostRecurringInvoiceTemplatesTemplateGenerate201,
+  PostRecurringInvoiceTemplatesTemplatePause200,
+  PostRecurringInvoiceTemplatesTemplateResume200,
+  PutRecurringInvoiceTemplatesId200,
   RecurringInvoiceTemplate
 } from '../qASAAPIDocumentation.schemas';
 
@@ -157,7 +161,7 @@ export const postRecurringInvoiceTemplates = (
 ) => {
 
 
-      return apiMutator<RecurringInvoiceTemplate>(
+      return apiMutator<PostRecurringInvoiceTemplates201>(
       {url: `/api/v1/recurring-invoice-templates`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: postRecurringInvoiceTemplatesBody, signal
@@ -309,15 +313,15 @@ export function useGetRecurringInvoiceTemplatesId<TData = Awaited<ReturnType<typ
  */
 export const putRecurringInvoiceTemplatesId = (
     id: string,
-    putRecurringInvoiceTemplatesIdBody: BodyType<PutRecurringInvoiceTemplatesIdBody>,
+    recurringInvoiceTemplate: BodyType<RecurringInvoiceTemplate>,
  options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
 ) => {
 
 
-      return apiMutator<RecurringInvoiceTemplate>(
+      return apiMutator<PutRecurringInvoiceTemplatesId200>(
       {url: `/api/v1/recurring-invoice-templates/${id}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
-      data: putRecurringInvoiceTemplatesIdBody, signal
+      data: recurringInvoiceTemplate, signal
     },
       options);
     }
@@ -326,8 +330,8 @@ export const putRecurringInvoiceTemplatesId = (
 
 
 export const getPutRecurringInvoiceTemplatesIdMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>, TError,{id: string;data: BodyType<PutRecurringInvoiceTemplatesIdBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>, TError,{id: string;data: BodyType<PutRecurringInvoiceTemplatesIdBody>}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>, TError,{id: string;data: BodyType<RecurringInvoiceTemplate>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>, TError,{id: string;data: BodyType<RecurringInvoiceTemplate>}, TContext> => {
 
 const mutationKey = ['putRecurringInvoiceTemplatesId'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -339,7 +343,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>, {id: string;data: BodyType<PutRecurringInvoiceTemplatesIdBody>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>, {id: string;data: BodyType<RecurringInvoiceTemplate>}> = (props) => {
           const {id,data} = props ?? {};
 
           return  putRecurringInvoiceTemplatesId(id,data,requestOptions)
@@ -353,18 +357,18 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type PutRecurringInvoiceTemplatesIdMutationResult = NonNullable<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>>
-    export type PutRecurringInvoiceTemplatesIdMutationBody = BodyType<PutRecurringInvoiceTemplatesIdBody>
+    export type PutRecurringInvoiceTemplatesIdMutationBody = BodyType<RecurringInvoiceTemplate>
     export type PutRecurringInvoiceTemplatesIdMutationError = ErrorType<void>
 
     /**
  * @summary Update recurring invoice template (replaces items)
  */
 export const usePutRecurringInvoiceTemplatesId = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>, TError,{id: string;data: BodyType<PutRecurringInvoiceTemplatesIdBody>}, TContext>, request?: SecondParameter<typeof apiMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>, TError,{id: string;data: BodyType<RecurringInvoiceTemplate>}, TContext>, request?: SecondParameter<typeof apiMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof putRecurringInvoiceTemplatesId>>,
         TError,
-        {id: string;data: BodyType<PutRecurringInvoiceTemplatesIdBody>},
+        {id: string;data: BodyType<RecurringInvoiceTemplate>},
         TContext
       > => {
       return useMutation(getPutRecurringInvoiceTemplatesIdMutationOptions(options), queryClient);
@@ -440,7 +444,7 @@ export const postRecurringInvoiceTemplatesTemplatePause = (
 ) => {
 
 
-      return apiMutator<RecurringInvoiceTemplate>(
+      return apiMutator<PostRecurringInvoiceTemplatesTemplatePause200>(
       {url: `/api/v1/recurring-invoice-templates/${template}/pause`, method: 'POST', signal
     },
       options);
@@ -502,7 +506,7 @@ export const postRecurringInvoiceTemplatesTemplateResume = (
 ) => {
 
 
-      return apiMutator<RecurringInvoiceTemplate>(
+      return apiMutator<PostRecurringInvoiceTemplatesTemplateResume200>(
       {url: `/api/v1/recurring-invoice-templates/${template}/resume`, method: 'POST', signal
     },
       options);
@@ -554,4 +558,66 @@ export const usePostRecurringInvoiceTemplatesTemplateResume = <TError = ErrorTyp
         TContext
       > => {
       return useMutation(getPostRecurringInvoiceTemplatesTemplateResumeMutationOptions(options), queryClient);
+    }
+    /**
+ * @summary Generate a draft invoice now, out of schedule (the automated cron job lives in the Automation module)
+ */
+export const postRecurringInvoiceTemplatesTemplateGenerate = (
+    template: string,
+ options?: SecondParameter<typeof apiMutator>,signal?: AbortSignal
+) => {
+
+
+      return apiMutator<PostRecurringInvoiceTemplatesTemplateGenerate201>(
+      {url: `/api/v1/recurring-invoice-templates/${template}/generate`, method: 'POST', signal
+    },
+      options);
+    }
+
+
+
+
+export const getPostRecurringInvoiceTemplatesTemplateGenerateMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postRecurringInvoiceTemplatesTemplateGenerate>>, TError,{template: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof postRecurringInvoiceTemplatesTemplateGenerate>>, TError,{template: string}, TContext> => {
+
+const mutationKey = ['postRecurringInvoiceTemplatesTemplateGenerate'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postRecurringInvoiceTemplatesTemplateGenerate>>, {template: string}> = (props) => {
+          const {template} = props ?? {};
+
+          return  postRecurringInvoiceTemplatesTemplateGenerate(template,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostRecurringInvoiceTemplatesTemplateGenerateMutationResult = NonNullable<Awaited<ReturnType<typeof postRecurringInvoiceTemplatesTemplateGenerate>>>
+
+    export type PostRecurringInvoiceTemplatesTemplateGenerateMutationError = ErrorType<void>
+
+    /**
+ * @summary Generate a draft invoice now, out of schedule (the automated cron job lives in the Automation module)
+ */
+export const usePostRecurringInvoiceTemplatesTemplateGenerate = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postRecurringInvoiceTemplatesTemplateGenerate>>, TError,{template: string}, TContext>, request?: SecondParameter<typeof apiMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postRecurringInvoiceTemplatesTemplateGenerate>>,
+        TError,
+        {template: string},
+        TContext
+      > => {
+      return useMutation(getPostRecurringInvoiceTemplatesTemplateGenerateMutationOptions(options), queryClient);
     }
