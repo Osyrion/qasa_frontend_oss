@@ -43,7 +43,7 @@ beforeEach(() => {
 
 describe('quote detail', () => {
   it('shows a live total preview while adding an item', async () => {
-    server.use(getGetQuotesIdMockHandler(baseQuote()))
+    server.use(getGetQuotesIdMockHandler({ data: baseQuote() }))
 
     renderApp('/quotes/q-1')
     const user = userEvent.setup()
@@ -58,7 +58,9 @@ describe('quote detail', () => {
   })
 
   it('only offers status transitions allowed from "sent"', async () => {
-    server.use(getGetQuotesIdMockHandler(baseQuote({ status: 'sent', effective_status: 'sent' })))
+    server.use(
+      getGetQuotesIdMockHandler({ data: baseQuote({ status: 'sent', effective_status: 'sent' }) }),
+    )
 
     renderApp('/quotes/q-1')
     const user = userEvent.setup()
@@ -73,7 +75,9 @@ describe('quote detail', () => {
 
   it('hides the change-status menu once a quote is terminal', async () => {
     server.use(
-      getGetQuotesIdMockHandler(baseQuote({ status: 'accepted', effective_status: 'accepted' })),
+      getGetQuotesIdMockHandler({
+        data: baseQuote({ status: 'accepted', effective_status: 'accepted' }),
+      }),
     )
 
     renderApp('/quotes/q-1')
@@ -83,7 +87,9 @@ describe('quote detail', () => {
   })
 
   it('offers convert-to-invoice and convert-to-order for a sent quote', async () => {
-    server.use(getGetQuotesIdMockHandler(baseQuote({ status: 'sent', effective_status: 'sent' })))
+    server.use(
+      getGetQuotesIdMockHandler({ data: baseQuote({ status: 'sent', effective_status: 'sent' }) }),
+    )
 
     renderApp('/quotes/q-1')
 
@@ -92,7 +98,9 @@ describe('quote detail', () => {
   })
 
   it('keeps the e-mail dialog open when the send is throttled', async () => {
-    server.use(getGetQuotesIdMockHandler(baseQuote({ status: 'sent', effective_status: 'sent' })))
+    server.use(
+      getGetQuotesIdMockHandler({ data: baseQuote({ status: 'sent', effective_status: 'sent' }) }),
+    )
     server.use(
       http.post('*/api/v1/quotes/q-1/email', () =>
         HttpResponse.json({ message: 'Too many requests.' }, { status: 429 }),

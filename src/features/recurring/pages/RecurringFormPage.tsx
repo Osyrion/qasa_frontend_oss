@@ -168,8 +168,8 @@ export function RecurringFormPage() {
   })
 
   useEffect(() => {
-    if (existing.data) {
-      reset(templateToFormValues(existing.data))
+    if (existing.data?.data) {
+      reset(templateToFormValues(existing.data.data))
     }
   }, [existing.data, reset])
 
@@ -293,7 +293,7 @@ export function RecurringFormPage() {
               type="date"
               label={t('form.first_issue_date')}
               error={errors.first_issue_date}
-              disabled={isEdit && Boolean(existing.data?.last_generated_at)}
+              disabled={isEdit && Boolean(existing.data?.data?.last_generated_at)}
               {...register('first_issue_date')}
             />
           </div>
@@ -324,7 +324,7 @@ export function RecurringFormPage() {
             {...register('end_date')}
           />
 
-          {isEdit && existing.data && (
+          {isEdit && existing.data?.data && (
             <p className="text-sm text-muted-foreground">{t('form.next_run_readonly')}</p>
           )}
         </FieldGroup>

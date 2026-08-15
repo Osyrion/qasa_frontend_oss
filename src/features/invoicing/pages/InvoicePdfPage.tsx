@@ -42,7 +42,10 @@ export function InvoicePdfPage() {
     setDownloading(true)
     try {
       const blob = await getInvoicesIdPdfDownload(id)
-      triggerBlobDownload(blob, filename(invoice.data?.invoice_number, invoice.data?.issued_at))
+      triggerBlobDownload(
+        blob,
+        filename(invoice.data?.data?.invoice_number, invoice.data?.data?.issued_at),
+      )
     } catch {
       toast.error(t('detail.pdf_download_failed'))
     } finally {
@@ -54,7 +57,7 @@ export function InvoicePdfPage() {
     <div className="flex h-full flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">
-          {invoice.data?.invoice_number ?? t('list.draft_placeholder')}
+          {invoice.data?.data?.invoice_number ?? t('list.draft_placeholder')}
         </h1>
         <Button onClick={() => void handleDownload()} disabled={downloading}>
           <DownloadIcon />

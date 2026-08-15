@@ -1,0 +1,37 @@
+{
+  "type": {
+    "social": "Sociálne poistenie",
+    "health": "Zdravotné poistenie",
+    "income_tax_advance": "Preddavok na daň"
+  },
+  "list": {
+    "title": "Odvody",
+    "new_contribution": "Nová platba",
+    "column_paid_at": "Zaplatené",
+    "column_type": "Typ",
+    "column_period": "Obdobie",
+    "column_amount": "Suma",
+    "filter_type": "Typ",
+    "filter_type_all": "Všetky typy",
+    "filter_year": "Rok",
+    "empty": "Zatiaľ žiadne platby odvodov."
+  },
+  "form": {
+    "create_title": "Zaznamenať platbu",
+    "edit_title": "Upraviť platbu",
+    "type": "Typ",
+    "period_year": "Rok obdobia",
+    "period_month": "Mesiac obdobia",
+    "amount": "Suma",
+    "currency": "Mena",
+    "paid_at": "Zaplatené",
+    "note": "Poznámka",
+    "created": "Platba bola zaznamenaná.",
+    "updated": "Platba bola upravená."
+  },
+  "validation": {
+    "period_year_invalid": "Zadajte platný rok.",
+    "amount_positive": "Suma musí byť väčšia ako nula.",
+    "paid_at_required": "Dátum platby je povinný."
+  }
+}

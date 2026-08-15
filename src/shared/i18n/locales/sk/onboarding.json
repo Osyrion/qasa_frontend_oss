@@ -1,0 +1,29 @@
+{
+  "title": "Nastavte si daňovú rezidenciu",
+  "description": "Jednorazový krok pred fakturáciou — neskôr sa už nedá zmeniť, tak si údaje skontrolujte.",
+  "country": "Daňová rezidencia",
+  "country_option": {
+    "SK": "Slovensko",
+    "CZ": "Česko"
+  },
+  "ico": "IČO",
+  "lookup_action": "Vyhľadať",
+  "lookup_success": "Údaje o firme boli doplnené z registra.",
+  "lookup_failed": "Firmu sa nepodarilo nájsť — vyplňte údaje ručne.",
+  "company_name": "Názov firmy / obchodné meno",
+  "dic": "DIČ",
+  "vat_id": "IČ DPH",
+  "address": "Adresa",
+  "city": "Mesto",
+  "postal_code": "PSČ",
+  "immutable_hint": "Daňovú rezidenciu a IČO po uložení už nemožno zmeniť.",
+  "submit": "Pokračovať",
+  "completed_toast": "Daňová rezidencia bola nastavená.",
+  "validation": {
+    "ico_required": "IČO je povinné.",
+    "company_name_required": "Názov firmy je povinný.",
+    "address_required": "Adresa je povinná.",
+    "city_required": "Mesto je povinné.",
+    "postal_code_required": "PSČ je povinné."
+  }
+}

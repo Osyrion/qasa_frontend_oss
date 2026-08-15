@@ -67,11 +67,11 @@ export function ClientDetailPage() {
     )
   }
 
-  if (!client.data) {
+  if (!client.data?.data) {
     return <Navigate to="/clients" replace />
   }
 
-  const data = client.data
+  const data = client.data.data
 
   return (
     <div className="flex max-w-2xl flex-col gap-6">

@@ -90,7 +90,7 @@ export function OrderFormPage() {
   const existing = useGetOrdersId(id ?? '', { query: { enabled: isEdit } })
 
   useEffect(() => {
-    if (isEdit && existing.data && !isOrderEditable(existing.data.status ?? 'active')) {
+    if (isEdit && existing.data?.data && !isOrderEditable(existing.data.data.status ?? 'active')) {
       toast.error(t('form.not_editable'))
       void navigate(`/orders/${id}`, { replace: true })
     }
@@ -128,8 +128,8 @@ export function OrderFormPage() {
   })
 
   useEffect(() => {
-    if (existing.data) {
-      reset(orderToFormValues(existing.data))
+    if (existing.data?.data) {
+      reset(orderToFormValues(existing.data.data))
     }
   }, [existing.data, reset])
 

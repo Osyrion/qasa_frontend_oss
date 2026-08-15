@@ -1,0 +1,29 @@
+{
+  "title": "Set up your tax residency",
+  "description": "One-time step before you can start invoicing — this cannot be changed later, so double-check it.",
+  "country": "Tax residency",
+  "country_option": {
+    "SK": "Slovakia",
+    "CZ": "Czech Republic"
+  },
+  "ico": "Company ID (IČO)",
+  "lookup_action": "Look up",
+  "lookup_success": "Company data filled in from the register.",
+  "lookup_failed": "Could not find this company — fill in the details manually.",
+  "company_name": "Company / trade name",
+  "dic": "Tax ID (DIČ)",
+  "vat_id": "VAT ID (IČ DPH)",
+  "address": "Address",
+  "city": "City",
+  "postal_code": "Postal code",
+  "immutable_hint": "Your tax residency and IČO cannot be changed once saved.",
+  "submit": "Continue",
+  "completed_toast": "Tax residency set up.",
+  "validation": {
+    "ico_required": "Company ID is required.",
+    "company_name_required": "Company name is required.",
+    "address_required": "Address is required.",
+    "city_required": "City is required.",
+    "postal_code_required": "Postal code is required."
+  }
+}

@@ -32,12 +32,14 @@ describe('client detail', () => {
   it('renders client details and its contact persons', async () => {
     server.use(
       getGetClientsIdMockHandler({
-        id: 'c1',
-        display_name: 'Acme s.r.o.',
-        client_type: 'company',
-        email: 'acme@example.com',
-        is_customer: true,
-        is_vendor: false,
+        data: {
+          id: 'c1',
+          display_name: 'Acme s.r.o.',
+          client_type: 'company',
+          email: 'acme@example.com',
+          is_customer: true,
+          is_vendor: false,
+        },
       }),
       getGetClientsClientIdContactPersonsMockHandler([
         {
@@ -60,7 +62,9 @@ describe('client detail', () => {
 
   it('adds a contact person through the dialog', async () => {
     server.use(
-      getGetClientsIdMockHandler({ id: 'c1', display_name: 'Acme s.r.o.', client_type: 'company' }),
+      getGetClientsIdMockHandler({
+        data: { id: 'c1', display_name: 'Acme s.r.o.', client_type: 'company' },
+      }),
       getGetClientsClientIdContactPersonsMockHandler([]),
       getPostClientsClientIdContactPersonsMockHandler({
         data: {
@@ -85,7 +89,9 @@ describe('client detail', () => {
 
   it('deletes the client after confirming', async () => {
     server.use(
-      getGetClientsIdMockHandler({ id: 'c1', display_name: 'Acme s.r.o.', client_type: 'company' }),
+      getGetClientsIdMockHandler({
+        data: { id: 'c1', display_name: 'Acme s.r.o.', client_type: 'company' },
+      }),
       getGetClientsClientIdContactPersonsMockHandler([]),
       getDeleteClientsIdMockHandler(),
     )
@@ -102,7 +108,9 @@ describe('client detail', () => {
 
   it('removes a contact person after confirming', async () => {
     server.use(
-      getGetClientsIdMockHandler({ id: 'c1', display_name: 'Acme s.r.o.', client_type: 'company' }),
+      getGetClientsIdMockHandler({
+        data: { id: 'c1', display_name: 'Acme s.r.o.', client_type: 'company' },
+      }),
       getGetClientsClientIdContactPersonsMockHandler([
         { id: 'p1', full_name: 'John Doe', is_primary: false },
       ]),

@@ -99,7 +99,7 @@ export function InvoiceFormPage() {
   const bankAccounts = useGetBankAccounts()
 
   useEffect(() => {
-    if (isEdit && existing.data && !isEditable(existing.data.status ?? 'draft')) {
+    if (isEdit && existing.data?.data && !isEditable(existing.data.data.status ?? 'draft')) {
       toast.error(t('form.not_editable'))
       void navigate(`/invoices/${id}`, { replace: true })
     }
@@ -142,8 +142,8 @@ export function InvoiceFormPage() {
   })
 
   useEffect(() => {
-    if (existing.data) {
-      reset(invoiceToFormValues(existing.data))
+    if (existing.data?.data) {
+      reset(invoiceToFormValues(existing.data.data))
     }
   }, [existing.data, reset])
 

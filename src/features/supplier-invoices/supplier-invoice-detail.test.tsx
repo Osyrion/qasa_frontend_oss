@@ -43,7 +43,7 @@ beforeEach(() => {
 
 describe('supplier invoice detail', () => {
   it('opens a paid_at dialog before marking as paid', async () => {
-    server.use(getGetSupplierInvoicesIdMockHandler(baseInvoice()))
+    server.use(getGetSupplierInvoicesIdMockHandler({ data: baseInvoice() }))
     server.use(
       getPostSupplierInvoicesSupplierInvoiceStatusMockHandler({
         data: baseInvoice({ status: 'paid' }),
@@ -66,9 +66,9 @@ describe('supplier invoice detail', () => {
 
   it('shows the self-assessed VAT row for a reverse-charge invoice', async () => {
     server.use(
-      getGetSupplierInvoicesIdMockHandler(
-        baseInvoice({ vat_regime: 'eu_reverse_charge', self_assessed_vat_amount: 20 }),
-      ),
+      getGetSupplierInvoicesIdMockHandler({
+        data: baseInvoice({ vat_regime: 'eu_reverse_charge', self_assessed_vat_amount: 20 }),
+      }),
     )
 
     renderApp('/supplier-invoices/si-1')

@@ -18,9 +18,11 @@
     "supplier_invoices": "Došlé faktúry",
     "inbox": "Inbox",
     "expenses": "Výdavky",
+    "contributions": "Odvody",
     "group_analysis": "Analýza",
     "statistics": "Štatistiky",
     "reports": "Reporty",
+    "tax_return": "Daňové priznanie",
     "activity": "Denník aktivít",
     "settings": "Nastavenia",
     "logout": "Odhlásiť sa"

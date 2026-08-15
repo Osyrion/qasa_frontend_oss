@@ -26,8 +26,8 @@ import type {
 
 import type {
   GetOrders200,
+  GetOrdersId200,
   GetOrdersParams,
-  Order,
   PostOrders201,
   PostOrdersBody,
   PutOrdersId200,
@@ -223,7 +223,7 @@ export const getOrdersId = (
 ) => {
 
 
-      return apiMutator<Order>(
+      return apiMutator<GetOrdersId200>(
       {url: `/api/v1/orders/${id}`, method: 'GET', signal
     },
       options);

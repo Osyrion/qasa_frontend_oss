@@ -201,8 +201,8 @@ export function ClientFormPage() {
   })
 
   useEffect(() => {
-    if (existing.data) {
-      reset(clientToFormValues(existing.data))
+    if (existing.data?.data) {
+      reset(clientToFormValues(existing.data.data))
     }
   }, [existing.data, reset])
 
@@ -338,7 +338,7 @@ export function ClientFormPage() {
                 country={country.slice(0, 2)}
                 vatId={vatId}
                 clientId={id}
-                wasVerified={Boolean(existing.data?.vat_verified_at)}
+                wasVerified={Boolean(existing.data?.data?.vat_verified_at)}
               />
             )}
           </div>

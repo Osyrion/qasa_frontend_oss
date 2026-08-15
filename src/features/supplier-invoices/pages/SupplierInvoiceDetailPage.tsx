@@ -54,11 +54,11 @@ export function SupplierInvoiceDetailPage() {
     )
   }
 
-  if (!supplierInvoice.data) {
+  if (!supplierInvoice.data?.data) {
     return <Navigate to="/supplier-invoices" replace />
   }
 
-  const data = supplierInvoice.data
+  const data = supplierInvoice.data.data
   const status = data.status ?? 'draft'
   const editable = isSupplierInvoiceEditable(status)
   const currency = data.currency ?? 'EUR'

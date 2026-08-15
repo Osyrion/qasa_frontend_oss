@@ -61,11 +61,11 @@ export function OrderDetailPage() {
     )
   }
 
-  if (!order.data) {
+  if (!order.data?.data) {
     return <Navigate to="/orders" replace />
   }
 
-  const data = order.data
+  const data = order.data.data
   const status = data.status ?? 'active'
   const editable = isOrderEditable(status)
   const canGenerateInvoice = Boolean(data.client?.id)

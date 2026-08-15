@@ -46,7 +46,7 @@ beforeEach(() => {
   server.use(
     getGetVatRatesMockHandler([{ id: 'vat1', rate: 20, is_default: true, code: 'SK-20' }]),
     getGetInvoicesInvoicePaymentsMockHandler({ data: [] }),
-    getGetInvoicesIdMockHandler(baseInvoice()),
+    getGetInvoicesIdMockHandler({ data: baseInvoice() }),
   )
 })
 
@@ -117,7 +117,7 @@ describe('work report', () => {
   })
 
   it('does not offer edit on a non-editable invoice', async () => {
-    server.use(getGetInvoicesIdMockHandler(baseInvoice({ status: 'sent' })))
+    server.use(getGetInvoicesIdMockHandler({ data: baseInvoice({ status: 'sent' }) }))
     server.use(getGetInvoicesInvoiceWorkReportMockHandler([]))
 
     renderApp('/invoices/inv-1')

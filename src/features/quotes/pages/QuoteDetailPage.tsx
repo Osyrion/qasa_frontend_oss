@@ -50,11 +50,11 @@ export function QuoteDetailPage() {
     )
   }
 
-  if (!quote.data) {
+  if (!quote.data?.data) {
     return <Navigate to="/quotes" replace />
   }
 
-  const data = quote.data
+  const data = quote.data.data
   const status = data.status ?? 'draft'
   const editable = isQuoteEditable(status)
 

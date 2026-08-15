@@ -26,9 +26,9 @@ import type {
 
 import type {
   GetInvoices200,
+  GetInvoicesId200,
   GetInvoicesInvoicePayments200,
   GetInvoicesParams,
-  Invoice,
   PatchInvoicesId200,
   PatchInvoicesIdBody,
   PostInvoices201,
@@ -244,7 +244,7 @@ export const getInvoicesId = (
 ) => {
 
 
-      return apiMutator<Invoice>(
+      return apiMutator<GetInvoicesId200>(
       {url: `/api/v1/invoices/${id}`, method: 'GET', signal
     },
       options);

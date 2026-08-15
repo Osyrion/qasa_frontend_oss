@@ -44,7 +44,7 @@ describe('order form', () => {
     const { router } = renderApp('/orders/new')
     const user = userEvent.setup()
 
-    await user.type(screen.getByLabelText('Name'), 'Personal project')
+    await user.type(await screen.findByLabelText('Name'), 'Personal project')
     await user.click(screen.getByRole('button', { name: 'Save' }))
 
     await waitFor(() => expect(router.state.location.pathname).toBe('/orders/new-order-id'))
@@ -63,7 +63,7 @@ describe('order form', () => {
     renderApp('/orders/new')
     const user = userEvent.setup()
 
-    await user.type(screen.getByLabelText('Name'), 'x')
+    await user.type(await screen.findByLabelText('Name'), 'x')
     await user.click(screen.getByRole('button', { name: 'Save' }))
 
     expect(await screen.findByText('The name field is required.')).toBeInTheDocument()

@@ -52,11 +52,11 @@ export function InvoiceDetailPage() {
     )
   }
 
-  if (!invoice.data) {
+  if (!invoice.data?.data) {
     return <Navigate to="/invoices" replace />
   }
 
-  const data = invoice.data
+  const data = invoice.data.data
   const status = data.status ?? 'draft'
   const editable = isEditable(status)
 

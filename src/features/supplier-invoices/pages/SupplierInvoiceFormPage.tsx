@@ -116,7 +116,11 @@ export function SupplierInvoiceFormPage() {
   const existing = useGetSupplierInvoicesId(id ?? '', { query: { enabled: isEdit } })
 
   useEffect(() => {
-    if (isEdit && existing.data && !isSupplierInvoiceEditable(existing.data.status ?? 'draft')) {
+    if (
+      isEdit &&
+      existing.data?.data &&
+      !isSupplierInvoiceEditable(existing.data.data.status ?? 'draft')
+    ) {
       toast.error(t('form.not_editable'))
       void navigate(`/supplier-invoices/${id}`, { replace: true })
     }
@@ -191,8 +195,8 @@ export function SupplierInvoiceFormPage() {
   })
 
   useEffect(() => {
-    if (existing.data) {
-      reset(invoiceToFormValues(existing.data))
+    if (existing.data?.data) {
+      reset(invoiceToFormValues(existing.data.data))
     }
   }, [existing.data, reset])
 

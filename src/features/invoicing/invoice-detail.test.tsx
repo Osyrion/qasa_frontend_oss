@@ -50,7 +50,7 @@ beforeEach(() => {
 
 describe('invoice detail', () => {
   it('shows a live total preview while adding an item', async () => {
-    server.use(getGetInvoicesIdMockHandler(baseInvoice()))
+    server.use(getGetInvoicesIdMockHandler({ data: baseInvoice() }))
 
     renderApp('/invoices/inv-1')
     const user = userEvent.setup()
@@ -65,7 +65,7 @@ describe('invoice detail', () => {
   })
 
   it('only offers status transitions allowed from "sent"', async () => {
-    server.use(getGetInvoicesIdMockHandler(baseInvoice({ status: 'sent' })))
+    server.use(getGetInvoicesIdMockHandler({ data: baseInvoice({ status: 'sent' }) }))
 
     renderApp('/invoices/inv-1')
 
@@ -77,7 +77,7 @@ describe('invoice detail', () => {
   })
 
   it('records a payment through the dialog', async () => {
-    server.use(getGetInvoicesIdMockHandler(baseInvoice({ status: 'sent' })))
+    server.use(getGetInvoicesIdMockHandler({ data: baseInvoice({ status: 'sent' }) }))
     server.use(
       http.post('*/api/v1/invoices/inv-1/payments', async ({ request }) => {
         const body = (await request.json()) as { amount: number }
@@ -101,7 +101,7 @@ describe('invoice detail', () => {
   })
 
   it('keeps the e-mail dialog open when the send is throttled', async () => {
-    server.use(getGetInvoicesIdMockHandler(baseInvoice({ status: 'sent' })))
+    server.use(getGetInvoicesIdMockHandler({ data: baseInvoice({ status: 'sent' }) }))
     server.use(
       http.post('*/api/v1/invoices/inv-1/email', () =>
         HttpResponse.json({ message: 'Too many requests.' }, { status: 429 }),

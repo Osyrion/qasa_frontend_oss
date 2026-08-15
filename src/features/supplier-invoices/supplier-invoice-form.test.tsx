@@ -44,7 +44,7 @@ describe('supplier invoice form', () => {
     const { router } = renderApp('/supplier-invoices/new')
     const user = userEvent.setup()
 
-    await user.click(screen.getByRole('combobox', { name: 'Vendor' }))
+    await user.click(await screen.findByRole('combobox', { name: 'Vendor' }))
     await user.click(await screen.findByRole('option', { name: 'Vendor s.r.o.' }))
     await user.type(screen.getByLabelText("Vendor's invoice number"), 'INV-001')
     await user.type(screen.getByLabelText('Base'), '100')
@@ -59,7 +59,7 @@ describe('supplier invoice form', () => {
     renderApp('/supplier-invoices/new')
     const user = userEvent.setup()
 
-    await user.click(screen.getByRole('combobox', { name: 'Vendor' }))
+    await user.click(await screen.findByRole('combobox', { name: 'Vendor' }))
     await user.click(await screen.findByRole('option', { name: 'Vendor s.r.o.' }))
     await user.type(screen.getByLabelText("Vendor's invoice number"), 'INV-001')
     await user.type(screen.getByLabelText('Base'), '100')

@@ -18,9 +18,11 @@
     "supplier_invoices": "Supplier invoices",
     "inbox": "Inbox",
     "expenses": "Expenses",
+    "contributions": "Contributions",
     "group_analysis": "Analysis",
     "statistics": "Statistics",
     "reports": "Reports",
+    "tax_return": "Tax return",
     "activity": "Activity log",
     "settings": "Settings",
     "logout": "Sign out"

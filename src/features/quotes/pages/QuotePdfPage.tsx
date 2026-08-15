@@ -40,7 +40,10 @@ export function QuotePdfPage() {
     setDownloading(true)
     try {
       const blob = await getQuotesQuotePdfDownload(id)
-      triggerBlobDownload(blob, filename(quote.data?.quote_number, quote.data?.issued_at))
+      triggerBlobDownload(
+        blob,
+        filename(quote.data?.data?.quote_number, quote.data?.data?.issued_at),
+      )
     } catch {
       toast.error(t('detail.pdf_download_failed'))
     } finally {
@@ -52,7 +55,7 @@ export function QuotePdfPage() {
     <div className="flex h-full flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">
-          {quote.data?.quote_number ?? t('list.draft_placeholder')}
+          {quote.data?.data?.quote_number ?? t('list.draft_placeholder')}
         </h1>
         <Button onClick={() => void handleDownload()} disabled={downloading}>
           <DownloadIcon />

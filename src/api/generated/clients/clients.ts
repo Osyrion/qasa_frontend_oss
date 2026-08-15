@@ -25,8 +25,8 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  Client,
   GetClients200,
+  GetClientsId200,
   GetClientsLookupParams,
   GetClientsParams,
   GetClientsVerifyVatParams,
@@ -227,7 +227,7 @@ export const getClientsId = (
 ) => {
 
 
-      return apiMutator<Client>(
+      return apiMutator<GetClientsId200>(
       {url: `/api/v1/clients/${id}`, method: 'GET', signal
     },
       options);

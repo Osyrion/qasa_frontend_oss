@@ -44,7 +44,7 @@ beforeEach(() => {
 
 describe('order detail', () => {
   it('disables generate-invoice for a personal order (no client)', async () => {
-    server.use(getGetOrdersIdMockHandler(baseOrder()))
+    server.use(getGetOrdersIdMockHandler({ data: baseOrder() }))
 
     renderApp('/orders/o-1')
 
@@ -53,7 +53,9 @@ describe('order detail', () => {
 
   it('enables generate-invoice once a client is assigned', async () => {
     server.use(
-      getGetOrdersIdMockHandler(baseOrder({ client: { id: 'c1', display_name: 'Acme s.r.o.' } })),
+      getGetOrdersIdMockHandler({
+        data: baseOrder({ client: { id: 'c1', display_name: 'Acme s.r.o.' } }),
+      }),
     )
 
     renderApp('/orders/o-1')
@@ -62,7 +64,7 @@ describe('order detail', () => {
   })
 
   it('adds an item with a type selection', async () => {
-    server.use(getGetOrdersIdMockHandler(baseOrder()))
+    server.use(getGetOrdersIdMockHandler({ data: baseOrder() }))
     server.use(
       getPostOrdersOrderItemsMockHandler({
         data: {
@@ -88,7 +90,7 @@ describe('order detail', () => {
   })
 
   it('sends a delete request when removing a note (server enforces own-note-only via 403)', async () => {
-    server.use(getGetOrdersIdMockHandler(baseOrder()))
+    server.use(getGetOrdersIdMockHandler({ data: baseOrder() }))
     let deleteRequested = false
     server.use(
       http.delete('*/api/v1/orders/o-1/notes/n-1', () => {
@@ -113,7 +115,7 @@ describe('order detail', () => {
   })
 
   it('lists attachments in the attachments tab', async () => {
-    server.use(getGetOrdersIdMockHandler(baseOrder()))
+    server.use(getGetOrdersIdMockHandler({ data: baseOrder() }))
     server.use(
       getGetOrdersOrderAttachmentsMockHandler([
         {

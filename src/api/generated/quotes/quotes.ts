@@ -26,6 +26,7 @@ import type {
 
 import type {
   GetQuotes200,
+  GetQuotesId200,
   GetQuotesParams,
   PostQuotes201,
   PostQuotesBody,
@@ -40,8 +41,7 @@ import type {
   PostQuotesQuoteStatus200,
   PostQuotesQuoteStatusBody,
   PutQuotesId200,
-  PutQuotesIdBody,
-  Quote
+  PutQuotesIdBody
 } from '../qASAAPIDocumentation.schemas';
 
 import { apiMutator } from '../../mutator';
@@ -233,7 +233,7 @@ export const getQuotesId = (
 ) => {
 
 
-      return apiMutator<Quote>(
+      return apiMutator<GetQuotesId200>(
       {url: `/api/v1/quotes/${id}`, method: 'GET', signal
     },
       options);

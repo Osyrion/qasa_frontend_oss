@@ -37,6 +37,7 @@ const navGroups = [
       { to: '/supplier-invoices', labelKey: 'nav.supplier_invoices' },
       { to: '/inbox', labelKey: 'nav.inbox' },
       { to: '/expenses', labelKey: 'nav.expenses' },
+      { to: '/contributions', labelKey: 'nav.contributions' },
     ],
   },
   {
@@ -44,6 +45,7 @@ const navGroups = [
     items: [
       { to: '/statistics', labelKey: 'nav.statistics' },
       { to: '/reports', labelKey: 'nav.reports' },
+      { to: '/tax-return', labelKey: 'nav.tax_return' },
       { to: '/activity', labelKey: 'nav.activity' },
     ],
   },

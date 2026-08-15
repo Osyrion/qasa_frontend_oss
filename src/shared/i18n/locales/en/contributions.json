@@ -1,0 +1,37 @@
+{
+  "type": {
+    "social": "Social insurance",
+    "health": "Health insurance",
+    "income_tax_advance": "Income tax advance"
+  },
+  "list": {
+    "title": "Contributions",
+    "new_contribution": "New payment",
+    "column_paid_at": "Paid on",
+    "column_type": "Type",
+    "column_period": "Period",
+    "column_amount": "Amount",
+    "filter_type": "Type",
+    "filter_type_all": "All types",
+    "filter_year": "Year",
+    "empty": "No contribution payments yet."
+  },
+  "form": {
+    "create_title": "Record a payment",
+    "edit_title": "Edit payment",
+    "type": "Type",
+    "period_year": "Period year",
+    "period_month": "Period month",
+    "amount": "Amount",
+    "currency": "Currency",
+    "paid_at": "Paid on",
+    "note": "Note",
+    "created": "Payment recorded.",
+    "updated": "Payment updated."
+  },
+  "validation": {
+    "period_year_invalid": "Enter a valid year.",
+    "amount_positive": "Amount must be greater than zero.",
+    "paid_at_required": "Payment date is required."
+  }
+}

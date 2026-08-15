@@ -1809,6 +1809,10 @@ export type PostClients201 = {
   data?: Client;
 };
 
+export type GetClientsId200 = {
+  data?: Client;
+};
+
 export type PutClientsIdBodyClientType = typeof PutClientsIdBodyClientType[keyof typeof PutClientsIdBodyClientType];
 
 
@@ -2070,6 +2074,10 @@ export type PostBankAccountsBody = {
 };
 
 export type PostBankAccounts201 = {
+  data?: BankAccount;
+};
+
+export type GetBankAccountsId200 = {
   data?: BankAccount;
 };
 
@@ -2453,6 +2461,10 @@ export type PostInvoices201 = {
   data?: Invoice;
 };
 
+export type GetInvoicesId200 = {
+  data?: Invoice;
+};
+
 export type PatchInvoicesIdBodyCurrency = typeof PatchInvoicesIdBodyCurrency[keyof typeof PatchInvoicesIdBodyCurrency];
 
 
@@ -2670,6 +2682,10 @@ export type GetInvoiceInbox200Meta = { [key: string]: unknown };
 export type GetInvoiceInbox200 = {
   data?: InvoiceInboxItem[];
   meta?: GetInvoiceInbox200Meta;
+};
+
+export type GetInvoiceInboxId200 = {
+  data?: InvoiceInboxItem;
 };
 
 export type PostInvoiceInboxInboxItemConvertBodyCurrency = typeof PostInvoiceInboxInboxItemConvertBodyCurrency[keyof typeof PostInvoiceInboxInboxItemConvertBodyCurrency];
@@ -3120,6 +3136,10 @@ export type PostQuotes201 = {
   data?: Quote;
 };
 
+export type GetQuotesId200 = {
+  data?: Quote;
+};
+
 export type PutQuotesIdBodyCurrency = typeof PutQuotesIdBodyCurrency[keyof typeof PutQuotesIdBodyCurrency];
 
 
@@ -3331,6 +3351,10 @@ export type PostRecurringInvoiceTemplatesBody = {
 };
 
 export type PostRecurringInvoiceTemplates201 = {
+  data?: RecurringInvoiceTemplate;
+};
+
+export type GetRecurringInvoiceTemplatesId200 = {
   data?: RecurringInvoiceTemplate;
 };
 
@@ -3661,6 +3685,10 @@ export type PostSupplierInvoices201 = {
   data?: SupplierInvoice;
 };
 
+export type GetSupplierInvoicesId200 = {
+  data?: SupplierInvoice;
+};
+
 export type PutSupplierInvoicesIdBodyCurrency = typeof PutSupplierInvoicesIdBodyCurrency[keyof typeof PutSupplierInvoicesIdBodyCurrency];
 
 
@@ -3757,6 +3785,10 @@ export type PostVatRatesBody = {
 };
 
 export type PostVatRates201 = {
+  data?: VatRate;
+};
+
+export type GetVatRatesId200 = {
   data?: VatRate;
 };
 
@@ -4045,6 +4077,10 @@ export type PostOrdersBody = {
 };
 
 export type PostOrders201 = {
+  data?: Order;
+};
+
+export type GetOrdersId200 = {
   data?: Order;
 };
 

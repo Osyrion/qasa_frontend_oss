@@ -1750,7 +1750,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Client"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Client"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -2838,7 +2843,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BankAccount"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/BankAccount"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -4033,7 +4043,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Invoice"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Invoice"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -5058,7 +5073,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/InvoiceInboxItem"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/InvoiceInboxItem"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -6666,7 +6686,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Quote"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Quote"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -7631,7 +7656,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/RecurringInvoiceTemplate"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/RecurringInvoiceTemplate"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -8771,7 +8801,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SupplierInvoice"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/SupplierInvoice"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -9248,7 +9283,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/VatRate"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/VatRate"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -10337,7 +10377,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Order"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Order"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }

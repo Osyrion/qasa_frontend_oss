@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router'
 
-import { GuestOnly, RequireAuth } from '@/features/auth/guards'
+import { GuestOnly, RequireAuth, RequireResidency } from '@/features/auth/guards'
 import { ForgotPasswordPage } from '@/features/auth/pages/ForgotPasswordPage'
 import { GoogleCallbackPage } from '@/features/auth/pages/GoogleCallbackPage'
 import { ActivityPage } from '@/features/activity/pages/ActivityPage'
@@ -14,7 +14,9 @@ import { VerifyEmailPage } from '@/features/auth/pages/VerifyEmailPage'
 import { ClientDetailPage } from '@/features/clients/pages/ClientDetailPage'
 import { ClientFormPage } from '@/features/clients/pages/ClientFormPage'
 import { ClientsListPage } from '@/features/clients/pages/ClientsListPage'
+import { ContributionsListPage } from '@/features/contributions/pages/ContributionsListPage'
 import { DashboardPage } from '@/features/dashboard/pages/DashboardPage'
+import { ResidencyOnboardingPage } from '@/features/onboarding/pages/ResidencyOnboardingPage'
 import { InvoiceDetailPage } from '@/features/invoicing/pages/InvoiceDetailPage'
 import { InvoiceFormPage } from '@/features/invoicing/pages/InvoiceFormPage'
 import { InvoicePdfPage } from '@/features/invoicing/pages/InvoicePdfPage'
@@ -32,6 +34,7 @@ import { SupplierInvoiceFormPage } from '@/features/supplier-invoices/pages/Supp
 import { SupplierInvoicesListPage } from '@/features/supplier-invoices/pages/SupplierInvoicesListPage'
 import { StatisticsPage } from '@/features/statistics/pages/StatisticsPage'
 import { ReportsPage } from '@/features/reports/pages/ReportsPage'
+import { TaxReturnPage } from '@/features/tax-return/pages/TaxReturnPage'
 import { QuoteFormPage } from '@/features/quotes/pages/QuoteFormPage'
 import { QuotePdfPage } from '@/features/quotes/pages/QuotePdfPage'
 import { QuotesListPage } from '@/features/quotes/pages/QuotesListPage'
@@ -75,6 +78,12 @@ export const routes = [
     element: <RequireAuth />,
     children: [
       {
+        // Standalone (no AppShell nav) — a mandatory step before most of the
+        // app is usable, since the backend gates invoicing/orders on it.
+        path: '/onboarding/residency',
+        element: <ResidencyOnboardingPage />,
+      },
+      {
         element: <AppShell />,
         children: [
           { path: '/dashboard', element: <DashboardPage /> },
@@ -82,32 +91,42 @@ export const routes = [
           { path: '/clients/new', element: <ClientFormPage /> },
           { path: '/clients/:id/edit', element: <ClientFormPage /> },
           { path: '/clients/:id', element: <ClientDetailPage /> },
-          { path: '/invoices', element: <InvoicesListPage /> },
-          { path: '/invoices/new', element: <InvoiceFormPage /> },
-          { path: '/invoices/:id/edit', element: <InvoiceFormPage /> },
-          { path: '/invoices/:id/pdf', element: <InvoicePdfPage /> },
-          { path: '/invoices/:id', element: <InvoiceDetailPage /> },
-          { path: '/quotes', element: <QuotesListPage /> },
-          { path: '/quotes/new', element: <QuoteFormPage /> },
-          { path: '/quotes/:id/edit', element: <QuoteFormPage /> },
-          { path: '/quotes/:id/pdf', element: <QuotePdfPage /> },
-          { path: '/quotes/:id', element: <QuoteDetailPage /> },
-          { path: '/orders', element: <OrdersListPage /> },
-          { path: '/orders/new', element: <OrderFormPage /> },
-          { path: '/orders/:id/edit', element: <OrderFormPage /> },
-          { path: '/orders/:id', element: <OrderDetailPage /> },
-          { path: '/recurring', element: <RecurringListPage /> },
-          { path: '/recurring/new', element: <RecurringFormPage /> },
-          { path: '/recurring/:id/edit', element: <RecurringFormPage /> },
-          { path: '/supplier-invoices', element: <SupplierInvoicesListPage /> },
-          { path: '/supplier-invoices/new', element: <SupplierInvoiceFormPage /> },
-          { path: '/supplier-invoices/:id/edit', element: <SupplierInvoiceFormPage /> },
-          { path: '/supplier-invoices/:id', element: <SupplierInvoiceDetailPage /> },
           { path: '/inbox', element: <InboxPage /> },
-          { path: '/expenses', element: <ExpensesListPage /> },
-          { path: '/statistics', element: <StatisticsPage /> },
-          { path: '/reports', element: <ReportsPage /> },
           { path: '/activity', element: <ActivityPage /> },
+          { path: '/contributions', element: <ContributionsListPage /> },
+          {
+            // Backend gates these on tax residency (`residency.required`
+            // middleware — invoicing, orders, quotes, supplier-invoices,
+            // recurring, statistics, reports).
+            element: <RequireResidency />,
+            children: [
+              { path: '/invoices', element: <InvoicesListPage /> },
+              { path: '/invoices/new', element: <InvoiceFormPage /> },
+              { path: '/invoices/:id/edit', element: <InvoiceFormPage /> },
+              { path: '/invoices/:id/pdf', element: <InvoicePdfPage /> },
+              { path: '/invoices/:id', element: <InvoiceDetailPage /> },
+              { path: '/quotes', element: <QuotesListPage /> },
+              { path: '/quotes/new', element: <QuoteFormPage /> },
+              { path: '/quotes/:id/edit', element: <QuoteFormPage /> },
+              { path: '/quotes/:id/pdf', element: <QuotePdfPage /> },
+              { path: '/quotes/:id', element: <QuoteDetailPage /> },
+              { path: '/orders', element: <OrdersListPage /> },
+              { path: '/orders/new', element: <OrderFormPage /> },
+              { path: '/orders/:id/edit', element: <OrderFormPage /> },
+              { path: '/orders/:id', element: <OrderDetailPage /> },
+              { path: '/recurring', element: <RecurringListPage /> },
+              { path: '/recurring/new', element: <RecurringFormPage /> },
+              { path: '/recurring/:id/edit', element: <RecurringFormPage /> },
+              { path: '/supplier-invoices', element: <SupplierInvoicesListPage /> },
+              { path: '/supplier-invoices/new', element: <SupplierInvoiceFormPage /> },
+              { path: '/supplier-invoices/:id/edit', element: <SupplierInvoiceFormPage /> },
+              { path: '/supplier-invoices/:id', element: <SupplierInvoiceDetailPage /> },
+              { path: '/statistics', element: <StatisticsPage /> },
+              { path: '/reports', element: <ReportsPage /> },
+              { path: '/tax-return', element: <TaxReturnPage /> },
+            ],
+          },
+          { path: '/expenses', element: <ExpensesListPage /> },
           {
             path: '/settings',
             element: <SettingsLayout />,
@@ -116,9 +135,15 @@ export const routes = [
               { path: 'profile', element: <ProfilePage /> },
               { path: 'security', element: <SecurityPage /> },
               { path: 'tokens', element: <TokensPage /> },
-              { path: 'bank-accounts', element: <BankAccountsPage /> },
-              { path: 'vat-rates', element: <VatRatesPage /> },
               { path: 'exchange-rates', element: <ExchangeRatesPage /> },
+              {
+                // bank-accounts / vat-rates are also residency-gated backend-side.
+                element: <RequireResidency />,
+                children: [
+                  { path: 'bank-accounts', element: <BankAccountsPage /> },
+                  { path: 'vat-rates', element: <VatRatesPage /> },
+                ],
+              },
             ],
           },
         ],

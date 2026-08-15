@@ -26,6 +26,7 @@ import type {
 
 import type {
   GetSupplierInvoices200,
+  GetSupplierInvoicesId200,
   GetSupplierInvoicesParams,
   GetSupplierInvoicesSupplierInvoicePaymentQr200,
   PostSupplierInvoices201,
@@ -33,8 +34,7 @@ import type {
   PostSupplierInvoicesSupplierInvoiceStatus200,
   PostSupplierInvoicesSupplierInvoiceStatusBody,
   PutSupplierInvoicesId200,
-  PutSupplierInvoicesIdBody,
-  SupplierInvoice
+  PutSupplierInvoicesIdBody
 } from '../qASAAPIDocumentation.schemas';
 
 import { apiMutator } from '../../mutator';
@@ -226,7 +226,7 @@ export const getSupplierInvoicesId = (
 ) => {
 
 
-      return apiMutator<SupplierInvoice>(
+      return apiMutator<GetSupplierInvoicesId200>(
       {url: `/api/v1/supplier-invoices/${id}`, method: 'GET', signal
     },
       options);

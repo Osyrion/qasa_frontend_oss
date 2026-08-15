@@ -75,7 +75,7 @@ export function QuoteFormPage() {
   const existing = useGetQuotesId(id ?? '', { query: { enabled: isEdit } })
 
   useEffect(() => {
-    if (isEdit && existing.data && !isQuoteEditable(existing.data.status ?? 'draft')) {
+    if (isEdit && existing.data?.data && !isQuoteEditable(existing.data.data.status ?? 'draft')) {
       toast.error(t('form.not_editable'))
       void navigate(`/quotes/${id}`, { replace: true })
     }
@@ -114,8 +114,8 @@ export function QuoteFormPage() {
   })
 
   useEffect(() => {
-    if (existing.data) {
-      reset(quoteToFormValues(existing.data))
+    if (existing.data?.data) {
+      reset(quoteToFormValues(existing.data.data))
     }
   }, [existing.data, reset])
 

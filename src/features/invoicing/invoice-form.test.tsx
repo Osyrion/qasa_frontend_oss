@@ -45,7 +45,7 @@ describe('invoice form', () => {
     const { router } = renderApp('/invoices/new')
     const user = userEvent.setup()
 
-    await user.click(screen.getByRole('combobox', { name: 'Client' }))
+    await user.click(await screen.findByRole('combobox', { name: 'Client' }))
     await user.click(await screen.findByRole('option', { name: 'Acme s.r.o.' }))
     await user.click(screen.getByRole('button', { name: 'Save' }))
 
@@ -68,7 +68,7 @@ describe('invoice form', () => {
     renderApp('/invoices/new')
     const user = userEvent.setup()
 
-    await user.click(screen.getByRole('combobox', { name: 'Client' }))
+    await user.click(await screen.findByRole('combobox', { name: 'Client' }))
     await user.click(await screen.findByRole('option', { name: 'Acme s.r.o.' }))
     await user.click(screen.getByRole('button', { name: 'Save' }))
 

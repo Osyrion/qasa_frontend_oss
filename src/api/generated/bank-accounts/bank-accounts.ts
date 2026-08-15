@@ -26,6 +26,7 @@ import type {
 
 import type {
   BankAccount,
+  GetBankAccountsId200,
   PostBankAccounts201,
   PostBankAccountsBody,
   PutBankAccountsId200,
@@ -220,7 +221,7 @@ export const getBankAccountsId = (
 ) => {
 
 
-      return apiMutator<BankAccount>(
+      return apiMutator<GetBankAccountsId200>(
       {url: `/api/v1/bank-accounts/${id}`, method: 'GET', signal
     },
       options);

@@ -45,8 +45,8 @@ describe('recurring template form', () => {
     const { router } = renderApp('/recurring/new')
     const user = userEvent.setup()
 
-    await user.type(screen.getByLabelText('Name'), 'Monthly retainer')
-    await user.click(screen.getByRole('combobox', { name: 'Client' }))
+    await user.type(await screen.findByLabelText('Name'), 'Monthly retainer')
+    await user.click(await screen.findByRole('combobox', { name: 'Client' }))
     await user.click(await screen.findByRole('option', { name: 'Acme s.r.o.' }))
 
     await user.type(screen.getByLabelText('Description'), 'Retainer fee')
@@ -65,7 +65,7 @@ describe('recurring template form', () => {
 
     // userEvent.type() treats a single `{`/`}` as a special-key escape sequence —
     // double them to type the literal placeholder token `{MONTH}`.
-    await user.type(screen.getByLabelText('Note (above items)'), 'Services for {{MONTH}}')
+    await user.type(await screen.findByLabelText('Note (above items)'), 'Services for {{MONTH}}')
 
     expect(await screen.findByText(/Preview:/)).toBeInTheDocument()
   })
@@ -74,7 +74,7 @@ describe('recurring template form', () => {
     renderApp('/recurring/new')
     const user = userEvent.setup()
 
-    expect(screen.getByLabelText('Day of month')).toBeEnabled()
+    expect(await screen.findByLabelText('Day of month')).toBeEnabled()
     await user.click(screen.getByRole('checkbox', { name: 'Last day of month' }))
 
     expect(screen.getByLabelText('Day of month')).toBeDisabled()

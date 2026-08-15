@@ -25,6 +25,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  GetVatRatesId200,
   PostVatRates201,
   PostVatRatesBody,
   PutVatRatesId200,
@@ -220,7 +221,7 @@ export const getVatRatesId = (
 ) => {
 
 
-      return apiMutator<VatRate>(
+      return apiMutator<GetVatRatesId200>(
       {url: `/api/v1/vat-rates/${id}`, method: 'GET', signal
     },
       options);

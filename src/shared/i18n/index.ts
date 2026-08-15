@@ -4,10 +4,12 @@ import { initReactI18next } from 'react-i18next'
 import enAuth from './locales/en/auth.json'
 import enClients from './locales/en/clients.json'
 import enCommon from './locales/en/common.json'
+import enContributions from './locales/en/contributions.json'
 import enInvoices from './locales/en/invoices.json'
 import enExpenses from './locales/en/expenses.json'
 import enActivity from './locales/en/activity.json'
 import enInbox from './locales/en/inbox.json'
+import enOnboarding from './locales/en/onboarding.json'
 import enOrders from './locales/en/orders.json'
 import enQuotes from './locales/en/quotes.json'
 import enRecurring from './locales/en/recurring.json'
@@ -15,13 +17,16 @@ import enReports from './locales/en/reports.json'
 import enSettings from './locales/en/settings.json'
 import enStatistics from './locales/en/statistics.json'
 import enSupplierInvoices from './locales/en/supplier-invoices.json'
+import enTaxReturn from './locales/en/taxReturn.json'
 import skActivity from './locales/sk/activity.json'
 import skAuth from './locales/sk/auth.json'
 import skClients from './locales/sk/clients.json'
 import skCommon from './locales/sk/common.json'
+import skContributions from './locales/sk/contributions.json'
 import skExpenses from './locales/sk/expenses.json'
 import skInbox from './locales/sk/inbox.json'
 import skInvoices from './locales/sk/invoices.json'
+import skOnboarding from './locales/sk/onboarding.json'
 import skOrders from './locales/sk/orders.json'
 import skQuotes from './locales/sk/quotes.json'
 import skRecurring from './locales/sk/recurring.json'
@@ -29,6 +34,7 @@ import skReports from './locales/sk/reports.json'
 import skSettings from './locales/sk/settings.json'
 import skStatistics from './locales/sk/statistics.json'
 import skSupplierInvoices from './locales/sk/supplier-invoices.json'
+import skTaxReturn from './locales/sk/taxReturn.json'
 
 export const AVAILABLE_LOCALES = ['en', 'sk'] as const
 export type Locale = (typeof AVAILABLE_LOCALES)[number]
@@ -50,6 +56,9 @@ void i18n.use(initReactI18next).init({
       reports: enReports,
       activity: enActivity,
       settings: enSettings,
+      onboarding: enOnboarding,
+      contributions: enContributions,
+      taxReturn: enTaxReturn,
     },
     sk: {
       common: skCommon,
@@ -66,6 +75,9 @@ void i18n.use(initReactI18next).init({
       reports: skReports,
       activity: skActivity,
       settings: skSettings,
+      onboarding: skOnboarding,
+      contributions: skContributions,
+      taxReturn: skTaxReturn,
     },
   },
   lng: navigator.language.startsWith('sk') ? 'sk' : 'en',

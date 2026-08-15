@@ -26,8 +26,8 @@ import type {
 
 import type {
   GetInvoiceInbox200,
+  GetInvoiceInboxId200,
   GetInvoiceInboxParams,
-  InvoiceInboxItem,
   PostInvoiceInboxInboxItemConvert201,
   PostInvoiceInboxInboxItemConvertBody,
   PostInvoiceInboxInboxItemIgnore200,
@@ -160,7 +160,7 @@ export const getInvoiceInboxId = (
 ) => {
 
 
-      return apiMutator<InvoiceInboxItem>(
+      return apiMutator<GetInvoiceInboxId200>(
       {url: `/api/v1/invoice-inbox/${id}`, method: 'GET', signal
     },
       options);

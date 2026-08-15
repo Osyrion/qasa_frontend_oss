@@ -26,6 +26,7 @@ import type {
 
 import type {
   GetRecurringInvoiceTemplates200,
+  GetRecurringInvoiceTemplatesId200,
   GetRecurringInvoiceTemplatesParams,
   PostRecurringInvoiceTemplates201,
   PostRecurringInvoiceTemplatesBody,
@@ -225,7 +226,7 @@ export const getRecurringInvoiceTemplatesId = (
 ) => {
 
 
-      return apiMutator<RecurringInvoiceTemplate>(
+      return apiMutator<GetRecurringInvoiceTemplatesId200>(
       {url: `/api/v1/recurring-invoice-templates/${id}`, method: 'GET', signal
     },
       options);
