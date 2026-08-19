@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/vitest'
 import { cleanup, configure } from '@testing-library/react'
 
 import { useAuthStore } from '@/features/auth/store'
+import { queryClient } from '@/shared/lib/query-client'
 import { server } from './server'
 
 // findBy*/waitFor default to 1s, which is not enough for a page that mounts,
@@ -54,6 +55,10 @@ afterEach(() => {
   server.resetHandlers()
   localStorage.clear()
   useAuthStore.getState().clear()
+  // Components invalidate through the `queryClient` singleton even though
+  // renderApp() mounts a fresh client, so anything they cached there outlives
+  // the test that put it in.
+  queryClient.clear()
 })
 
 afterAll(() => {

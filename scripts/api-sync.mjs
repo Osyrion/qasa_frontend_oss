@@ -13,7 +13,14 @@ import process from 'node:process'
 
 const root = path.resolve(import.meta.dirname, '..')
 const target = path.join(root, 'openapi', 'api-docs.json')
-const siblingSpec = path.resolve(root, '..', 'qasa-backend-oss', 'storage', 'api-docs', 'api-docs.json')
+const siblingSpec = path.resolve(
+  root,
+  '..',
+  'qasa-backend-oss',
+  'storage',
+  'api-docs',
+  'api-docs.json',
+)
 const backendUrl = process.env.QASA_API_URL ?? 'http://localhost:8000'
 
 async function fetchSpec() {

@@ -5,6 +5,7 @@ import { usePostAuthLogout } from '@/api/generated/authentication/authentication
 import { EmailVerificationBanner } from '@/features/auth/components/EmailVerificationBanner'
 import { useAuthStore } from '@/features/auth/store'
 import { useActivityAccess } from '@/features/activity/lib/use-activity-access'
+import { endSession } from '@/shared/lib/session'
 import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
 import {
@@ -67,7 +68,7 @@ export function AppShell() {
     mutation: {
       // Local session ends even if the revoke call fails (e.g. offline).
       onSettled: () => {
-        clear()
+        endSession(clear)
         void navigate('/login')
       },
     },

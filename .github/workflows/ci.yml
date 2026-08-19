@@ -36,5 +36,16 @@ jobs:
       - name: Test
         run: npm run test
 
+      - name: Audit dependencies
+        # The `overrides` block in package.json is what currently keeps this at
+        # zero; without a gate here, the next transitive bump undoes that
+        # quietly.
+        run: npm audit --audit-level=moderate
+
       - name: Build
         run: npm run build
+
+      - name: Assert the bundle ships a CSP
+        # The policy is added by a build-only Vite plugin, so nothing in dev or
+        # in the test run would notice it going missing.
+        run: grep -q 'http-equiv="Content-Security-Policy"' dist/index.html

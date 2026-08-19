@@ -36,7 +36,17 @@ CI fails if the spec and the generated client drift apart.
 webserver must fall back to `index.html` for unknown paths (React Router handles the rest).
 
 Auth tokens live in `localStorage` (see `src/features/auth/store.ts` for the trade-off), so a
-strict CSP is the main mitigation against token theft via XSS. Example nginx config:
+strict CSP is the main mitigation against token theft via XSS.
+
+**The bundle carries its own policy.** `npm run build` writes a `Content-Security-Policy` meta
+tag into `dist/index.html` (the `qasa-csp` plugin in `vite.config.ts`), built from the same
+`VITE_API_URL` the client was compiled against — so the origins cannot drift out of step with
+the code the way a hand-maintained webserver config does. It is build-only: Vite's dev server
+needs inline scripts and `eval` for HMR, and a policy loose enough for that is not worth
+shipping. CI greps `dist/index.html` for it.
+
+What a meta tag **cannot** do is `frame-ancestors` — browsers ignore it there — so the
+webserver still owes the clickjacking and transport headers:
 
 ```nginx
 server {
@@ -44,7 +54,13 @@ server {
     root /var/www/qasa-web/dist;
     index index.html;
 
-    add_header Content-Security-Policy "default-src 'self'; connect-src 'self' https://api.example.com; img-src 'self' data: https://api.example.com; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'" always;
+    # Not duplicating the CSP: the bundle ships its own, and two policies both
+    # apply — the intersection — so a stale copy here silently subtracts from
+    # the fresh one. These are the ones the meta tag has no say over.
+    add_header Content-Security-Policy "frame-ancestors 'none'" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 
     location / {
         try_files $uri $uri/ /index.html;
@@ -52,8 +68,9 @@ server {
 }
 ```
 
-Adjust `connect-src`/`img-src` to the backend's actual origin (`VITE_API_URL` at build time),
-and add the CDN origin serving `logo_path`/`avatar_path` images if it differs from the API host.
+`img-src` already carries the API origin, because the account logo (`logo_path`) is served off
+`/storage/` there. If that ever moves to a CDN, add the new origin in
+`contentSecurityPolicy()` rather than here.
 
 ## Scripts
 
