@@ -1,9 +1,9 @@
 import { useAuthStore } from './store'
 
 /**
- * Whether the signed-in user holds a backend ability — the strings from
- * flok_backend's AbilityCatalog / PermissionCatalog (`invoices.manage`,
- * `taxation.manage`, `reports.view`, …), returned by GET auth/me.
+ * Whether the signed-in user holds a backend ability — the strings the API's
+ * own ability catalogue defines (`invoices.manage`, `taxation.manage`,
+ * `reports.view`, …), returned by GET auth/me.
  *
  * A UX affordance, never a security boundary. The API enforces every one of
  * these on every request and is the only thing that decides; this exists so

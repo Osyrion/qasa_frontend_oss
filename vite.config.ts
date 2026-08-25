@@ -93,6 +93,9 @@ export default defineConfig(({ mode }) => ({
     port: 3000,
   },
   test: {
+    // tests/ holds checks that read the repository itself (edition boundary);
+    // src/ holds the component tests.
+    include: ['src/**/*.{test,spec}.{ts,tsx}', 'tests/**/*.{test,spec}.ts'],
     environment: 'jsdom',
     globals: true,
     setupFiles: ['src/test/setup.ts'],
